@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex,nofollow">
+<title>Inspire Health PT — Launch Checklist &amp; Intake</title>
+<style>
+  :root{--green:#0F3024;--brass:#B8893A;--ink:#1f1c17;--muted:#6b655c;--cream:#FAF6EC;--card:#fff;--line:#e7ddc9;--ok:#2D6B52;}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:var(--cream);color:var(--ink);font:16px/1.55 -apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif}
+  .wrap{max-width:760px;margin:0 auto;padding:40px 20px 120px}
+  header{border-bottom:3px solid var(--brass);padding-bottom:20px;margin-bottom:8px}
+  .kick{font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--brass);font-weight:700}
+  h1{font-size:27px;line-height:1.15;margin:8px 0 6px;color:var(--green)}
+  .sub{color:var(--muted)}
+  h2{font-size:18px;color:var(--green);margin:30px 0 6px;padding-left:11px;border-left:4px solid var(--brass)}
+  .hint{color:var(--muted);font-size:13px;margin:2px 0 12px}
+  .fld{margin:14px 0}
+  label{display:block;font-weight:600;font-size:14px;margin-bottom:5px}
+  label .opt{font-weight:400;color:var(--muted);font-size:12px}
+  input[type=text],textarea,select{width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:7px;font:inherit;background:var(--card);color:var(--ink)}
+  textarea{min-height:64px;resize:vertical}
+  input:focus,textarea:focus,select:focus{outline:none;border-color:var(--brass);box-shadow:0 0 0 3px rgba(184,137,58,.15)}
+  .chk{display:flex;align-items:flex-start;gap:9px;padding:7px 0;font-size:14px}
+  .chk input{margin-top:3px}
+  .row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  @media(max-width:560px){.row{grid-template-columns:1fr}}
+  .card{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--brass);border-radius:8px;padding:16px 18px;margin:10px 0}
+  .files small{color:var(--muted)}
+  .bar{position:fixed;left:0;right:0;bottom:0;background:var(--green);padding:12px 16px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap;box-shadow:0 -6px 24px rgba(0,0,0,.18)}
+  button{font:inherit;font-weight:700;border:0;border-radius:8px;padding:11px 18px;cursor:pointer}
+  .btn-gold{background:var(--brass);color:#160f04}
+  .btn-out{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.4)}
+  .btn-gold:hover{filter:brightness(1.07)}
+  .note{font-size:12px;color:#cdbf9f;align-self:center;width:100%;text-align:center;margin-top:2px}
+  .ok{color:var(--ok);font-weight:700}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div class="kick">Inspire Health PT · The Vault — Launch Intake</div>
+  <h1>Five minutes to finish your site.</h1>
+  <p class="sub">Your site is built. Fill what you can below, then tap <strong>Copy answers</strong> (paste into Fiverr) or <strong>Email to us</strong>. Send the actual files (photos, ebook PDF, logo) through Fiverr. Skip anything you don't have yet — we'll use a tasteful placeholder until it arrives.</p>
+</header>
+
+<form id="f">
+
+<h2>1 · Contact &amp; domain</h2>
+<div class="row">
+  <div class="fld"><label>Public phone <span class="opt">shown on site</span></label><input type="text" name="Phone"></div>
+  <div class="fld"><label>Public email</label><input type="text" name="Email"></div>
+</div>
+<div class="fld"><label>Domain <span class="opt">e.g. inspirehealthpt.com — and where it's registered</span></label><input type="text" name="Domain"></div>
+
+<h2>2 · Pricing</h2>
+<p class="hint">Confirm real numbers so we replace the sample figures. Leave "by consult" where you'd rather not publish a price.</p>
+<div class="row">
+  <div class="fld"><label>Evaluation fee <span class="opt">60-min first visit</span></label><input type="text" name="Eval fee" placeholder="e.g. $250"></div>
+  <div class="fld"><label>Per-session / Performance Plan</label><input type="text" name="Session price" placeholder="e.g. $180/session"></div>
+</div>
+<div class="row">
+  <div class="fld"><label>Founder's Vault — Reset</label><input type="text" name="Vault Reset price"></div>
+  <div class="fld"><label>Founder's Vault — Build</label><input type="text" name="Vault Build price"></div>
+</div>
+<div class="fld"><label>Founder's Vault — Membership</label><input type="text" name="Vault Membership price" placeholder="e.g. by consult"></div>
+
+<h2>3 · Stripe (ebook checkout)</h2>
+<div class="fld"><label>How should we handle Stripe?</label>
+  <select name="Stripe">
+    <option value="">— choose —</option>
+    <option>Invite you to my existing Stripe account</option>
+    <option>Set one up for me, hand over at launch</option>
+    <option>Not selling the ebook yet — skip for now</option>
+  </select>
+</div>
+<div class="fld"><label>Stripe account email <span class="opt">if inviting us</span></label><input type="text" name="Stripe email"></div>
+
+<h2>4 · Booking (Calendly)</h2>
+<div class="chk"><input type="checkbox" name="Calendly 60-min correct"><label style="font-weight:400;margin:0">The 60-min link <code>calendly.com/inspirehealthpt/60min</code> is correct</label></div>
+<div class="chk"><input type="checkbox" name="Free-call link correct"><label style="font-weight:400;margin:0">The free 15-min call link is correct</label></div>
+<div class="fld"><label>Different links? Paste here</label><input type="text" name="Calendly links"></div>
+<div class="fld"><label>Intake fields you want collected at booking <span class="opt">name, email, phone, what's going on, sport…</span></label><input type="text" name="Intake fields"></div>
+
+<h2>5 · VSL videos</h2>
+<p class="hint">Paste embed/share URLs (YouTube, Vimeo, etc.). They drop into the play-button placeholders.</p>
+<div class="fld"><label>Home page video</label><input type="text" name="VSL home"></div>
+<div class="row">
+  <div class="fld"><label>Evaluation page video</label><input type="text" name="VSL eval"></div>
+  <div class="fld"><label>Founder's Vault video</label><input type="text" name="VSL vault"></div>
+</div>
+
+<h2>6 · The ebook</h2>
+<div class="chk"><input type="checkbox" name="Ebook PDF sending"><label style="font-weight:400;margin:0">I'll send the finished "Pain-Free Performance Playbook" PDF via Fiverr</label></div>
+<div class="fld"><label>Ebook price <span class="opt">default $19</span></label><input type="text" name="Ebook price" placeholder="$19"></div>
+
+<h2>7 · Email / CRM tool</h2>
+<div class="fld"><label>Which tool sends the ebook + lead follow-ups?</label><input type="text" name="Email tool" placeholder="Mailchimp / GoHighLevel / ConvertKit / other"></div>
+
+<h2>8 · Photos <span style="font-size:12px;color:var(--muted);font-weight:400">(send files via Fiverr — tick what you have)</span></h2>
+<div class="card files">
+  <div class="chk"><input type="checkbox" name="Photo: sauna"><label style="font-weight:400;margin:0">Infrared sauna</label></div>
+  <div class="chk"><input type="checkbox" name="Photo: treatment suite"><label style="font-weight:400;margin:0">Treatment suite / table room</label></div>
+  <div class="chk"><input type="checkbox" name="Photo: curated walls"><label style="font-weight:400;margin:0">The curated walls / interior</label></div>
+  <div class="chk"><input type="checkbox" name="Photo: gym/exterior"><label style="font-weight:400;margin:0">Gym &amp; exterior / signage</label></div>
+  <div class="chk"><input type="checkbox" name="Logo vector"><label style="font-weight:400;margin:0">Logo as vector (SVG / AI / PDF) for crisp scaling</label></div>
+</div>
+
+<h2>9 · The Gallery <span style="font-size:12px;color:var(--muted);font-weight:400">(rotating local artist)</span></h2>
+<div class="row">
+  <div class="fld"><label>Current exhibition title</label><input type="text" name="Exhibition title"></div>
+  <div class="fld"><label>Artist name</label><input type="text" name="Artist name"></div>
+</div>
+<div class="fld"><label>Dates <span class="opt">e.g. "Now showing — Aug 2026"</span></label><input type="text" name="Exhibition dates"></div>
+<div class="fld"><label>Artist bio + a sentence about the show</label><textarea name="Artist bio / statement"></textarea></div>
+<div class="fld"><label>Past exhibitions <span class="opt">title — artist — season, one per line</span></label><textarea name="Past exhibitions"></textarea></div>
+<div class="chk"><input type="checkbox" name="Artwork images sending"><label style="font-weight:400;margin:0">I'll send the artwork images + artist portrait via Fiverr</label></div>
+
+<h2>10 · Testimonials &amp; legal</h2>
+<div class="chk"><input type="checkbox" name="Google reviews OK"><label style="font-weight:400;margin:0">OK to use my 4 real Google reviews (shown anonymized, with a "results vary" note)</label></div>
+<div class="fld"><label>Video testimonials? <span class="opt">links if any</span></label><input type="text" name="Video testimonials"></div>
+<div class="fld"><label>Will you run testimonial/guarantee copy past a FL PT-board / attorney before launch? <span class="opt">recommended</span></label>
+  <select name="Legal review"><option value="">— choose —</option><option>Yes, I'll handle that</option><option>Need a recommendation</option><option>Not needed</option></select>
+</div>
+
+<h2>11 · WordPress (Phase 2)</h2>
+<div class="fld"><label>Hosting / WordPress admin access plan <span class="opt">we'll request securely when ready</span></label><input type="text" name="WP access"></div>
+
+<h2>Anything else</h2>
+<div class="fld"><label>Notes / questions for us</label><textarea name="Notes"></textarea></div>
+
+</form>
+</div>
+
+<div class="bar">
+  <button class="btn-gold" onclick="copyAns()">Copy answers</button>
+  <button class="btn-out" onclick="emailAns()">Email to us</button>
+  <button class="btn-out" onclick="window.print()">Print / Save PDF</button>
+  <div class="note" id="status">Tip: tap "Copy answers" → paste straight into the Fiverr chat. Files go through Fiverr too.</div>
+</div>
+
+<script>
+function collect(){
+  const f=document.getElementById('f');
+  let out='INSPIRE HEALTH PT — LAUNCH INTAKE\\n'+new Date().toLocaleString()+'\\n\\n';
+  let section='';
+  f.querySelectorAll('h2,input,textarea,select').forEach(el=>{
+    if(el.tagName==='H2'){section=el.textContent.replace(/\\s+/g,' ').trim();out+='\\n## '+section+'\\n';return;}
+    const name=el.name; if(!name)return;
+    let v;
+    if(el.type==='checkbox'){ if(!el.checked)return; v='✔'; }
+    else { v=(el.value||'').trim(); if(!v)return; }
+    out+='• '+name+': '+v+'\\n';
+  });
+  return out;
+}
+function copyAns(){
+  const t=collect();
+  navigator.clipboard.writeText(t).then(()=>{document.getElementById('status').innerHTML='<span class="ok">Copied ✓</span> — paste into the Fiverr chat. Send files (photos, ebook PDF, logo) via Fiverr too.';},
+  ()=>{ // fallback
+    const ta=document.createElement('textarea');ta.value=t;document.body.appendChild(ta);ta.select();document.execCommand('copy');ta.remove();
+    document.getElementById('status').innerHTML='<span class="ok">Copied ✓</span> — paste into Fiverr.';});
+}
+function emailAns(){
+  const t=collect();
+  window.location.href='mailto:info@skynetjoe.com?subject='+encodeURIComponent('Inspire Health PT — Launch Intake')+'&body='+encodeURIComponent(t);
+}
+</script>
+</body>
+</html>
