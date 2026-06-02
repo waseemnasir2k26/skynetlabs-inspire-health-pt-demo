@@ -1,0 +1,3 @@
+# Spec demo — keep out of the index until the client launches on their domain.
+User-agent: *
+Disallow: /
