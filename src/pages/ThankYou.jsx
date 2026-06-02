@@ -1,33 +1,54 @@
-import { Section, Reveal, Icon } from '../ui.jsx'
-import { CLINIC } from '../data.js'
+import { Section, Reveal, Eyebrow, DiamondRule, Logo, Btn, Icon } from '../ui.jsx'
+import { THANKYOU, CLINIC, BRANDLINES } from '../data.js'
 
-export default function ThankYou({ go }) {
+// Maps the route sub-segment (thank-you/<sub>) to its content + a sensible CTA label.
+const VARIANTS = {
+  eval: THANKYOU.evaluation,
+  ebook: THANKYOU.ebook,
+  vault: THANKYOU.vault,
+}
+
+const NEXT_LABEL = {
+  ebook: 'Read the Playbook',
+  evaluation: 'Book your evaluation',
+}
+
+export default function ThankYou({ go, sub }) {
+  const data = VARIANTS[sub] || THANKYOU.evaluation
+  const nextLabel = NEXT_LABEL[data.nextTo] || 'Continue'
+
   return (
-    <main className="flex min-h-[80vh] items-center pt-24">
-      <Section className="py-16 text-center">
+    <main className="flex min-h-screen items-center pt-28 pb-20">
+      <Section className="text-center">
         <Reveal>
-          <div className="mx-auto mb-7 flex h-20 w-20 items-center justify-center rounded-full" style={{ background: 'color-mix(in srgb, var(--c-accent) 14%, transparent)', color: 'var(--c-accent)' }}>
-            <Icon name="check" className="h-10 w-10" />
+          <Logo variant="brass" className="mx-auto h-10" />
+        </Reveal>
+
+        <Reveal delay={80}>
+          <div className="card-green mx-auto mt-10 max-w-2xl px-6 py-16 sm:px-12">
+            <div
+              className="mx-auto mb-8 flex h-20 w-20 items-center justify-center rounded-full"
+              style={{ background: 'color-mix(in srgb, var(--c-accent) 14%, transparent)' }}
+            >
+              <Icon name="check" className="h-12 w-12 text-accent" />
+            </div>
+
+            <Eyebrow className="mb-5">{CLINIC.sub}</Eyebrow>
+            <h1 className="display mx-auto max-w-[18ch] text-4xl sm:text-6xl">{data.title}</h1>
+            <p className="lede mx-auto mt-6 max-w-xl">{data.body}</p>
+
+            <DiamondRule />
+
+            <p className="serif mx-auto max-w-md text-lg italic text-muted">{data.next}</p>
+            <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
+              <Btn to={data.nextTo} go={go}>{nextLabel}</Btn>
+              <Btn to="" go={go} variant="ghost">Back to home</Btn>
+            </div>
           </div>
         </Reveal>
-        <Reveal delay={60}><h1 className="display mx-auto max-w-2xl text-5xl sm:text-6xl">You’re all set.</h1></Reveal>
-        <Reveal delay={120}>
-          <p className="mx-auto mt-6 max-w-lg text-lg text-muted">
-            Check your inbox — a confirmation and everything you need is on its way. If anything’s urgent, call us at <a href={CLINIC.phoneHref} className="ulink text-ink">{CLINIC.phone}</a>.
-          </p>
-        </Reveal>
-        <Reveal delay={180}>
-          <div className="mt-9 flex flex-wrap justify-center gap-4">
-            <button onClick={() => go('')} className="btn-primary px-7 py-3.5 font-semibold">Back to home</button>
-            <button onClick={() => go('services')} className="btn-ghost px-7 py-3.5 font-semibold">Explore services</button>
-          </div>
-        </Reveal>
-        <Reveal delay={240}>
-          <div className="mx-auto mt-14 grid max-w-2xl grid-cols-3 gap-4 text-left">
-            {[['Add to calendar', 'A calendar invite is in your email'], ['Find us', CLINIC.address], ['Questions?', CLINIC.email]].map(([t, b], i) => (
-              <div key={i} className="card p-5"><div className="display text-sm text-accent">{t}</div><div className="mt-1 text-xs text-muted">{b}</div></div>
-            ))}
-          </div>
+
+        <Reveal delay={160}>
+          <p className="serif mx-auto mt-12 max-w-lg text-sm italic text-muted2">{BRANDLINES.closing}</p>
         </Reveal>
       </Section>
     </main>
