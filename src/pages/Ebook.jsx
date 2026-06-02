@@ -61,7 +61,7 @@ export default function Ebook({ go }) {
       <Section className="py-12">
         <div className="grid items-start gap-12 lg:grid-cols-12">
           <div className="lg:col-span-7">
-            <Reveal><Eyebrow>Digital playbook · ${'19'} </Eyebrow></Reveal>
+            <Reveal><Eyebrow>Digital Playbook</Eyebrow></Reveal>
             <Reveal delay={60}><h1 className="display text-5xl leading-[1.03] sm:text-6xl">{EBOOK.title}</h1></Reveal>
             <Reveal delay={120}><p className="mt-5 max-w-xl text-lg text-muted">{EBOOK.subtitle}</p></Reveal>
             <Reveal delay={160}>
