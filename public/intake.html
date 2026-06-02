@@ -42,7 +42,7 @@
 <header>
   <div class="kick">Inspire Health PT · The Vault — Launch Intake</div>
   <h1>Five minutes to finish your site.</h1>
-  <p class="sub">Your site is built. Fill what you can below, then tap <strong>Copy answers</strong> (paste into Fiverr) or <strong>Email to us</strong>. Send the actual files (photos, ebook PDF, logo) through Fiverr. Skip anything you don't have yet — we'll use a tasteful placeholder until it arrives.</p>
+  <p class="sub">Your site is built. Fill in what you can below, then tap <strong>Print / Save PDF</strong> at the bottom and send the saved PDF back to us here on Fiverr — along with your files (photos, ebook PDF, logo). Skip anything you don't have yet; we'll use a tasteful placeholder until it arrives.</p>
 </header>
 
 <form id="f">
@@ -66,16 +66,22 @@
 </div>
 <div class="fld"><label>Founder's Vault — Membership</label><input type="text" name="Vault Membership price" placeholder="e.g. by consult"></div>
 
-<h2>3 · Stripe (ebook checkout)</h2>
-<div class="fld"><label>How should we handle Stripe?</label>
-  <select name="Stripe">
+<h2>3 · Stripe — ebook payments</h2>
+<p class="hint">So people can buy the Playbook right away, pick ONE:</p>
+<div class="fld"><label>Which option?</label>
+  <select name="Stripe option">
     <option value="">— choose —</option>
-    <option>Invite you to my existing Stripe account</option>
-    <option>Set one up for me, hand over at launch</option>
+    <option>A — Give us access to your Stripe account (invite us / share credentials securely)</option>
+    <option>B — You create the ebook product in Stripe and paste the Payment Link below</option>
     <option>Not selling the ebook yet — skip for now</option>
   </select>
 </div>
-<div class="fld"><label>Stripe account email <span class="opt">if inviting us</span></label><input type="text" name="Stripe email"></div>
+<div class="fld"><label>Option A — Stripe account email <span class="opt">the email on your Stripe login, so you can invite us</span></label><input type="text" name="Stripe account email"></div>
+<div class="card" style="margin:8px 0 4px">
+  <label style="margin-bottom:4px">Option B — Stripe Payment Link for the ebook</label>
+  <p class="hint" style="margin:2px 0 8px">In Stripe: <strong>Products → Add product</strong> → name it “Pain-Free Performance Playbook”, price <strong>$19</strong> → save → <strong>Create payment link</strong> → copy the URL and paste it here. We wire the “Buy” button straight to it so customers can purchase instantly.</p>
+  <input type="text" name="Stripe payment link" placeholder="https://buy.stripe.com/...">
+</div>
 
 <h2>4 · Booking (Calendly)</h2>
 <div class="chk"><input type="checkbox" name="Calendly 60-min correct"><label style="font-weight:400;margin:0">The 60-min link <code>calendly.com/inspirehealthpt/60min</code> is correct</label></div>
@@ -134,38 +140,15 @@
 </div>
 
 <div class="bar">
-  <button class="btn-gold" onclick="copyAns()">Copy answers</button>
-  <button class="btn-out" onclick="emailAns()">Email to us</button>
-  <button class="btn-out" onclick="window.print()">Print / Save PDF</button>
-  <div class="note" id="status">Tip: tap "Copy answers" → paste straight into the Fiverr chat. Files go through Fiverr too.</div>
+  <button class="btn-gold" onclick="window.print()">Print / Save PDF</button>
+  <div class="note">Tap to save your answers as a PDF, then send the PDF back to us here on Fiverr.</div>
 </div>
 
-<script>
-function collect(){
-  const f=document.getElementById('f');
-  let out='INSPIRE HEALTH PT — LAUNCH INTAKE\\n'+new Date().toLocaleString()+'\\n\\n';
-  let section='';
-  f.querySelectorAll('h2,input,textarea,select').forEach(el=>{
-    if(el.tagName==='H2'){section=el.textContent.replace(/\\s+/g,' ').trim();out+='\\n## '+section+'\\n';return;}
-    const name=el.name; if(!name)return;
-    let v;
-    if(el.type==='checkbox'){ if(!el.checked)return; v='✔'; }
-    else { v=(el.value||'').trim(); if(!v)return; }
-    out+='• '+name+': '+v+'\\n';
-  });
-  return out;
-}
-function copyAns(){
-  const t=collect();
-  navigator.clipboard.writeText(t).then(()=>{document.getElementById('status').innerHTML='<span class="ok">Copied ✓</span> — paste into the Fiverr chat. Send files (photos, ebook PDF, logo) via Fiverr too.';},
-  ()=>{ // fallback
-    const ta=document.createElement('textarea');ta.value=t;document.body.appendChild(ta);ta.select();document.execCommand('copy');ta.remove();
-    document.getElementById('status').innerHTML='<span class="ok">Copied ✓</span> — paste into Fiverr.';});
-}
-function emailAns(){
-  const t=collect();
-  window.location.href='mailto:info@skynetjoe.com?subject='+encodeURIComponent('Inspire Health PT — Launch Intake')+'&body='+encodeURIComponent(t);
-}
-</script>
+<style media="print">
+  .bar{display:none !important}
+  body{background:#fff}
+  input,textarea,select{border:1px solid #ccc !important}
+  .wrap{padding-bottom:24px}
+</style>
 </body>
 </html>
