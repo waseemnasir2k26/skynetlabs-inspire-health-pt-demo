@@ -1,33 +1,35 @@
-# Fiverr Message — paste verbatim
+# Fiverr Message — paste verbatim (sent 2026-06-02)
 
 ---
 
-Hi — I read your brief closely, so instead of just describing what I'd do, I built you a working demo for Inspire Health PT first:
+Hi — rather than just tell you what I'd build, I built it. Here's a working demo for Inspire Health PT:
 
 **https://skynetlabs-inspire-health-pt-demo.vercel.app**
 
-Use the **style switcher (top-right)** to flip the entire site between three directions live — Editorial (warm/luxe), Cinematic (dark/performance), and Minimal (clinical/clean). Pick the one closest to your brand guide and I build that.
+Tap the **style switcher (top-right)** — it flips the *entire* site live between three premium directions: **Editorial** (warm/luxe), **Cinematic** (dark/performance), and **Minimal** (clinical/clean). Pick the one closest to your brand guide and I build that one out.
 
-You asked for examples of landing pages and paywalls — they're already in the demo, built for *your* clinic, not a portfolio link:
+You asked for landing-page and paywall examples — they're already in the demo, built for *your* clinic, not a portfolio link:
 • **Evaluation landing page** — VSL slot + a one-tap booking flow + lead capture
 • **Ebook landing page** — a working checkout/paywall (email → card → instant download)
-• Plus Home, About, Services, and Thank-You pages
+• Plus Home, About, Services and Thank-You pages — all mobile-first and fast.
 
-Quick answers to your questions:
-→ **WooCommerce/Stripe:** yes — the ebook becomes a downloadable WooCommerce product with Stripe, and purchase auto-sends the PDF by email.
-→ **Build method:** WordPress on a Kadence child theme — clean, fast, easy for you to edit later (no Elementor bloat).
-→ **Timeline:** comfortably within 2 weeks. Week 1 the full build, week 2 content + speed + QA + launch.
-→ **Revisions:** two rounds included — and showing you three styles up front means far less back-and-forth.
+Straight answers to your questions:
+→ **WooCommerce/Stripe** — yes. The ebook becomes a downloadable WooCommerce product with Stripe; buying it auto-emails the PDF.
+→ **Build method** — WordPress on a Kadence child theme. Clean, fast, easy for *you* to edit later (no Elementor bloat).
+→ **Timeline** — comfortably inside 2 weeks. Week 1 the full build, week 2 content + speed + QA + launch.
+→ **Revisions** — two rounds, and showing you three styles up front means far less back-and-forth.
 
-A few things that help me drop in real assets and lock scope:
-1. Which of the three styles feels closest to your brand guide?
-2. Do you have hosting + domain ready, or want that handled?
-3. Is the ebook one PDF at one price, or a product line later?
-4. Is your Calendly already set up the way you want intake collected?
-5. Which email tool should send the ebook and follow-ups?
-6. Can you share the brand guide, photos, VSL links, testimonials, and the ebook PDF?
+**And honestly I can take this further than the brief.** For a cash-pay clinic the website is the start — I also set up Google Business Profile + local SEO so you rank for "physical therapy Miami," review-capture automation, per-service pages that pull in patients, and an email follow-up sequence that turns the ebook into booked evaluations. We can do the site now and grow it from there.
 
-Everything's built mobile-first, fast, and with the medical/compliance details a cash-pay clinic needs handled properly. Happy to walk you through the demo and have it live on your domain inside the week — want me to start with your favorite of the three?
+A few quick things so I can drop in real assets and lock scope:
+1. Which of the three styles feels closest to your brand guide — or a blend?
+2. Do you have hosting + a domain ready, or should I handle setup?
+3. Is the ebook one PDF at one price, or a small product line later?
+4. Is your Calendly already collecting the intake fields you want?
+5. Which email tool should send the ebook and follow-ups (Mailchimp, GoHighLevel, other)?
+6. Can you share the brand guide, clinic photos, VSL links, testimonials, and the ebook PDF?
+
+Everything's built with the medical/compliance details a cash-pay clinic needs handled properly. I can have your favorite of the three live on your domain inside the week — which one do you want me to start with?
 
 ---
 
