@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Inspire Health PT — Build Status &amp; What We Need From You</title>
+<style>
+  :root{--green:#0F3024;--brass:#B8893A;--ink:#1f1c17;--muted:#6b655c;--cream:#FAF6EC;--card:#fff;--line:#e7ddc9;--ok:#2D6B52;--warn:#b5742a;}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:var(--cream);color:var(--ink);font:16px/1.6 -apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .wrap{max-width:880px;margin:0 auto;padding:48px 22px 80px}
+  header{border-bottom:3px solid var(--brass);padding-bottom:22px;margin-bottom:30px}
+  .kick{font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--brass);font-weight:700}
+  h1{font-size:30px;line-height:1.15;margin:8px 0 6px;color:var(--green)}
+  .sub{color:var(--muted)}
+  h2{font-size:21px;color:var(--green);margin:36px 0 14px;padding-left:12px;border-left:4px solid var(--brass)}
+  h3{font-size:16px;margin:18px 0 6px}
+  p{margin:0 0 12px}
+  ul{margin:0 0 14px 0;list-style:none}
+  li{padding:9px 0 9px 30px;position:relative;border-bottom:1px solid var(--line)}
+  li:last-child{border-bottom:0}
+  li::before{content:"";position:absolute;left:6px;top:15px;width:8px;height:8px;background:var(--brass);transform:rotate(45deg)}
+  .card{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--brass);border-radius:6px;padding:18px 22px;margin:14px 0}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  @media(max-width:640px){.grid{grid-template-columns:1fr}}
+  .pill{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:3px 9px;border-radius:20px;margin-left:8px;vertical-align:middle}
+  .pill.need{background:#fbeede;color:var(--warn)}
+  .pill.done{background:#e3efe7;color:var(--ok)}
+  .pill.legal{background:#f6e2e0;color:#a4453b}
+  .num{display:inline-block;width:26px;height:26px;line-height:26px;text-align:center;background:var(--green);color:#fff;border-radius:50%;font-size:13px;font-weight:700;margin-right:8px}
+  table{width:100%;border-collapse:collapse;margin:10px 0}
+  td,th{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);font-size:14px;vertical-align:top}
+  th{color:var(--brass);text-transform:uppercase;font-size:11px;letter-spacing:.08em}
+  code{background:#f1ead9;padding:1px 6px;border-radius:4px;font-size:13px}
+  .foot{margin-top:40px;padding-top:16px;border-top:1px solid var(--line);color:var(--muted);font-size:13px}
+  a{color:var(--brass)}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div class="kick">Inspire Health PT · The Vault — Phase 1 Build</div>
+  <h1>Site is built. Here's what's done — and the assets we need from you to finish.</h1>
+  <p class="sub">A premium, conversion-focused site on your real brand (hunter green + brass, "The Vault"). Built as a fast React site first; ports to WordPress in Phase 2.</p>
+</header>
+
+<h2>✓ What's already built</h2>
+<div class="card">
+  <p><strong>10 pages</strong>, fully designed on your brand guide + your "Vault" prototype, dark cinematic look you picked:</p>
+  <div class="grid">
+    <ul>
+      <li>Home — hero, VSL, the 4-phase Method, who-it's-for, proof, the Vault story</li>
+      <li>About — Dr. Guzman feature + full team (you, Freddy, Annie)</li>
+      <li>Services — services, method, "what you're really paying for", pricing</li>
+      <li>The Space (Facilities) — sauna, private gym, curated walls, a-day-in-the-Vault</li>
+      <li>The Gallery — rotating local-artist exhibition layout</li>
+    </ul>
+    <ul>
+      <li>FAQ — accordion, cash-pay / direct-access answers</li>
+      <li>Evaluation landing page — VSL + inline Calendly + lead form + thank-you</li>
+      <li>Ebook landing page — book mockup + checkout + thank-you</li>
+      <li>The Founder's Vault — high-ticket virtual offer LP + apply + thank-you</li>
+      <li>Logo recolored to <strong>brass/gold</strong>; your photos placed; mobile-ready</li>
+    </ul>
+  </div>
+  <p style="margin-top:8px"><strong>Compliance baked in:</strong> no "cure/guaranteed" claims, results-vary disclaimer on testimonials (FTC 2023), out-of-network/superbill framing, medical disclaimer.</p>
+</div>
+
+<h2>What we still need from you</h2>
+<p>Each item below maps to a placeholder in the site. The site works now with tasteful placeholders — these swap in your real assets.</p>
+
+<div class="card">
+  <h3><span class="num">1</span>Payments — Stripe <span class="pill need">needed</span></h3>
+  <p>For the ebook checkout (and later the Founder's Vault). Either invite us to your Stripe account, or we set one up under our workspace and hand it over at launch. The checkout is a working mock until then.</p>
+
+  <h3><span class="num">2</span>Calendly <span class="pill need">confirm</span></h3>
+  <p>We wired your prototype link <code>calendly.com/inspirehealthpt/60min</code> + the free 15-min call link. Please confirm both are correct and that the 60-min event collects the intake fields you want (name, email, phone, what's going on, etc.).</p>
+
+  <h3><span class="num">3</span>VSL video links <span class="pill need">needed</span></h3>
+  <p>The actual embed URLs (the "Miami Starroom" videos) for Home, the Evaluation page, and the Founder's Vault. Right now those show a branded play-button placeholder.</p>
+
+  <h3><span class="num">4</span>Ebook PDF <span class="pill need">needed</span></h3>
+  <p>The finished "Pain-Free Performance Playbook" file, so checkout can auto-deliver the download.</p>
+
+  <h3><span class="num">5</span>Real pricing <span class="pill need">confirm</span></h3>
+  <p>Confirm prices so we replace placeholders: the Evaluation fee, per-session / Performance Plan price, and the three Founder's Vault tiers. (We currently show sample figures and "by consult" where it's premium.)</p>
+
+  <h3><span class="num">6</span>Photos of the space <span class="pill need">needed</span></h3>
+  <p>Infrared sauna, treatment suite, the curated walls, and the gym/exterior. We have you, Freddy &amp; Annie + one gym shot — the rest are elegant placeholders for now. (A vector/SVG of the logo would also help for crisp scaling.)</p>
+
+  <h3><span class="num">7</span>Gallery content + artwork <span class="pill need">needed</span></h3>
+  <p>For the rotating gallery: current exhibition title, artist name + short bio, dates, a sentence about the show, the artwork images, and 2–3 past shows (title / artist / season).</p>
+
+  <h3><span class="num">8</span>Public contact details <span class="pill need">needed</span></h3>
+  <p>Phone + email you want shown (for the footer, contact, and Google/AEO schema). The site is booking-first until you provide them.</p>
+
+  <h3><span class="num">9</span>Email / CRM tool <span class="pill need">needed</span></h3>
+  <p>Which tool sends the ebook + lead follow-ups (Mailchimp, GoHighLevel, ConvertKit…). This is where the Evaluation and Founder's Vault forms will deliver leads.</p>
+
+  <h3><span class="num">10</span>Domain + WordPress access <span class="pill need">Phase 2</span></h3>
+  <p>For the WordPress build: the domain and hosting/WP admin access. (You mentioned WordPress is installed — we'll port there after the content above is locked.)</p>
+
+  <h3><span class="num">11</span>Testimonials OK + legal review <span class="pill legal">legal</span></h3>
+  <p>We used 4 of your real Google reviews (generalized, with a results-vary note). Please confirm that's fine and send any video testimonials. <strong>Before launch we recommend a quick FL Board of PT + healthcare-attorney review</strong> of testimonial &amp; any guarantee copy — standard for a cash-pay clinic.</p>
+</div>
+
+<h2>Answers to your Fiverr questions</h2>
+<table>
+  <tr><th>You asked</th><th>Answer</th></tr>
+  <tr><td>WooCommerce / Stripe experience</td><td>Yes — the ebook becomes a WooCommerce product with Stripe; purchase auto-emails the PDF.</td></tr>
+  <tr><td>Build method / page builder</td><td>WordPress on a <strong>Kadence</strong> child theme — clean, fast, easy for you to edit (no Elementor bloat). We build the look as a React prototype first to lock design, then port.</td></tr>
+  <tr><td>Timeline</td><td>Comfortably inside 2 weeks once assets are in: week 1 build, week 2 content + speed + QA + launch.</td></tr>
+  <tr><td>Revisions</td><td>Two rounds included. Picking the cinematic direction up front cuts back-and-forth.</td></tr>
+  <tr><td>Milestone payments on Fiverr</td><td>Yes — Fiverr Milestones can split a custom offer into stages (e.g. build → content → launch). We can set that up if you'd like.</td></tr>
+</table>
+
+<h2>Preview it locally</h2>
+<div class="card">
+  <p>Repo: <code>C:\Users\info\GITHUB\skynetlabs-inspire-health-pt-demo</code> · branch <code>feat/full-brand-build</code></p>
+  <p><code>npm install</code> → <code>npm run dev</code> → open the localhost URL. Navigate via the top menu (Home, About, Services, The Space, The Gallery, FAQ) and the Book / Playbook / Founder's Vault flows.</p>
+</div>
+
+<p class="foot">Built by SkynetLabs · Phase 1 (React) complete · Phase 2 = WordPress/Kadence port once assets above are locked.</p>
+</div>
+</body>
+</html>
