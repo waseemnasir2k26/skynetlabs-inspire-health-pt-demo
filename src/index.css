@@ -3,8 +3,9 @@
 @tailwind utilities;
 
 :root {
-  --font-display: 'Fraunces', serif;
+  --font-display: 'Bebas Neue', sans-serif;
   --font-body: 'Inter', sans-serif;
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
 }
 
 * { -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
@@ -16,7 +17,6 @@ body {
   background: var(--c-bg);
   color: var(--c-ink);
   font-family: var(--font-body);
-  transition: background-color .5s ease, color .5s ease;
 }
 
 ::selection { background: var(--c-accent); color: var(--c-onaccent); }
@@ -26,12 +26,23 @@ h1, h2, h3, .display {
   font-weight: var(--display-weight);
   letter-spacing: var(--display-tracking);
   text-transform: var(--uppercase);
-  line-height: 1.02;
+  line-height: 1.04;
 }
+
+/* editorial serif — big paragraphs, taglines, blockquotes */
+.serif { font-family: var(--font-serif); }
+.lede {
+  font-family: var(--font-serif);
+  font-size: clamp(1.15rem, 1.6vw, 1.4rem);
+  line-height: 1.7;
+  color: #cfcabb;
+  font-weight: 400;
+}
+.tagline { font-family: var(--font-serif); font-style: italic; color: var(--c-accent); }
 
 /* ---- premium signatures ---- */
 
-/* film grain overlay (intensity driven by --grain per theme) */
+/* film grain overlay (intensity driven by --grain) */
 .grain::after {
   content: '';
   position: fixed;
@@ -71,29 +82,63 @@ h1, h2, h3, .display {
   pointer-events: none;
 }
 
-/* magnetic-ish CTA */
+/* primary CTA — gold button, near-black text (brand btn-gold) */
 .btn-primary {
   background: var(--c-accent);
   color: var(--c-onaccent);
   border-radius: var(--radius);
-  transition: transform .25s cubic-bezier(.2,.7,.2,1), box-shadow .25s, filter .25s;
-  text-transform: var(--uppercase);
-  letter-spacing: .01em;
+  font-family: var(--font-display);
+  letter-spacing: .06em;
+  transition: transform .25s cubic-bezier(.2,.7,.2,1), box-shadow .25s, background .25s;
 }
-.btn-primary:hover { transform: translateY(-2px); box-shadow: var(--shadow); filter: brightness(1.06); }
+.btn-primary:hover { transform: translateY(-2px); box-shadow: var(--shadow); background: var(--c-accent-soft); }
 
 .btn-ghost {
   border: 1px solid var(--c-line);
   color: var(--c-ink);
   border-radius: var(--radius);
+  font-family: var(--font-display);
+  letter-spacing: .06em;
   transition: border-color .25s, background .25s, transform .25s;
 }
 .btn-ghost:hover { border-color: var(--c-accent); transform: translateY(-2px); }
 
+/* underline-on-hover text link (Cormorant, for inline editorial CTAs) */
+.btn-underline {
+  color: #cfcabb;
+  border-bottom: 1px solid var(--c-muted2);
+  font-family: var(--font-serif);
+  transition: color .25s, border-color .25s;
+}
+.btn-underline:hover { color: var(--c-ink); border-color: var(--c-accent); }
+
+/* standard card */
 .card {
   background: var(--c-surface);
-  border: 1px solid var(--c-line);
+  border: 1px solid var(--c-line-soft);
   border-radius: var(--radius);
+}
+
+/* brass left-edge bar card — the brand's signature element */
+.card-brass {
+  background: var(--c-surface);
+  border: 1px solid var(--c-line-soft);
+  border-left: 3px solid var(--c-accent);
+  border-radius: 0;
+}
+/* brass top-edge bar variant (matches prototype phase cards) */
+.card-brass-top {
+  background: var(--c-surface2);
+  border: 1px solid #262A26;
+  border-top: 2px solid var(--c-accent);
+  border-radius: 0;
+}
+/* hunter-green premium / featured card */
+.card-green {
+  background: var(--c-green);
+  border: 1px solid var(--c-line);
+  border-top: 2px solid var(--c-accent);
+  border-radius: 0;
 }
 
 .hairline { height: 1px; background: var(--c-line); }
@@ -109,14 +154,50 @@ h1, h2, h3, .display {
 }
 .ulink:hover::after { transform: scaleX(1); }
 
-/* eyebrow label */
+/* brass small-caps eyebrow label (brand signature) */
 .eyebrow {
+  font-family: var(--font-display);
   text-transform: uppercase;
-  letter-spacing: .22em;
-  font-size: .72rem;
-  font-weight: 600;
+  letter-spacing: .26em;
+  font-size: .82rem;
   color: var(--c-accent);
 }
+
+/* diamond rule ornament — —◆— brand decorative section break */
+.diamond-rule {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  max-width: 520px;
+  margin: 0 auto;
+}
+.diamond-rule .line { flex: 1; height: 1px; background: var(--c-pine); }
+.diamond-rule .line.mid { background: var(--c-accent); }
+.diamond-rule .diamond { width: 8px; height: 8px; background: var(--c-accent); transform: rotate(45deg); }
+
+/* VSL / video placeholder frame */
+.vsl-frame {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  background: #0A0C0A;
+  border: 1px solid var(--c-line);
+  border-radius: var(--radius);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  cursor: pointer;
+  transition: border-color .3s;
+}
+.vsl-frame:hover { border-color: var(--c-accent); }
+.vsl-play {
+  width: 64px; height: 64px; border-radius: 50%;
+  background: var(--c-accent);
+  display: flex; align-items: center; justify-content: center;
+  transition: transform .3s;
+}
+.vsl-frame:hover .vsl-play { transform: scale(1.08); }
 
 @media (prefers-reduced-motion: reduce) {
   .kenburns, .marquee { animation: none; }
