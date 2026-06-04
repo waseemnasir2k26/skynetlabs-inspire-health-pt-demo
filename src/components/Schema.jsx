@@ -38,7 +38,7 @@ export default function Schema({ type = 'home' }) {
       graph.push({ '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: FAQ.items.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) })
     }
     if (type === 'ebook') {
-      graph.push({ '@context': 'https://schema.org', '@type': 'Product', name: 'The Pain-Free Performance Playbook', description: 'A digital movement & recovery guide from Inspire Health PT.', brand: { '@type': 'Brand', name: CLINIC.name }, offers: { '@type': 'Offer', price: '19.00', priceCurrency: 'USD', availability: 'https://schema.org/InStock' } })
+      graph.push({ '@context': 'https://schema.org', '@type': 'Product', name: 'Shoulder Health & Freedom', description: 'A digital shoulder health & recovery guide from Inspire Health PT, with a free 12-Day Shoulder Challenge.', brand: { '@type': 'Brand', name: CLINIC.name }, offers: { '@type': 'Offer', price: '27.00', priceCurrency: 'USD', availability: 'https://schema.org/InStock' } })
     }
 
     const el = document.createElement('script')

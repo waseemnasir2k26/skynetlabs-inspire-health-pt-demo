@@ -118,7 +118,7 @@ function Footer({ go }) {
           </div>
           <div>
             <p className="eyebrow mb-4 text-xs">Explore</p>
-            {[...NAV, { p: 'ebook', label: 'The Playbook' }, { p: 'vault-offer', label: 'The Founder’s Vault' }].map(({ p, label }) => (
+            {[...NAV, { p: 'ebook', label: 'The Shoulder Guide' }, { p: 'vault-offer', label: 'The Founder’s Vault' }].map(({ p, label }) => (
               <button key={p} onClick={() => go(p)} className="ulink mb-2.5 block text-sm text-muted">{label}</button>
             ))}
           </div>

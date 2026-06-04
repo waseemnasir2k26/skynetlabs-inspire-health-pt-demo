@@ -46,6 +46,16 @@ function Checkout({ go }) {
   function submit(e) {
     e.preventDefault()
     setBusy(true)
+    // demo delivery: hand over the real PDF, then route to thank-you.
+    // TODO(client): replace with real Stripe Checkout → fulfillment.
+    try {
+      const a = document.createElement('a')
+      a.href = EBOOK.pdf
+      a.download = 'Shoulder-Health-and-Freedom.pdf'
+      document.body.appendChild(a)
+      a.click()
+      a.remove()
+    } catch (_) { /* download is best-effort in the demo */ }
     setTimeout(() => go('thank-you/ebook'), 700)
   }
   return (
@@ -125,7 +135,7 @@ export default function Ebook({ go }) {
 
             <Reveal delay={260}>
               <div className="mt-8 flex flex-wrap items-center gap-5">
-                <a href="#get" className="btn-primary inline-block px-9 py-4 text-lg">Get the Playbook — {EBOOK.price}</a>
+                <a href="#get" className="btn-primary inline-block px-9 py-4 text-lg">Get the Guide — {EBOOK.price}</a>
                 <span className="eyebrow" style={{ color: 'var(--c-accent)' }}>{EBOOK.author}</span>
               </div>
             </Reveal>
@@ -155,7 +165,7 @@ export default function Ebook({ go }) {
         <DiamondRule />
         <div className="mx-auto max-w-3xl">
           <Reveal className="text-center"><Eyebrow>The contents</Eyebrow></Reveal>
-          <Reveal delay={60}><h2 className="display text-center text-4xl sm:text-5xl">Inside the Playbook</h2></Reveal>
+          <Reveal delay={60}><h2 className="display text-center text-4xl sm:text-5xl">Inside the Guide</h2></Reveal>
           <ol className="mt-10 divide-y divide-line border-y border-line">
             {EBOOK.toc.map((t, i) => (
               <Reveal key={i} delay={i * 40}>
@@ -182,7 +192,7 @@ export default function Ebook({ go }) {
               <h3 className="display text-2xl">{founder.name}</h3>
               <p className="eyebrow mt-1" style={{ color: 'var(--c-accent)' }}>{founder.cred}</p>
               <p className="serif mt-3 text-lg italic text-muted">
-                The movement habits our Miami athletes use to stay out of the clinic — and in the game.
+                {EBOOK.subtitle}
               </p>
             </div>
           </div>
@@ -196,6 +206,29 @@ export default function Ebook({ go }) {
             style={{ color: 'var(--c-accent)' }}>
             {EBOOK.valueLine}
           </p>
+        </Reveal>
+      </Section>
+
+      {/* 5b. BONUS — 12-Day Shoulder Challenge (free with purchase) */}
+      <Section className="py-12">
+        <Reveal>
+          <div className="card-green mx-auto max-w-3xl px-6 py-12 text-center sm:px-12">
+            <p className="eyebrow mb-3" style={{ color: 'var(--c-accent-soft)' }}>{EBOOK.bonus.eyebrow}</p>
+            <h2 className="display text-4xl sm:text-5xl" style={{ color: '#fff' }}>{EBOOK.bonus.title}</h2>
+            <p className="serif mt-3 text-xl italic" style={{ color: 'var(--c-accent-soft)' }}>{EBOOK.bonus.lede}</p>
+            <p className="lede mx-auto mt-5 max-w-xl" style={{ color: '#dce8e2' }}>{EBOOK.bonus.body}</p>
+            <ul className="mx-auto mt-8 grid max-w-xl gap-3 text-left sm:grid-cols-2">
+              {EBOOK.bonus.points.map((b, i) => (
+                <li key={i} className="flex items-start gap-3">
+                  <Icon name="check" className="mt-0.5 h-5 w-5 shrink-0 text-accent" />
+                  <span style={{ color: '#e9efe9' }}>{b}</span>
+                </li>
+              ))}
+            </ul>
+            <div className="hairline mx-auto my-8 max-w-sm" />
+            <p className="eyebrow" style={{ color: 'var(--c-accent-soft)' }}>{EBOOK.bonus.claimLabel}</p>
+            <p className="serif mx-auto mt-2 max-w-lg text-lg italic" style={{ color: '#dce8e2' }}>{EBOOK.bonus.claim}</p>
+          </div>
         </Reveal>
       </Section>
 

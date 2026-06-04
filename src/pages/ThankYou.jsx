@@ -1,5 +1,5 @@
 import { Section, Reveal, Eyebrow, DiamondRule, Logo, Btn, Icon } from '../ui.jsx'
-import { THANKYOU, CLINIC, BRANDLINES } from '../data.js'
+import { THANKYOU, CLINIC, BRANDLINES, EBOOK } from '../data.js'
 
 // Maps the route sub-segment (thank-you/<sub>) to its content + a sensible CTA label.
 const VARIANTS = {
@@ -9,7 +9,7 @@ const VARIANTS = {
 }
 
 const NEXT_LABEL = {
-  ebook: 'Read the Playbook',
+  ebook: 'Read the guide',
   evaluation: 'Book your evaluation',
 }
 
@@ -39,7 +39,14 @@ export default function ThankYou({ go, sub }) {
 
             <DiamondRule />
 
-            <p className="serif mx-auto max-w-md text-lg italic text-muted">{data.next}</p>
+            {sub === 'ebook' && (
+              <a href={EBOOK.pdf} download="Shoulder-Health-and-Freedom.pdf"
+                className="btn-primary mt-2 inline-flex items-center gap-2 px-7 py-3.5">
+                <Icon name="check" className="h-5 w-5" /> Download your guide
+              </a>
+            )}
+
+            <p className="serif mx-auto mt-8 max-w-md text-lg italic text-muted">{data.next}</p>
             <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
               <Btn to={data.nextTo} go={go}>{nextLabel}</Btn>
               <Btn to="" go={go} variant="ghost">Back to home</Btn>

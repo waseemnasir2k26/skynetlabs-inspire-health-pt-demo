@@ -247,8 +247,16 @@ export const FACILITIES = {
 }
 
 // --------------------------------------------------------------------- GALLERY
-// Rotating local-artist gallery inside the clinic.
-// TODO(client): real exhibition title, artist name/bio, and artwork images.
+// Rotating local-artist gallery inside the clinic. Each artist shows for ~6 months.
+//
+// ┌─ HOW TO ROTATE THE EXHIBITION  (easy 3-step swap, no code knowledge needed) ─┐
+// │ 1. Drop the new photos into  /public/img/gallery/                            │
+// │ 2. Edit the `artists` array below — name, medium, bio, `feature`, `images`.  │
+// │      • Set  feature: true  on exactly ONE artist (the spotlight).            │
+// │      • Each image:  { src: '/img/gallery/FILE.jpg', ratio: 'tall'|'wide'|'square' } │
+// │ 3. Update `season`, `current.title`, and `current.statement`.                │
+// │ That's the whole rotation. No other files to touch.                          │
+// └──────────────────────────────────────────────────────────────────────────────┘
 export const GALLERY = {
   hero: {
     kicker: 'The Gallery',
@@ -256,61 +264,100 @@ export const GALLERY = {
     lede: 'A rotating exhibition of local Miami artists lives inside The Vault. The art changes; the intent doesn’t — to make the space you recover in worth being in.',
   },
   manifesto: 'We believe environment is part of recovery. So instead of motivational posters and fluorescent light, The Vault holds a curated, rotating gallery — work chosen to be looked at, sat with, and protected. It’s the same instinct behind everything we do: things worth keeping deserve a vault.',
+
+  season: 'Now showing', // TODO(client): e.g. 'Summer 2026'
   current: {
     eyebrow: 'Current Exhibition',
-    title: 'Exhibition Title', // TODO(client)
-    artist: 'Featured Artist', // TODO(client)
-    dates: 'Now showing', // TODO(client)
-    statement: 'A short statement about the current show drops in here — the artist, the work, and why it lives at The Vault this season.',
-    // placeholder pieces: page renders elegant empty frames with varied heights
-    pieces: [
-      { title: 'Untitled I', medium: 'Mixed media', ratio: 'tall' },
-      { title: 'Untitled II', medium: 'Acrylic on canvas', ratio: 'wide' },
-      { title: 'Untitled III', medium: 'Photography', ratio: 'square' },
-      { title: 'Untitled IV', medium: 'Mixed media', ratio: 'square' },
-      { title: 'Untitled V', medium: 'Oil on linen', ratio: 'tall' },
-      { title: 'Untitled VI', medium: 'Print', ratio: 'wide' },
-    ],
+    title: 'The Vault Collection', // TODO(client): real exhibition title
+    statement: 'This season’s walls bring together three Miami artists — mixed-media collage, photography on metal, and colored pencil — each piece chosen for the room it lives in.', // TODO(client)
   },
-  spotlight: {
-    eyebrow: 'Artist Spotlight',
-    name: 'Featured Artist', // TODO(client)
-    bio: 'A short artist bio and statement drops in here — who they are, where they work, and what this collection is about.',
-  },
-  past: {
-    eyebrow: 'Past Exhibitions',
-    items: [
-      { title: 'Past Show', artist: 'Artist Name', season: 'Season' }, // TODO(client) ×3
-      { title: 'Past Show', artist: 'Artist Name', season: 'Season' },
-      { title: 'Past Show', artist: 'Artist Name', season: 'Season' },
-    ],
-  },
+
+  // ── current artists (swap these to rotate the show) ──
+  artists: [
+    {
+      name: 'Katie Hirshfield',
+      medium: 'Mixed-media collage',
+      feature: true, // spotlight artist
+      // TODO(client): confirm full artist bio.
+      bio: 'This season’s featured artist. Katie Hirshfield builds her portraits from hundreds of cut fragments — magazine, ephemera, found print — layered into a single face. Up close it reads as chaos; from across the room it resolves into something unmistakably human.',
+      images: [
+        { src: '/img/gallery/katie-1.jpg', ratio: 'tall' },
+        { src: '/img/gallery/katie-4.jpg', ratio: 'wide' },
+        { src: '/img/gallery/katie-5.jpg', ratio: 'square' },
+        { src: '/img/gallery/katie-2.jpg', ratio: 'tall' },
+        { src: '/img/gallery/katie-3.jpg', ratio: 'tall' },
+      ],
+    },
+    {
+      name: 'Adrian Mesa',
+      medium: 'Photography on metal',
+      // TODO(client): confirm full artist bio.
+      bio: 'Local Miami photographer. Adrian Mesa prints his portraits on metal — faces weathered and exact, mounted in reclaimed industrial frames.',
+      images: [
+        { src: '/img/gallery/adrian-1.jpg', ratio: 'tall' },
+        { src: '/img/gallery/adrian-2.jpg', ratio: 'tall' },
+        { src: '/img/gallery/adrian-3.jpg', ratio: 'tall' },
+      ],
+    },
+    {
+      name: 'Carlo Guzman',
+      medium: 'Colored pencil',
+      // TODO(client): confirm full artist bio.
+      bio: 'Colored-pencil work, scorched and framed — text and surface treated as a single gesture.',
+      images: [
+        { src: '/img/gallery/carlo-1.jpg', ratio: 'tall' },
+      ],
+    },
+  ],
+
   applyCta: { title: 'Are you a local artist?', body: 'The Vault rotates new work each season. Tell us about yours.', label: 'Start a free 15-minute call' },
 }
 
 // ----------------------------------------------------------------------- EBOOK
+// Real $27 guide — "Shoulder Health & Freedom" (client-provided PDF, 12 pages).
+// Delivered file lives at /public/shoulder-health-and-freedom.pdf
 export const EBOOK = {
-  eyebrow: 'The Playbook',
-  title: 'The Pain-Free Performance Playbook',
-  subtitle: 'The movement habits our Miami athletes use to stay out of the clinic — and in the game.',
-  price: '$19',
-  cover: 'The Pain-Free Performance Playbook',
+  eyebrow: 'The Shoulder Guide',
+  title: 'Shoulder Health & Freedom',
+  subtitle: 'Understand what’s happening inside your shoulder. Move better. Get back to the life you’ve been missing.',
+  price: '$27',
+  cover: 'Shoulder Health & Freedom',
   author: 'By Dr. Juan Guzman, PT, CSCS',
+  pdf: '/shoulder-health-and-freedom.pdf', // paid deliverable
+  tagline: 'Your body is the only piece of the operation you cannot replace. Insure it accordingly.',
   bullets: [
-    'The 5-minute daily mobility routine for busy professionals',
-    'How to tell a niggle from a real injury — and what to do about each',
-    'The recovery mistakes that keep you in pain longer',
-    'A printable return-to-training checklist',
+    'The 8 muscles that actually run your shoulder — and the one quietly driving your pain',
+    'Why most shoulder pain is a movement problem, not a tissue problem',
+    'The 10 daily habits our Miami athletes use to stay out of the clinic',
+    'How to tell soreness (progress) from sharp pain (stop and get evaluated)',
   ],
-  // table of contents = the value stack for a low-ticket ebook
+  // table of contents = the value stack (real, from the guide)
   toc: [
-    'Why pain isn’t the problem — it’s the messenger',
-    'The 5-minute daily mobility reset',
-    'Load vs. rest: reading your own signals',
-    'The three habits that protect every joint',
-    'Return-to-training without re-injury',
-    'When to handle it yourself — and when to call a pro',
+    'Welcome — Why Your Shoulder Matters',
+    'Anatomy — Meet the Team Inside Your Shoulder',
+    'How Your Shoulder Actually Moves',
+    'Movement Is the Medicine — 10 Rehab Tips',
+    'Bonus: The 12-Day Shoulder Challenge',
+    'Your Next Step',
   ],
+  // BONUS — free with purchase. The 12-Day Shoulder Challenge + protocol videos.
+  // TODO(client): confirm claim mechanism — IG DM (current) vs PTeverywhere CRM
+  // auto-assign on email submit. Message drafted; awaiting client + API details.
+  bonus: {
+    eyebrow: 'Bonus · included free',
+    title: 'The 12-Day Shoulder Challenge',
+    lede: '12 movements. 12 days. Under 10 minutes each.',
+    body: 'One targeted shoulder movement delivered each day for 12 days — no gym, no equipment. Each builds on the last, so by Day 12 your shoulder moves differently.',
+    points: [
+      'One guided movement per day, 12 days straight',
+      'Just 5–10 focused minutes — no equipment',
+      'Each movement builds on the last',
+      'Plus access to our shoulder protocol video library',
+    ],
+    claimLabel: 'How to claim your bonus',
+    claim: 'DM the word SHOULDER RESET to @inspirehealthpt on Instagram and we’ll send your 12-day challenge access right away.',
+    claimHref: 'https://instagram.com/inspirehealthpt',
+  },
   // anchored value framing
   valueLine: 'Less than a tenth of a single private session — and it might save you several.',
   guarantee: 'Instant download. If it’s not for you, email us within 7 days for a full refund.',
@@ -363,10 +410,10 @@ export const VAULT_OFFER = {
       { label: 'Full remote assessment & video screen', value: '$250' },
       { label: 'Custom four-phase program (app-delivered)', value: '$600' },
       { label: 'Direct founder messaging & check-ins', value: '$400' },
-      { label: 'The Pain-Free Performance Playbook', value: '$19' },
+      { label: 'Shoulder Health & Freedom guide', value: '$27' },
     ],
     totalLabel: 'Total value',
-    total: '$1,269',
+    total: '$1,277',
   },
   // pricing tiers — anchor high, recommend middle. TODO(client): confirm prices.
   tiers: [
@@ -392,19 +439,19 @@ export const THANKYOU = {
   evaluation: {
     title: 'Your evaluation is reserved.',
     body: 'Check your inbox for confirmation and everything you need before your visit. We’re looking forward to meeting you at The Vault.',
-    next: 'While you wait, read The Pain-Free Performance Playbook.',
+    next: 'While you wait, read Shoulder Health & Freedom.',
     nextTo: 'ebook',
   },
   ebook: {
-    title: 'The Playbook is on its way.',
-    body: 'Your download link is in your inbox. Start with the 5-minute daily reset — it’s the habit our athletes never skip.',
+    title: 'Your guide is on its way.',
+    body: 'Your copy of Shoulder Health & Freedom is ready below. Then DM “SHOULDER RESET” on Instagram to unlock your free 12-Day Shoulder Challenge.',
     next: 'Ready to go deeper? Book your evaluation.',
     nextTo: 'evaluation',
   },
   vault: {
     title: 'Your application is in.',
     body: 'Dr. Guzman’s team reviews every application personally. We’ll be in touch shortly about next steps for The Founder’s Vault.',
-    next: 'In the meantime, start with The Playbook.',
+    next: 'In the meantime, start with the shoulder guide.',
     nextTo: 'ebook',
   },
 }
