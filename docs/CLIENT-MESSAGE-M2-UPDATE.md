@@ -1,61 +1,58 @@
-# Client Message — Milestone 2 Update (pricing, contact, gallery, nav + funnel)
+# Client Message — Milestone Update (pricing, contact, gallery, nav + funnel) + accept-milestone ask
 
-_To send after deploy → live at https://skynetlabs-inspire-health-pt-demo.vercel.app_
+_Live demo: https://skynetlabs-inspire-health-pt-demo.vercel.app · funnel: /#/guide_
 
 ---
 
-**Subject: Pricing, contact + the funnel question — all handled**
+**Subject: Your demo's ready — pricing, contact, gallery + the funnel, all handled**
 
 Hi [Name],
 
-Great notes — thank you. I've put your numbers and details in, fixed the nav issue you spotted, and built something specific for the funnel question you asked. All live on the demo:
+Great notes — thank you. I took everything you sent and turned this round into a real update. Here's exactly what I changed:
+
+**In this update I:**
+
+- ✅ Put in your **real pricing** ($279 eval + the three in-person plans) and structured them so they don't compete with the Vault
+- ✅ Made the **Founder's Vault application-only** with no price on the page
+- ✅ Wired in your **phone + email** (footer + behind-the-scenes for Google)
+- ✅ Cut the gallery down to **Katy Hirschfeld only** with her full statement (removed Adrian + Carlo)
+- ✅ Removed the manual Instagram DM step — the **ebook now delivers automatically** (downloads on the demo; auto-emails once we connect your email tool)
+- ✅ **Fixed the menu/footer mismatch** you spotted
+- ✅ Built you a brand-new **distraction-free funnel page** for paid traffic
+
+All live here:
 
 👉 **https://skynetlabs-inspire-health-pt-demo.vercel.app**
 
-**What's now in:**
+**The detail, item by item:**
 
-1. **Pricing is live and structured the way you laid it out.** The Evaluation is **$279** (noted as the same as a single session). The three in-person plans show as one choice: **2-month $1,800**, **3-month $2,550 (marked "Most chosen")**, and **4-month $3,280**. The Founder's Vault sits beside them as the _separate, online_ path — so the two never compete. (Services page.)
+1. **Pricing, the way you laid it out.** Evaluation **$279** (same as a single session). In-person plans show as one choice — **2-month $1,800**, **3-month $2,550 (Most chosen)**, **4-month $3,280**. The Founder's Vault sits beside them as the separate, online path, so the two never compete.
 
-2. **The Founder's Vault is application-only, no price on the page** — exactly as you wanted. It now points people to the application, and the copy alludes to a serious 3-month commitment with pay-in-full and payment-plan options "shared once you're a fit," without putting $4,000/$5,200 up front. Qualified people self-select in; tire-kickers don't.
+2. **The Founder's Vault is application-only, no price on the page** — exactly as you wanted. Qualified people self-select in; tire-kickers don't.
 
-3. **Your contact details are in** — phone (305) 479-7757 and inspirehealthpt@gmail.com now show in the footer and are wired into the site's behind-the-scenes data (helps Google show the right number).
+3. **Your contact details are in** — (305) 479-7757 and inspirehealthpt@gmail.com in the footer and wired into the data that helps Google show the right number.
 
-4. **Gallery is now Katy Hirschfeld only**, with her full artist statement. I removed Adrian and Carlo as you said. Whenever you send the photos of the actual pieces, I'll drop them straight in.
+4. **Gallery is now Katy Hirschfeld only**, with her full artist statement. Send me the photos of the actual pieces and I'll drop them straight in.
 
-5. **The ebook flow is built for automatic delivery** — no manual DM step. The page is wired so that once we connect it to your email tool (PTeverywhere or whatever you use), the guide + 12-Day Shoulder Challenge go to the buyer's inbox on their own. On the demo it downloads the guide instantly so you can see the experience; the auto-email switches on the moment you give me the email-tool login. (Same for payment — the checkout is a working demo; I'll wire it to live Stripe when you're ready to take real money.)
+5. **The ebook flow is built for automatic delivery** — no manual DM step. Once we connect it to your email tool (PTeverywhere or whatever you use), the guide + 12-Day Challenge go to the buyer's inbox on their own. On the demo it downloads instantly so you can see the experience.
 
-**Now, the nav + funnel question — this is the important one:**
+**The funnel question — the important one:**
 
-You were right that the top menu and the footer didn't match. **Fixed** — the Shoulder Guide and the Founder's Vault now appear in both, so nothing's buried for someone browsing or coming from Google.
+You were right that the top menu and footer didn't match. **Fixed.** And your sharper question — _does the ebook funnel still convert if the big offers aren't pushed hard?_ — the honest answer is yes, **as long as the funnel page and the browse-site do two different jobs.** So I built you a dedicated, distraction-free landing page just for funnel traffic:
 
-But your real question was sharper: _does the ebook funnel still convert if the big offers aren't pushed hard?_ Here's the honest answer from how these actually perform: **yes — as long as the funnel and the browse-site do two different jobs.**
+👉 **https://skynetlabs-inspire-health-pt-demo.vercel.app/#/guide**
 
-So I built you a **dedicated, distraction-free landing page just for funnel traffic**: 👉 **https://skynetlabs-inspire-health-pt-demo.vercel.app/#/guide**
+No menu, no footer, one offer, one button. Send all your paid/social traffic there. Your main site keeps the full menu for Google and word-of-mouth visitors who browse and find the high-ticket programs on their own.
 
-- **No menu, no footer, one offer, one button.** Stripping navigation off an opt-in page is one of the most consistent conversion lifts there is. In the landing-page tests I trust (Unbounce and VWO have both published on this), removing the nav from a focused opt-in page lifts conversions by a meaningful double-digit margin — because every extra link is a way to leave instead of buy.
-- Send all your **paid/social traffic straight to that page.** It's built to convert the ebook, full stop.
-- Your **main site keeps the full menu** — that's where Google and word-of-mouth visitors browse and find the high-ticket programs on their own.
-- Then the ebook buyers get **nurtured up the ladder** (ebook → in-person plan → Founder's Vault) over a short email sequence, instead of being asked for the big decision cold.
+**Next step — if this looks right, please accept this milestone.**
 
-Short version: keeping the program and Vault lower-key _on the funnel path_ helps the ebook convert — and we don't lose the high-ticket discovery, because that lives on the main site and in the follow-up.
+Once you approve, I move straight into **Milestone 2: deploying everything onto your live site (inspirehealthpt.co)** and wiring the funnel from demo to live. For that I'll need:
 
-**Still waiting on you (to launch on inspirehealthpt.co):**
+- **Email tool login** (PTeverywhere or similar) — so the guide + Challenge auto-send
+- A **Stripe account** to connect — so the checkout takes real payments
+- Your **VSL link**, **logo file**, **exterior/storefront shot**, **photos of the gallery pieces** + exhibition title/season, and a quick **thumbs-up on the sauna artwork**
 
-- Your **VSL link** (I know it's in final edit — the spot is ready for it).
-- **Photos of the actual gallery pieces** + the exhibition **title/season**.
-- Your **logo file** and an **exterior/storefront** shot.
-- Quick **thumbs-up on the sauna artwork** reading right for a clinic site.
-
-**To switch the funnel from demo to live (when you're ready to run traffic):**
-
-- **Email tool login** (PTeverywhere or similar) — so the guide + 12-Day Challenge auto-send.
-- A **Stripe account** to connect — so the checkout takes real payments.
-
-Until those two are connected the funnel runs as a working demo (downloads the guide, no charge), so you can show it around safely.
-
-**One quick answer to your question** about editing photos/bios later: this build is a custom-coded site (not a WordPress dashboard), so right now changes are a 5-minute edit on my end — send me the photo or new bio and it's live the same day. When we move to inspirehealthpt.co, I can either keep it this way (fastest, I handle swaps) **or** set you up so you can edit the gallery and bios yourself — your call, and I'll walk you through whichever you prefer.
-
-Take a look — especially the `/#/guide` page on your phone — and let me know.
+Take a look — especially the `/#/guide` page on your phone — accept the milestone, and I'll get the live deployment rolling.
 
 Best,
 Waseem
