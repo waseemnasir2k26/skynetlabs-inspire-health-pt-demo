@@ -686,7 +686,7 @@ export const THANKYOU = {
   },
   ebook: {
     title: "Your guide is on its way.",
-    body: "Your copy of Shoulder Health & Freedom is ready below. Then DM “SHOULDER RESET” on Instagram to unlock your free 12-Day Shoulder Challenge.",
+    body: "Your copy of Shoulder Health & Freedom is ready below — plus your free 12-Day Shoulder Challenge lands in your inbox shortly.",
     next: "Ready to go deeper? Book your evaluation.",
     nextTo: "evaluation",
   },
