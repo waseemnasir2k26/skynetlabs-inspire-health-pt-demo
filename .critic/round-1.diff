@@ -1,0 +1,1892 @@
+diff --git a/src/App.jsx b/src/App.jsx
+index 62a3bde..d942708 100644
+--- a/src/App.jsx
++++ b/src/App.jsx
+@@ -1,20 +1,21 @@
+-import { useEffect, useState, useCallback } from 'react'
+-import { BRAND } from './themes.js'
+-import { CLINIC, NAV, DISCLAIMERS } from './data.js'
+-import { Logo, Icon } from './ui.jsx'
+-import Home from './pages/Home.jsx'
+-import About from './pages/About.jsx'
+-import Services from './pages/Services.jsx'
+-import Facilities from './pages/Facilities.jsx'
+-import Gallery from './pages/Gallery.jsx'
+-import Faq from './pages/Faq.jsx'
+-import Evaluation from './pages/Evaluation.jsx'
+-import Ebook from './pages/Ebook.jsx'
+-import VaultOffer from './pages/VaultOffer.jsx'
+-import ThankYou from './pages/ThankYou.jsx'
++import { useEffect, useState, useCallback } from "react";
++import { BRAND } from "./themes.js";
++import { CLINIC, NAV, DISCLAIMERS } from "./data.js";
++import { Logo, Icon } from "./ui.jsx";
++import Home from "./pages/Home.jsx";
++import About from "./pages/About.jsx";
++import Services from "./pages/Services.jsx";
++import Facilities from "./pages/Facilities.jsx";
++import Gallery from "./pages/Gallery.jsx";
++import Faq from "./pages/Faq.jsx";
++import Evaluation from "./pages/Evaluation.jsx";
++import Ebook from "./pages/Ebook.jsx";
++import Guide from "./pages/Guide.jsx";
++import VaultOffer from "./pages/VaultOffer.jsx";
++import ThankYou from "./pages/ThankYou.jsx";
+ 
+ const PAGES = {
+-  '': Home,
++  "": Home,
+   about: About,
+   services: Services,
+   facilities: Facilities,
+@@ -22,122 +23,232 @@ const PAGES = {
+   faq: Faq,
+   evaluation: Evaluation,
+   ebook: Ebook,
+-  'vault-offer': VaultOffer,
+-  'thank-you': ThankYou,
+-}
++  guide: Guide,
++  "vault-offer": VaultOffer,
++  "thank-you": ThankYou,
++};
++
++// Distraction-free funnel pages: no global header/footer, one CTA (max attention
++// ratio). Send paid/social lead-magnet traffic straight to #/guide.
++const BARE = new Set(["guide"]);
+ 
+ function parseHash() {
+-  const raw = window.location.hash.replace(/^#\/?/, '')
+-  const [page, sub = ''] = raw.split('/')
+-  return { page: PAGES[page] ? page : '', sub }
++  const raw = window.location.hash.replace(/^#\/?/, "");
++  const [page, sub = ""] = raw.split("/");
++  return { page: PAGES[page] ? page : "", sub };
+ }
+ 
+ export default function App() {
+-  const [{ page, sub }, setRoute] = useState(parseHash)
++  const [{ page, sub }, setRoute] = useState(parseHash);
+ 
+   // apply the single brand theme once
+   useEffect(() => {
+-    const root = document.documentElement
+-    Object.entries(BRAND.vars).forEach(([k, v]) => root.style.setProperty(k, v))
+-    root.dataset.mode = BRAND.mode
+-  }, [])
++    const root = document.documentElement;
++    Object.entries(BRAND.vars).forEach(([k, v]) =>
++      root.style.setProperty(k, v),
++    );
++    root.dataset.mode = BRAND.mode;
++  }, []);
+ 
+   useEffect(() => {
+-    const onHash = () => { setRoute(parseHash()); window.scrollTo(0, 0) }
+-    window.addEventListener('hashchange', onHash)
+-    return () => window.removeEventListener('hashchange', onHash)
+-  }, [])
++    const onHash = () => {
++      setRoute(parseHash());
++      window.scrollTo(0, 0);
++    };
++    window.addEventListener("hashchange", onHash);
++    return () => window.removeEventListener("hashchange", onHash);
++  }, []);
+ 
+-  const go = useCallback((p) => { window.location.hash = p ? `#/${p}` : '#/' }, [])
++  const go = useCallback((p) => {
++    window.location.hash = p ? `#/${p}` : "#/";
++  }, []);
+ 
+-  const Page = PAGES[page] || Home
++  const Page = PAGES[page] || Home;
++  const bare = BARE.has(page);
+ 
+   return (
+     <div className="grain min-h-screen">
+-      <Header page={page} go={go} />
+-      <main><Page go={go} sub={sub} /></main>
+-      <Footer go={go} />
++      {!bare && <Header page={page} go={go} />}
++      <main>
++        <Page go={go} sub={sub} />
++      </main>
++      {!bare && <Footer go={go} />}
+     </div>
+-  )
++  );
+ }
+ 
+ function Header({ page, go }) {
+-  const [scrolled, setScrolled] = useState(false)
+-  const [open, setOpen] = useState(false)
++  const [scrolled, setScrolled] = useState(false);
++  const [open, setOpen] = useState(false);
+   useEffect(() => {
+-    const onScroll = () => setScrolled(window.scrollY > 60)
+-    window.addEventListener('scroll', onScroll)
+-    return () => window.removeEventListener('scroll', onScroll)
+-  }, [])
++    const onScroll = () => setScrolled(window.scrollY > 60);
++    window.addEventListener("scroll", onScroll);
++    return () => window.removeEventListener("scroll", onScroll);
++  }, []);
+   return (
+-    <header className="fixed inset-x-0 top-0 z-[70] transition-all duration-500"
++    <header
++      className="fixed inset-x-0 top-0 z-[70] transition-all duration-500"
+       style={{
+-        background: scrolled ? 'color-mix(in srgb, var(--c-bg) 88%, transparent)' : 'transparent',
+-        backdropFilter: scrolled ? 'blur(14px)' : 'none',
+-        borderBottom: scrolled ? '1px solid var(--c-line)' : '1px solid transparent',
+-      }}>
++        background: scrolled
++          ? "color-mix(in srgb, var(--c-bg) 88%, transparent)"
++          : "transparent",
++        backdropFilter: scrolled ? "blur(14px)" : "none",
++        borderBottom: scrolled
++          ? "1px solid var(--c-line)"
++          : "1px solid transparent",
++      }}
++    >
+       <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-3.5 sm:px-8">
+-        <button onClick={() => go('')} className="flex items-center" aria-label="Inspire Health PT — home">
++        <button
++          onClick={() => go("")}
++          className="flex items-center"
++          aria-label="Inspire Health PT — home"
++        >
+           <Logo variant="brass" className="h-10 w-auto" />
+         </button>
+-        <nav className="hidden items-center gap-7 lg:flex">
++        <nav className="hidden items-center gap-5 xl:flex">
+           {NAV.map(({ p, label }) => (
+-            <button key={p} onClick={() => go(p)}
+-              className={`ulink text-sm tracking-wide ${page === p ? 'text-accent' : 'text-ink'}`}>{label}</button>
++            <button
++              key={p}
++              onClick={() => go(p)}
++              className={`ulink whitespace-nowrap text-sm tracking-wide ${page === p ? "text-accent" : "text-ink"}`}
++            >
++              {label}
++            </button>
+           ))}
+-          <button onClick={() => go('evaluation')} className="btn-primary px-5 py-2.5 text-sm">Book Evaluation</button>
++          <button
++            onClick={() => go("evaluation")}
++            className="btn-primary whitespace-nowrap px-5 py-2.5 text-sm"
++          >
++            Book Evaluation
++          </button>
+         </nav>
+-        <button onClick={() => setOpen(!open)} className="lg:hidden" aria-label="Menu">
+-          <div className="space-y-1.5"><span className="block h-0.5 w-6 bg-ink" /><span className="block h-0.5 w-6 bg-ink" /><span className="block h-0.5 w-6 bg-ink" /></div>
++        <button
++          onClick={() => setOpen(!open)}
++          className="xl:hidden"
++          aria-label="Menu"
++        >
++          <div className="space-y-1.5">
++            <span className="block h-0.5 w-6 bg-ink" />
++            <span className="block h-0.5 w-6 bg-ink" />
++            <span className="block h-0.5 w-6 bg-ink" />
++          </div>
+         </button>
+       </div>
+       {open && (
+-        <div className="border-t border-line bg-bg px-5 py-4 lg:hidden">
++        <div className="border-t border-line bg-bg px-5 py-4 xl:hidden">
+           {NAV.map(({ p, label }) => (
+-            <button key={p} onClick={() => { go(p); setOpen(false) }} className="block w-full py-2.5 text-left text-ink">{label}</button>
++            <button
++              key={p}
++              onClick={() => {
++                go(p);
++                setOpen(false);
++              }}
++              className="block w-full py-2.5 text-left text-ink"
++            >
++              {label}
++            </button>
+           ))}
+-          <button onClick={() => { go('evaluation'); setOpen(false) }} className="btn-primary mt-3 w-full px-5 py-3">Book Your Evaluation</button>
++          <button
++            onClick={() => {
++              go("evaluation");
++              setOpen(false);
++            }}
++            className="btn-primary mt-3 w-full px-5 py-3"
++          >
++            Book Your Evaluation
++          </button>
+         </div>
+       )}
+     </header>
+-  )
++  );
+ }
+ 
+ function Footer({ go }) {
+-  const year = new Date().getFullYear()
++  const year = new Date().getFullYear();
+   return (
+     <footer className="mt-24 border-t border-line bg-surface">
+       <div className="mx-auto max-w-7xl px-5 py-16 sm:px-8">
+         <div className="grid gap-10 md:grid-cols-4">
+           <div className="md:col-span-2">
+             <Logo variant="brass" className="mb-5 h-12 w-auto" />
+-            <p className="serif max-w-sm text-lg" style={{ color: '#cfcabb' }}>
+-              One room. One doctor. One hour. Private 1-on-1 rehab and performance in Miami — we don’t manage pain, we build you past it.
++            <p className="serif max-w-sm text-lg" style={{ color: "#cfcabb" }}>
++              One room. One doctor. One hour. Private 1-on-1 rehab and
++              performance in Miami — we don’t manage pain, we build you past it.
+             </p>
+-            <button onClick={() => go('evaluation')} className="btn-primary mt-7 px-6 py-3 text-sm">Book Your Evaluation</button>
++            <button
++              onClick={() => go("evaluation")}
++              className="btn-primary mt-7 px-6 py-3 text-sm"
++            >
++              Book Your Evaluation
++            </button>
+           </div>
+           <div>
+             <p className="eyebrow mb-4 text-xs">Explore</p>
+-            {[...NAV, { p: 'ebook', label: 'The Shoulder Guide' }, { p: 'vault-offer', label: 'The Founder’s Vault' }].map(({ p, label }) => (
+-              <button key={p} onClick={() => go(p)} className="ulink mb-2.5 block text-sm text-muted">{label}</button>
++            {NAV.map(({ p, label }) => (
++              <button
++                key={p}
++                onClick={() => go(p)}
++                className="ulink mb-2.5 block text-sm text-muted"
++              >
++                {label}
++              </button>
+             ))}
+           </div>
+           <div>
+             <p className="eyebrow mb-4 text-xs">Visit</p>
+             <p className="mb-3 flex items-start gap-2 text-sm text-muted">
+-              <Icon name="map" className="mt-0.5 h-4 w-4 shrink-0 text-accent" />{CLINIC.address}
++              <Icon
++                name="map"
++                className="mt-0.5 h-4 w-4 shrink-0 text-accent"
++              />
++              {CLINIC.address}
+             </p>
+-            <a href={CLINIC.calendly} target="_blank" rel="noopener" className="ulink mb-2.5 block text-sm text-ink">Book online ↗</a>
+-            <a href={CLINIC.freeCall} target="_blank" rel="noopener" className="ulink block text-sm text-muted">Free 15-min call ↗</a>
++            {CLINIC.phone && (
++              <a
++                href={CLINIC.phoneHref}
++                className="ulink mb-3 flex items-center gap-2 text-sm text-muted"
++              >
++                <Icon name="phone" className="h-4 w-4 shrink-0 text-accent" />
++                {CLINIC.phone}
++              </a>
++            )}
++            {CLINIC.email && (
++              <a
++                href={`mailto:${CLINIC.email}`}
++                className="ulink mb-3 flex items-center gap-2 text-sm text-muted"
++              >
++                <Icon name="mail" className="h-4 w-4 shrink-0 text-accent" />
++                {CLINIC.email}
++              </a>
++            )}
++            <a
++              href={CLINIC.calendly}
++              target="_blank"
++              rel="noopener"
++              className="ulink mb-2.5 block text-sm text-ink"
++            >
++              Book online ↗
++            </a>
++            <a
++              href={CLINIC.freeCall}
++              target="_blank"
++              rel="noopener"
++              className="ulink block text-sm text-muted"
++            >
++              Free 15-min call ↗
++            </a>
+           </div>
+         </div>
+         <div className="hairline my-10" />
+         <div className="space-y-3 text-xs text-muted2">
+           <p>{DISCLAIMERS.network}</p>
+           <p>{DISCLAIMERS.medical}</p>
+-          <p className="pt-2">© {year} Inspire Health PT · The Vault. All rights reserved.</p>
++          <p className="pt-2">
++            © {year} Inspire Health PT · The Vault. All rights reserved.
++          </p>
+         </div>
+       </div>
+     </footer>
+-  )
++  );
+ }
+diff --git a/src/data.js b/src/data.js
+index dccca11..a433615 100644
+--- a/src/data.js
++++ b/src/data.js
+@@ -19,15 +19,15 @@ export const CLINIC = {
+   // Booking is the primary CTA. Real links from the client prototype:
+   calendly: "https://calendly.com/inspirehealthpt/60min",
+   freeCall: "https://shoulder.inspirehealthpt.co/6a0f23d5d134ea342e889e00/",
+-  // TODO(client): confirm public phone + email. Booking-first until provided.
+-  phone: null,
+-  phoneHref: null,
+-  email: null,
++  // Public contact — confirmed by client 2026-06-08.
++  phone: "(305) 479-7757",
++  phoneHref: "tel:+13054797757",
++  email: "inspirehealthpt@gmail.com",
+   rating: "5.0",
+   reviewCount: "72",
+-  // TODO(client): real VSL embed URL (by Miami Starroom). Placeholder frame for now.
++  // VSL by Miami Starroom — still in final edit; placeholder frame until the cut lands.
+   vsl: null,
+-  vslNote: "VSL by Miami Starroom — drops in here",
++  vslNote: "VSL by Miami Starroom — final edit in progress",
+ };
+ 
+ export const BRANDLINES = {
+@@ -37,13 +37,16 @@ export const BRANDLINES = {
+   oneLine: "One room. One doctor. One hour.",
+ };
+ 
+-// primary nav — used by Header + Footer
++// primary nav — used by Header + Footer (kept identical in both so top === bottom).
++// Includes the two offers (Shoulder Guide + Founder's Vault) so nothing is buried.
+ export const NAV = [
+   { p: "", label: "Home" },
+   { p: "about", label: "About" },
+   { p: "services", label: "Services" },
+   { p: "facilities", label: "The Space" },
+   { p: "gallery", label: "The Gallery" },
++  { p: "ebook", label: "The Shoulder Guide" },
++  { p: "vault-offer", label: "The Founder’s Vault" },
+   { p: "faq", label: "FAQ" },
+ ];
+ 
+@@ -204,59 +207,95 @@ export const COMPARE = {
+   ],
+ };
+ 
+-// pricing — entry eval transparent; programs by consult (premium concierge framing)
+-// TODO(client): confirm real prices. Values below are placeholders for layout.
++// pricing — real, client-confirmed 2026-06-08.
++//   • Every journey starts with one Evaluation ($279 — same as a single session).
++//   • Then choose ONE in-person program (2 / 3 / 4 month).
++//   • OR train remotely via The Founder's Vault — online, by application only,
++//     prices NOT shown here (qualified applicants are walked through investment
++//     + pay-in-full / payment-plan options). In-person and the Vault are
++//     mutually exclusive paths.
+ export const PRICING = {
+   eyebrow: "Investment",
+   title: "Straightforward, cash-pay, no insurance runaround.",
+   note: "Out-of-network · superbill provided for possible reimbursement (coverage varies by plan).",
+-  tiers: [
+-    {
+-      name: "The Evaluation",
+-      price: "$250", // TODO(client) confirm
+-      unit: "one-time · 60 minutes",
+-      desc: "A complete assessment and same-day hands-on treatment with your clinician.",
++
++  // step one — the front door
++  evaluation: {
++    name: "The Evaluation",
++    price: "$279",
++    unit: "one-time · 60 minutes",
++    desc: "Where every journey starts — a complete assessment and same-day hands-on treatment with your clinician. Priced the same as a single private session.",
++    points: [
++      "Full movement & injury screen",
++      "Hands-on treatment day one",
++      "A clear, custom plan you’ll understand",
++      "Direct access — no referral needed",
++    ],
++    cta: "Book Your Evaluation",
++    to: "evaluation",
++  },
++
++  // step two, path A — in-person programs (choose one; most pick the 3-month)
++  programsEyebrow: "In-person programs",
++  programsTitle: "Commit to the work. Choose your runway.",
++  programsNote:
++    "Multi-session programs at The Vault in Miami, each one full hour and 1-on-1. Most clients choose the 3-month.",
++  programs: [
++    {
++      name: "2-Month Plan",
++      price: "$1,800",
++      unit: "8 weeks · in person",
++      desc: "A focused block to break the cycle, calm the driver of your pain, and build a real foundation.",
+       points: [
+-        "Full movement & injury screen",
+-        "Hands-on treatment day one",
+-        "A clear, custom plan you’ll understand",
+-        "Direct access — no referral needed",
++        "A full hour, 1-on-1, every visit",
++        "Same clinician each session",
++        "Built on the four-phase method",
++        "Superbill provided",
+       ],
+-      cta: "Book Your Evaluation",
++      cta: "Start the 2-Month Plan",
+       to: "evaluation",
+       featured: false,
+     },
+     {
+-      name: "The Performance Plan",
+-      price: "From $180", // TODO(client) confirm
+-      unit: "per private session",
+-      desc: "Our most-chosen path. Private, focused sessions on your schedule, inside the four-phase method.",
++      name: "3-Month Plan",
++      price: "$2,550",
++      unit: "12 weeks · in person",
++      desc: "Our most-chosen runway — long enough to forge durable strength, not just calm symptoms.",
+       points: [
+-        "A full hour, 1-on-1, every visit",
+-        "Same clinician each session",
++        "Everything in the 2-Month Plan",
+         "Dry needling & BFR included as indicated",
+-        "Superbill provided",
++        "Strength & motor-control progression",
++        "A movement re-screen built in",
+       ],
+-      cta: "Start Your Plan",
++      cta: "Start the 3-Month Plan",
+       to: "evaluation",
+       featured: true,
+     },
+     {
+-      name: "Concierge & Virtual",
+-      price: "By consult",
+-      unit: "membership / remote",
+-      desc: "Priority access in-clinic, or train with the founder from anywhere through The Founder’s Vault.",
++      name: "4-Month Program",
++      price: "$3,280",
++      unit: "16 weeks · in person",
++      desc: "The full progression — from rehab all the way through to performance and return-to-sport.",
+       points: [
++        "Everything in the 3-Month Plan",
++        "Performance & plyometric phase",
++        "Sport-specific return-to-play work",
+         "Priority scheduling",
+-        "Quarterly movement re-screen",
+-        "Remote programming option",
+-        "Direct line to your clinician",
+       ],
+-      cta: "Explore The Founder’s Vault",
+-      to: "vault-offer",
++      cta: "Start the 4-Month Program",
++      to: "evaluation",
+       featured: false,
+     },
+   ],
++
++  // step two, path B — the remote alternative (application-gated, no upfront price)
++  vault: {
++    eyebrow: "Or train remotely",
++    name: "The Founder’s Vault",
++    line: "Not local, or prefer to train with Dr. Guzman from anywhere? The Founder’s Vault is our 3-month online program — by application only, with pay-in-full and payment-plan options shared once you’re a fit.",
++    cta: "Apply for The Founder’s Vault",
++    to: "vault-offer",
++  },
+ };
+ 
+ // ------------------------------------------------------------------------ TEAM
+@@ -444,17 +483,18 @@ export const GALLERY = {
+     eyebrow: "Current Exhibition",
+     title: "The Vault Collection", // TODO(client): real exhibition title
+     statement:
+-      "This season’s walls bring together three Miami artists — mixed-media collage, photography on metal, and colored pencil — each piece chosen for the room it lives in.", // TODO(client)
++      "This season the walls belong to Miami mixed-media artist Katy Hirschfeld — layered collage built from hundreds of cut fragments, each piece chosen for the room it lives in.",
+   },
+ 
+   // ── current artists (swap these to rotate the show) ──
++  // Katy Hirschfeld is the sole featured artist this season (client direction
++  // 2026-06-08). Bio is her own artist statement, verbatim.
+   artists: [
+     {
+-      name: "Katie Hirshfield",
++      name: "Katy Hirschfeld",
+       medium: "Mixed-media collage",
+       feature: true, // spotlight artist
+-      // TODO(client): confirm full artist bio.
+-      bio: "This season’s featured artist. Katie Hirshfield builds her portraits from hundreds of cut fragments — magazine, ephemera, found print — layered into a single face. Up close it reads as chaos; from across the room it resolves into something unmistakably human.",
++      bio: "My collages are often influenced by my personal outlook and true life experiences. I share a fraction of my own little world, by promoting strength, knowledge, and self awareness to overcome social flux and challenges; learning from them through the art of mixed media. I like to express my playful side, never shunning the Basquiat beneath. Culled from the social consciousness and current events of today, each of my pieces features a different cultural comment viewed through the lens of my experiences. The simple overlapping of many small pieces, arranged in just the right way speaks volumes, touching on issues implicitly without being overbearing or sanctimonious. My work tends to stand as a viewer’s test, challenging what one sees versus what they feel in relation to the contemporary pits, progress and powers affecting us all.",
+       images: [
+         { src: "/img/gallery/katie-1.jpg", ratio: "tall" },
+         { src: "/img/gallery/katie-4.jpg", ratio: "wide" },
+@@ -463,24 +503,6 @@ export const GALLERY = {
+         { src: "/img/gallery/katie-3.jpg", ratio: "tall" },
+       ],
+     },
+-    {
+-      name: "Adrian Mesa",
+-      medium: "Photography on metal",
+-      // TODO(client): confirm full artist bio.
+-      bio: "Local Miami photographer. Adrian Mesa prints his portraits on metal — faces weathered and exact, mounted in reclaimed industrial frames.",
+-      images: [
+-        { src: "/img/gallery/adrian-1.jpg", ratio: "tall" },
+-        { src: "/img/gallery/adrian-2.jpg", ratio: "tall" },
+-        { src: "/img/gallery/adrian-3.jpg", ratio: "tall" },
+-      ],
+-    },
+-    {
+-      name: "Carlo Guzman",
+-      medium: "Colored pencil",
+-      // TODO(client): confirm full artist bio.
+-      bio: "Colored-pencil work, scorched and framed — text and surface treated as a single gesture.",
+-      images: [{ src: "/img/gallery/carlo-1.jpg", ratio: "tall" }],
+-    },
+   ],
+ 
+   applyCta: {
+@@ -533,10 +555,10 @@ export const EBOOK = {
+       "Each movement builds on the last",
+       "Plus access to our shoulder protocol video library",
+     ],
+-    claimLabel: "How to claim your bonus",
++    claimLabel: "Included — delivered automatically",
+     claim:
+-      "DM the word SHOULDER RESET to @inspirehealthpt on Instagram and we’ll send your 12-day challenge access right away.",
+-    claimHref: "https://instagram.com/inspirehealthpt",
++      "When you grab the guide, your 12-Day Shoulder Challenge is sent straight to your inbox — one guided movement a day, no manual step needed.",
++    claimHref: null,
+   },
+   // anchored value framing
+   valueLine:
+@@ -608,62 +630,27 @@ export const VAULT_OFFER = {
+       },
+     ],
+   },
+-  // value stack — TODO(client): confirm what's included + real $ values
+-  valueStack: {
+-    eyebrow: "What you get",
++  // What's included — clean inclusions list, no fabricated dollar values.
++  included: {
++    eyebrow: "What’s included",
++    title: "Everything you need to do this right.",
+     items: [
+-      { label: "Full remote assessment & video screen", value: "$250" },
+-      { label: "Custom four-phase program (app-delivered)", value: "$600" },
+-      { label: "Direct founder messaging & check-ins", value: "$400" },
+-      { label: "Shoulder Health & Freedom guide", value: "$27" },
++      "Full remote assessment & video movement screen",
++      "Custom four-phase program, app-delivered & updated as you progress",
++      "Direct founder messaging & regular check-ins",
++      "The Shoulder Health & Freedom guide",
+     ],
+-    totalLabel: "Total value",
+-    total: "$1,277",
+   },
+-  // pricing tiers — anchor high, recommend middle. TODO(client): confirm prices.
+-  tiers: [
+-    {
+-      name: "The Reset",
+-      price: "$295",
+-      unit: "one-time",
+-      desc: "A remote assessment + a 6-week program to break the cycle.",
+-      points: [
+-        "Full remote assessment",
+-        "6-week custom program",
+-        "One mid-point check-in",
+-      ],
+-      cta: "Start The Reset",
+-      featured: false,
+-    },
+-    {
+-      name: "The Build",
+-      price: "$595",
+-      unit: "12 weeks",
+-      desc: "The full progression with ongoing founder access — most chosen.",
+-      points: [
+-        "Everything in The Reset",
+-        "12-week progressive program",
+-        "Direct founder messaging",
+-        "Bi-weekly check-ins",
+-      ],
+-      cta: "Apply for The Build",
+-      featured: true,
+-    },
+-    {
+-      name: "The Vault Membership",
+-      price: "By consult",
+-      unit: "ongoing",
+-      desc: "Continuous, founder-led performance coaching for serious athletes.",
+-      points: [
+-        "Everything in The Build",
+-        "Continuous programming",
+-        "Priority founder access",
+-        "Quarterly re-assessment",
+-      ],
+-      cta: "Request an Invite",
+-      featured: false,
+-    },
+-  ],
++  // Investment — application-gated (client direction 2026-06-08). 3-month online
++  // program. Prices intentionally NOT shown on the page: qualified applicants are
++  // walked through pay-in-full and payment-plan options on the application call.
++  investment: {
++    eyebrow: "The investment",
++    title: "A serious, 3-month commitment.",
++    body: "The Founder’s Vault is a founder-led, 3-month program — not a subscription app, and not for everyone. Because every program is built and coached personally, we keep it small and take clients by application. Pricing, with pay-in-full and payment-plan options, is shared the moment we confirm you’re a fit.",
++    note: "Applying takes two minutes, and there’s no obligation.",
++    cta: "Apply for The Founder’s Vault",
++  },
+   riskReversal: {
+     title: "A fair promise.",
+     // satisfaction/service guarantee — NOT a clinical outcome guarantee (compliance)
+@@ -699,7 +686,7 @@ export const THANKYOU = {
+   },
+   ebook: {
+     title: "Your guide is on its way.",
+-    body: "Your copy of Shoulder Health & Freedom is ready below. Then DM “SHOULDER RESET” on Instagram to unlock your free 12-Day Shoulder Challenge.",
++    body: "Your copy of Shoulder Health & Freedom is ready below — plus your free 12-Day Shoulder Challenge lands in your inbox shortly.",
+     next: "Ready to go deeper? Book your evaluation.",
+     nextTo: "evaluation",
+   },
+diff --git a/src/pages/Evaluation.jsx b/src/pages/Evaluation.jsx
+index 31ca71f..34a83f3 100644
+--- a/src/pages/Evaluation.jsx
++++ b/src/pages/Evaluation.jsx
+@@ -1,79 +1,120 @@
+-import { useState } from 'react'
+-import Schema from '../components/Schema.jsx'
++import { useState } from "react";
++import Schema from "../components/Schema.jsx";
+ import {
+-  Section, Reveal, Eyebrow, DiamondRule, Btn, VSL, CTABand, FAQList, Icon, Stars,
+-} from '../ui.jsx'
+-import { HERO, METHOD, PRICING, FAQ, TESTIMONIALS, DISCLAIMERS, CLINIC } from '../data.js'
++  Section,
++  Reveal,
++  Eyebrow,
++  DiamondRule,
++  Btn,
++  VSL,
++  CTABand,
++  FAQList,
++  Icon,
++  Stars,
++} from "../ui.jsx";
++import {
++  HERO,
++  METHOD,
++  PRICING,
++  FAQ,
++  TESTIMONIALS,
++  DISCLAIMERS,
++  CLINIC,
++} from "../data.js";
+ 
+ // What happens in your 60 minutes — derived from METHOD phase 01/02 + standard
+ // eval steps. Friction reducer: demystify the visit before they book.
+ const VISIT_STEPS = [
+   {
+-    n: '01',
+-    title: 'Full movement & injury screen',
+-    body: 'We map how you move, where you compensate, and find the driver of your pain — before we load a single rep.',
++    n: "01",
++    title: "Full movement & injury screen",
++    body: "We map how you move, where you compensate, and find the driver of your pain — before we load a single rep.",
+   },
+   {
+-    n: '02',
+-    title: 'Hands-on treatment, day one',
+-    body: 'You don’t just get talked at. Skilled manual work to calm the tissue and get the joint moving the way it should.',
++    n: "02",
++    title: "Hands-on treatment, day one",
++    body: "You don’t just get talked at. Skilled manual work to calm the tissue and get the joint moving the way it should.",
+   },
+   {
+-    n: '03',
+-    title: 'A clear, custom plan',
+-    body: 'You leave understanding exactly what’s going on and the path past it — built around your goals, not a billing code.',
++    n: "03",
++    title: "A clear, custom plan",
++    body: "You leave understanding exactly what’s going on and the path past it — built around your goals, not a billing code.",
+   },
+   {
+-    n: '04',
+-    title: 'Your next steps',
+-    body: 'No referral needed, no runaround. We confirm what comes next and hand you a superbill for possible reimbursement.',
++    n: "04",
++    title: "Your next steps",
++    body: "No referral needed, no runaround. We confirm what comes next and hand you a superbill for possible reimbursement.",
+   },
+-]
++];
+ 
+ const WHO = [
+-  'The overhead athlete with a shoulder that won’t hold up',
+-  'The Hyrox competitor whose low back is catching up to the volume',
+-  'The runner stuck on knee pain that rest hasn’t fixed',
+-  'The weekend warrior tired of skipping weekends to avoid a flare-up',
+-]
++  "The overhead athlete with a shoulder that won’t hold up",
++  "The Hyrox competitor whose low back is catching up to the volume",
++  "The runner stuck on knee pain that rest hasn’t fixed",
++  "The weekend warrior tired of skipping weekends to avoid a flare-up",
++];
+ 
+ // Secondary lead-capture fallback — Calendly stays the primary action.
+ function LeadForm({ go }) {
+-  const [name, setName] = useState('')
+-  const [email, setEmail] = useState('')
+-  const [msg, setMsg] = useState('')
+-  const [busy, setBusy] = useState(false)
++  const [name, setName] = useState("");
++  const [email, setEmail] = useState("");
++  const [msg, setMsg] = useState("");
++  const [busy, setBusy] = useState(false);
+   return (
+     <form
+-      onSubmit={(e) => { e.preventDefault(); setBusy(true); setTimeout(() => go('thank-you/eval'), 700) }}
++      onSubmit={(e) => {
++        e.preventDefault();
++        setBusy(true);
++        setTimeout(() => go("thank-you/eval"), 700);
++      }}
+       className="card p-6 sm:p-7"
+     >
+-      <h3 className="display text-2xl">Prefer we reach out? Leave your details.</h3>
+-      <p className="serif mt-2 text-sm text-muted">We’ll confirm a time and send everything you need before your visit.</p>
++      <h3 className="display text-2xl">
++        Prefer we reach out? Leave your details.
++      </h3>
++      <p className="serif mt-2 text-sm text-muted">
++        We’ll confirm a time and send everything you need before your visit.
++      </p>
+       <div className="mt-5 space-y-3">
+         <input
+-          required value={name} onChange={(e) => setName(e.target.value)} placeholder="Your name"
++          required
++          value={name}
++          onChange={(e) => setName(e.target.value)}
++          placeholder="Your name"
+           className="w-full rounded-theme border border-line bg-bg px-4 py-3 text-ink outline-none focus:border-accent"
+         />
+         <input
+-          required type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email"
++          required
++          type="email"
++          value={email}
++          onChange={(e) => setEmail(e.target.value)}
++          placeholder="Email"
+           className="w-full rounded-theme border border-line bg-bg px-4 py-3 text-ink outline-none focus:border-accent"
+         />
+         <textarea
+-          rows={3} value={msg} onChange={(e) => setMsg(e.target.value)} placeholder="What’s going on?"
++          rows={3}
++          value={msg}
++          onChange={(e) => setMsg(e.target.value)}
++          placeholder="What’s going on?"
+           className="w-full rounded-theme border border-line bg-bg px-4 py-3 text-ink outline-none focus:border-accent"
+         />
+       </div>
+-      <button type="submit" disabled={busy} className="btn-ghost mt-5 w-full px-6 py-3.5 font-semibold disabled:opacity-60">
+-        {busy ? 'Sending…' : 'Request a callback'}
++      <button
++        type="submit"
++        disabled={busy}
++        className="btn-ghost mt-5 w-full px-6 py-3.5 font-semibold disabled:opacity-60"
++      >
++        {busy ? "Sending…" : "Request a callback"}
+       </button>
+-      <p className="mt-3 text-center text-xs text-muted">Demo form · no message is sent</p>
++      <p className="mt-3 text-center text-xs text-muted">
++        Demo form · no message is sent
++      </p>
+     </form>
+-  )
++  );
+ }
+ 
+ export default function Evaluation({ go, sub }) {
+-  const tier = PRICING.tiers[0]
++  const tier = PRICING.evaluation;
+   return (
+     <main>
+       <Schema type="evaluation" />
+@@ -81,7 +122,10 @@ export default function Evaluation({ go, sub }) {
+       {/* 1 — HERO ----------------------------------------------------------- */}
+       <header
+         className="relative overflow-hidden border-b border-line"
+-        style={{ background: 'radial-gradient(ellipse at 50% 0%, rgba(15,48,36,0.5), transparent 62%), linear-gradient(180deg,#11150F,var(--c-bg))' }}
++        style={{
++          background:
++            "radial-gradient(ellipse at 50% 0%, rgba(15,48,36,0.5), transparent 62%), linear-gradient(180deg,#11150F,var(--c-bg))",
++        }}
+       >
+         <Section className="pt-28 pb-20 text-center sm:pt-36 sm:pb-24">
+           <Reveal>
+@@ -90,27 +134,38 @@ export default function Evaluation({ go, sub }) {
+               Cash-pay · out-of-network · superbill provided
+             </span>
+           </Reveal>
+-          <Reveal delay={60}><p className="eyebrow mt-6 mb-5">Book Your Evaluation</p></Reveal>
++          <Reveal delay={60}>
++            <p className="eyebrow mt-6 mb-5">Book Your Evaluation</p>
++          </Reveal>
+           <Reveal delay={120}>
+             <h1 className="display mx-auto max-w-[18ch] text-5xl sm:text-7xl">
+-              A real diagnosis. A real plan. <span className="italic text-accent">In one hour.</span>
++              A real diagnosis. A real plan.{" "}
++              <span className="italic text-accent">In one hour.</span>
+             </h1>
+           </Reveal>
+           <Reveal delay={180}>
+             <p className="lede mx-auto mt-7 max-w-2xl">
+-              One private hour with a Doctor of Physical Therapy. We find why the pain is there, treat it the same day,
+-              and send you home with a plan you actually understand.
++              One private hour with a Doctor of Physical Therapy. We find why
++              the pain is there, treat it the same day, and send you home with a
++              plan you actually understand.
+             </p>
+           </Reveal>
+           <Reveal delay={240}>
+             <div className="mt-9 flex flex-wrap items-center justify-center gap-4">
+-              <Btn href={CLINIC.calendly} size="lg">Book Your Evaluation</Btn>
+-              <Btn href={CLINIC.freeCall} variant="underline">Free 15-min call</Btn>
++              <Btn href={CLINIC.calendly} size="lg">
++                Book Your Evaluation
++              </Btn>
++              <Btn href={CLINIC.freeCall} variant="underline">
++                Free 15-min call
++              </Btn>
+             </div>
+           </Reveal>
+           <Reveal delay={300}>
+             <div className="mt-7 flex items-center justify-center gap-3 text-sm text-muted">
+-              <Stars /> <span>{TESTIMONIALS.rating} · {TESTIMONIALS.count} reviews</span>
++              <Stars />{" "}
++              <span>
++                {TESTIMONIALS.rating} · {TESTIMONIALS.count} reviews
++              </span>
+             </div>
+           </Reveal>
+         </Section>
+@@ -118,7 +173,9 @@ export default function Evaluation({ go, sub }) {
+ 
+       {/* 2 — VSL ------------------------------------------------------------ */}
+       <Section className="py-20">
+-        <Reveal className="text-center"><Eyebrow>Watch first</Eyebrow></Reveal>
++        <Reveal className="text-center">
++          <Eyebrow>Watch first</Eyebrow>
++        </Reveal>
+         <Reveal delay={60}>
+           <h2 className="display mx-auto max-w-[16ch] text-center text-3xl sm:text-5xl">
+             Sixty seconds on what your hour looks like.
+@@ -135,7 +192,9 @@ export default function Evaluation({ go, sub }) {
+ 
+       {/* 3 — WHAT HAPPENS IN YOUR 60 MINUTES ------------------------------- */}
+       <Section className="py-20">
+-        <Reveal className="text-center"><Eyebrow>The visit</Eyebrow></Reveal>
++        <Reveal className="text-center">
++          <Eyebrow>The visit</Eyebrow>
++        </Reveal>
+         <Reveal delay={60}>
+           <h2 className="display mx-auto max-w-[18ch] text-center text-4xl sm:text-6xl">
+             What happens in your 60 minutes.
+@@ -147,7 +206,9 @@ export default function Evaluation({ go, sub }) {
+               <div className="card-brass h-full p-6">
+                 <span className="display text-3xl text-accent">{s.n}</span>
+                 <h3 className="display mt-3 text-xl text-ink">{s.title}</h3>
+-                <p className="serif mt-2 leading-relaxed text-muted">{s.body}</p>
++                <p className="serif mt-2 leading-relaxed text-muted">
++                  {s.body}
++                </p>
+               </div>
+             </Reveal>
+           ))}
+@@ -157,16 +218,23 @@ export default function Evaluation({ go, sub }) {
+       {/* 4 — WHO IT'S FOR --------------------------------------------------- */}
+       <Section className="py-16">
+         <div className="mx-auto max-w-3xl text-center">
+-          <Reveal><Eyebrow>Who it’s for</Eyebrow></Reveal>
++          <Reveal>
++            <Eyebrow>Who it’s for</Eyebrow>
++          </Reveal>
+           <Reveal delay={60}>
+-            <h2 className="display text-3xl sm:text-5xl">You’ll know if this is you.</h2>
++            <h2 className="display text-3xl sm:text-5xl">
++              You’ll know if this is you.
++            </h2>
+           </Reveal>
+         </div>
+         <ul className="mx-auto mt-9 grid max-w-3xl gap-3">
+           {WHO.map((w, i) => (
+             <Reveal key={i} delay={i * 50}>
+               <li className="flex items-start gap-3 border-b border-line pb-3">
+-                <Icon name="check" className="mt-0.5 h-5 w-5 shrink-0 text-accent" />
++                <Icon
++                  name="check"
++                  className="mt-0.5 h-5 w-5 shrink-0 text-accent"
++                />
+                 <span className="text-ink">{w}</span>
+               </li>
+             </Reveal>
+@@ -176,16 +244,20 @@ export default function Evaluation({ go, sub }) {
+ 
+       {/* 5 — INLINE CALENDLY #1 -------------------------------------------- */}
+       <Section className="py-20">
+-        <Reveal className="text-center"><Eyebrow>Reserve your time</Eyebrow></Reveal>
++        <Reveal className="text-center">
++          <Eyebrow>Reserve your time</Eyebrow>
++        </Reveal>
+         <Reveal delay={60}>
+-          <h2 className="display mx-auto max-w-[16ch] text-center text-4xl sm:text-6xl">Pick your time.</h2>
++          <h2 className="display mx-auto max-w-[16ch] text-center text-4xl sm:text-6xl">
++            Pick your time.
++          </h2>
+         </Reveal>
+         <Reveal delay={140}>
+           <div className="card-brass mx-auto mt-10 max-w-3xl overflow-hidden p-2">
+             <iframe
+               src={CLINIC.calendly}
+               className="w-full"
+-              style={{ minHeight: '680px', border: '0' }}
++              style={{ minHeight: "680px", border: "0" }}
+               title="Book your evaluation"
+             />
+           </div>
+@@ -197,7 +269,9 @@ export default function Evaluation({ go, sub }) {
+       {/* 6 — PRICING CLARITY (eval tier) ----------------------------------- */}
+       <Section className="py-16">
+         <div className="mx-auto max-w-3xl text-center">
+-          <Reveal><Eyebrow>{PRICING.eyebrow}</Eyebrow></Reveal>
++          <Reveal>
++            <Eyebrow>{PRICING.eyebrow}</Eyebrow>
++          </Reveal>
+           <Reveal delay={60}>
+             <h2 className="display text-3xl sm:text-5xl">{PRICING.title}</h2>
+           </Reveal>
+@@ -215,17 +289,30 @@ export default function Evaluation({ go, sub }) {
+             <ul className="mt-6 space-y-3">
+               {tier.points.map((p, i) => (
+                 <li key={i} className="flex items-start gap-3">
+-                  <Icon name="check" className="mt-0.5 h-5 w-5 shrink-0 text-accent" />
++                  <Icon
++                    name="check"
++                    className="mt-0.5 h-5 w-5 shrink-0 text-accent"
++                  />
+                   <span className="text-ink">{p}</span>
+                 </li>
+               ))}
+             </ul>
+-            <Btn href={CLINIC.calendly} size="lg" className="mt-8 w-full text-center">{tier.cta}</Btn>
+-            <p className="mt-4 text-center text-xs text-muted">{PRICING.note}</p>
++            <Btn
++              href={CLINIC.calendly}
++              size="lg"
++              className="mt-8 w-full text-center"
++            >
++              {tier.cta}
++            </Btn>
++            <p className="mt-4 text-center text-xs text-muted">
++              {PRICING.note}
++            </p>
+           </div>
+         </Reveal>
+         <Reveal delay={180}>
+-          <p className="mx-auto mt-6 max-w-xl text-center text-xs text-muted">{DISCLAIMERS.network}</p>
++          <p className="mx-auto mt-6 max-w-xl text-center text-xs text-muted">
++            {DISCLAIMERS.network}
++          </p>
+         </Reveal>
+       </Section>
+ 
+@@ -241,7 +328,9 @@ export default function Evaluation({ go, sub }) {
+       {/* 8 — FAQ ------------------------------------------------------------ */}
+       <Section className="py-16">
+         <div className="mx-auto max-w-3xl text-center">
+-          <Reveal><Eyebrow>{FAQ.eyebrow}</Eyebrow></Reveal>
++          <Reveal>
++            <Eyebrow>{FAQ.eyebrow}</Eyebrow>
++          </Reveal>
+           <Reveal delay={60}>
+             <h2 className="display text-3xl sm:text-5xl">{FAQ.title}</h2>
+           </Reveal>
+@@ -257,8 +346,12 @@ export default function Evaluation({ go, sub }) {
+         body="Reserve your evaluation at The Vault."
+         label="Book Your Evaluation"
+         go={go}
+-        secondary={<Btn href={CLINIC.freeCall} variant="underline">Free 15-min call</Btn>}
++        secondary={
++          <Btn href={CLINIC.freeCall} variant="underline">
++            Free 15-min call
++          </Btn>
++        }
+       />
+     </main>
+-  )
++  );
+ }
+diff --git a/src/pages/Guide.jsx b/src/pages/Guide.jsx
+new file mode 100644
+index 0000000..2a2d70a
+--- /dev/null
++++ b/src/pages/Guide.jsx
+@@ -0,0 +1,272 @@
++import { useState } from "react";
++import { Reveal, Icon, Logo } from "../ui.jsx";
++import { EBOOK, CLINIC, TEAM, TESTIMONIALS, DISCLAIMERS } from "../data.js";
++
++// ─────────────────────────────────────────────────────────────────────────────
++// THE GUIDE — distraction-free lead-magnet funnel landing page.
++//
++// This page renders WITHOUT the global header/footer (see BARE in App.jsx) so it
++// holds a 1:1 attention ratio: one offer, one CTA, zero competing links. Send all
++// paid/social traffic here →  /#/guide  — NOT to the in-site /#/ebook page (which
++// keeps full nav + cross-sells for organic browsers).
++// ─────────────────────────────────────────────────────────────────────────────
++
++const founder = TEAM.members[0];
++
++// CSS-only 3D book mock (mirrors the in-site ebook page).
++function BookMock() {
++  return (
++    <div
++      className="relative mx-auto w-full max-w-[280px]"
++      style={{ perspective: "1400px" }}
++    >
++      <div
++        className="relative aspect-[3/4] w-full overflow-hidden"
++        style={{
++          transform: "rotateY(-16deg) rotateX(3deg)",
++          transformStyle: "preserve-3d",
++          background:
++            "linear-gradient(150deg, var(--c-surface2) 0%, var(--c-surface) 60%, var(--c-bg) 100%)",
++          border: "1px solid var(--c-accent)",
++          borderRadius: "4px 10px 10px 4px",
++          boxShadow: "22px 26px 60px rgba(0,0,0,0.55)",
++        }}
++      >
++        <span
++          className="pointer-events-none absolute inset-y-0 left-0 w-7"
++          style={{
++            background: "linear-gradient(90deg, rgba(0,0,0,0.55), transparent)",
++          }}
++        />
++        <span
++          className="pointer-events-none absolute inset-0"
++          style={{
++            background:
++              "linear-gradient(115deg, rgba(255,255,255,0.07), transparent 42%)",
++          }}
++        />
++        <div className="relative flex h-full flex-col p-7 text-left">
++          <p className="eyebrow" style={{ color: "var(--c-accent)" }}>
++            {CLINIC.name}
++          </p>
++          <span
++            className="diamond mx-0 my-5 block h-2 w-2 rotate-45"
++            style={{ background: "var(--c-accent)" }}
++          />
++          <h3
++            className="display mt-1 text-3xl leading-[1.04]"
++            style={{ color: "var(--c-ink)" }}
++          >
++            {EBOOK.cover}
++          </h3>
++          <div className="mt-auto">
++            <div className="hairline mb-3" />
++            <p className="text-xs" style={{ color: "var(--c-muted)" }}>
++              {EBOOK.author}
++            </p>
++          </div>
++        </div>
++      </div>
++    </div>
++  );
++}
++
++export default function Guide({ go }) {
++  const [busy, setBusy] = useState(false);
++
++  // Demo delivery: hand over the real PDF, then route to the thank-you page.
++  // TODO(client): wire real Stripe Checkout → fulfillment + auto-trigger the
++  // 12-Day Shoulder Challenge email sequence (PTeverywhere automation).
++  function submit(e) {
++    e.preventDefault();
++    setBusy(true);
++    try {
++      const a = document.createElement("a");
++      a.href = EBOOK.pdf;
++      a.download = "Shoulder-Health-and-Freedom.pdf";
++      document.body.appendChild(a);
++      a.click();
++      a.remove();
++    } catch (_) {
++      /* best-effort in demo */
++    }
++    setTimeout(() => go("thank-you/ebook"), 700);
++  }
++
++  return (
++    <main
++      className="min-h-screen"
++      style={{
++        background:
++          "radial-gradient(ellipse at 50% -5%, rgba(15,48,36,0.55), transparent 60%), linear-gradient(180deg,#10140E,var(--c-bg))",
++      }}
++    >
++      {/* logo only — NO navigation (this is the whole point of a funnel page) */}
++      <div className="mx-auto flex max-w-5xl items-center justify-center px-5 pt-8">
++        <Logo variant="brass" className="h-9 w-auto" />
++      </div>
++
++      <div className="mx-auto grid max-w-5xl items-center gap-12 px-5 py-12 lg:grid-cols-2 lg:py-20">
++        {/* LEFT — the offer */}
++        <div>
++          <Reveal>
++            <p className="eyebrow" style={{ color: "var(--c-accent)" }}>
++              {EBOOK.eyebrow}
++            </p>
++          </Reveal>
++          <Reveal delay={70}>
++            <h1 className="display mt-4 text-4xl leading-[1.04] sm:text-6xl">
++              {EBOOK.title}
++            </h1>
++          </Reveal>
++          <Reveal delay={140}>
++            <p className="lede mt-5 max-w-xl">{EBOOK.subtitle}</p>
++          </Reveal>
++
++          <Reveal delay={200}>
++            <ul className="mt-8 grid gap-3">
++              {EBOOK.bullets.map((b, i) => (
++                <li key={i} className="flex items-start gap-3">
++                  <Icon
++                    name="check"
++                    className="mt-0.5 h-5 w-5 shrink-0 text-accent"
++                  />
++                  <span className="text-ink">{b}</span>
++                </li>
++              ))}
++            </ul>
++          </Reveal>
++
++          <Reveal delay={260}>
++            <div className="mt-8 flex items-center gap-4 border-t border-line pt-6">
++              <img
++                src="/img/juan.jpg"
++                alt={founder.name}
++                className="h-14 w-14 shrink-0 rounded-full object-cover"
++                style={{ border: "1px solid var(--c-accent)" }}
++              />
++              <p className="serif text-sm italic text-muted">
++                {EBOOK.author} · {TESTIMONIALS.rating}★ from{" "}
++                {TESTIMONIALS.count} Google reviews
++              </p>
++            </div>
++          </Reveal>
++        </div>
++
++        {/* RIGHT — the single CTA: checkout */}
++        <div>
++          <Reveal delay={120}>
++            <div className="mb-8 hidden lg:block">
++              <BookMock />
++            </div>
++          </Reveal>
++
++          <Reveal delay={160}>
++            <div className="card-brass mx-auto max-w-md p-7 sm:p-8">
++              <div className="flex items-baseline justify-between border-b border-line pb-4">
++                <span className="display text-2xl">Get instant access</span>
++                <span
++                  className="display text-3xl"
++                  style={{ color: "var(--c-accent)" }}
++                >
++                  {EBOOK.price}
++                </span>
++              </div>
++
++              {/* bonus, stated once — reinforces value without adding a link */}
++              <p className="serif mt-4 text-sm italic text-muted">
++                <span
++                  className="not-italic"
++                  style={{ color: "var(--c-accent)" }}
++                >
++                  Included free:{" "}
++                </span>
++                {EBOOK.bonus.title} — {EBOOK.bonus.lede}
++              </p>
++
++              <div className="mt-5 grid grid-cols-2 gap-3">
++                <button
++                  type="button"
++                  onClick={submit}
++                  className="rounded-theme border border-line bg-bg py-3 text-sm font-semibold text-ink transition hover:border-accent"
++                >
++                  {" "}
++                  Pay
++                </button>
++                <button
++                  type="button"
++                  onClick={submit}
++                  className="rounded-theme border border-line bg-bg py-3 text-sm font-semibold text-ink transition hover:border-accent"
++                >
++                  G&nbsp;Pay
++                </button>
++              </div>
++
++              <div className="my-5 flex items-center gap-3">
++                <span className="hairline flex-1" />
++                <span className="text-xs uppercase tracking-[0.2em] text-muted2">
++                  or pay with card
++                </span>
++                <span className="hairline flex-1" />
++              </div>
++
++              <form onSubmit={submit} className="space-y-3">
++                <input
++                  required
++                  type="email"
++                  placeholder="Email for delivery"
++                  className="w-full rounded-theme border border-line bg-bg px-4 py-3 text-ink outline-none transition focus:border-accent"
++                />
++                <div className="flex items-center rounded-theme border border-line bg-bg px-4 transition focus-within:border-accent">
++                  <input
++                    required
++                    inputMode="numeric"
++                    placeholder="Card number"
++                    className="w-full bg-transparent py-3 text-ink outline-none"
++                  />
++                  <span className="text-xs font-bold text-muted">VISA</span>
++                </div>
++                <div className="grid grid-cols-2 gap-3">
++                  <input
++                    required
++                    placeholder="MM / YY"
++                    className="rounded-theme border border-line bg-bg px-4 py-3 text-ink outline-none transition focus:border-accent"
++                  />
++                  <input
++                    required
++                    placeholder="CVC"
++                    className="rounded-theme border border-line bg-bg px-4 py-3 text-ink outline-none transition focus:border-accent"
++                  />
++                </div>
++                <button
++                  type="submit"
++                  disabled={busy}
++                  className="btn-primary mt-2 w-full px-6 py-4 font-semibold disabled:opacity-60"
++                >
++                  {busy ? "Processing…" : `Get the Guide — ${EBOOK.price}`}
++                </button>
++              </form>
++
++              <p className="mt-4 flex items-center justify-center gap-2 text-center text-xs text-muted">
++                <Icon name="lock" className="h-4 w-4" /> {EBOOK.checkout.note}
++              </p>
++              <p className="mt-3 text-center text-xs text-muted2">
++                {EBOOK.guarantee}
++              </p>
++            </div>
++          </Reveal>
++        </div>
++      </div>
++
++      {/* minimal legal — required, but kept quiet so it isn't a competing link */}
++      <div className="mx-auto max-w-3xl px-5 pb-12 text-center">
++        <p className="text-xs leading-relaxed text-muted2">
++          {EBOOK.disclaimer}
++        </p>
++        <p className="mt-2 text-xs text-muted2">
++          © {CLINIC.name} · The Vault · Miami, FL
++        </p>
++      </div>
++    </main>
++  );
++}
+diff --git a/src/pages/Services.jsx b/src/pages/Services.jsx
+index a758eec..55a26d7 100644
+--- a/src/pages/Services.jsx
++++ b/src/pages/Services.jsx
+@@ -166,8 +166,73 @@ export default function Services({ go, sub }) {
+           </Reveal>
+         </div>
+ 
+-        <div className="mt-14 grid items-stretch gap-6 lg:grid-cols-3">
+-          {PRICING.tiers.map((tier, i) => (
++        {/* 5a — the front door: one evaluation */}
++        <Reveal delay={100}>
++          <div className="card-brass mx-auto mt-14 max-w-4xl p-8 sm:p-10">
++            <div className="grid items-center gap-8 sm:grid-cols-[1.4fr_1fr]">
++              <div>
++                <p className="eyebrow text-accent">Start here</p>
++                <h3 className="display mt-2 text-3xl">
++                  {PRICING.evaluation.name}
++                </h3>
++                <p className="serif mt-3 leading-relaxed text-muted">
++                  {PRICING.evaluation.desc}
++                </p>
++                <ul className="mt-5 grid gap-2.5 sm:grid-cols-2">
++                  {PRICING.evaluation.points.map((pt) => (
++                    <li
++                      key={pt}
++                      className="flex items-start gap-2.5 text-sm text-muted"
++                    >
++                      <Icon
++                        name="check"
++                        className="mt-0.5 h-4 w-4 shrink-0 text-accent"
++                      />
++                      <span>{pt}</span>
++                    </li>
++                  ))}
++                </ul>
++              </div>
++              <div className="flex flex-col items-start gap-3 sm:items-center sm:text-center">
++                <span className="display text-5xl text-accent sm:text-6xl">
++                  {PRICING.evaluation.price}
++                </span>
++                <span className="text-sm text-muted2">
++                  {PRICING.evaluation.unit}
++                </span>
++                <Btn
++                  to={PRICING.evaluation.to}
++                  go={go}
++                  className="mt-2 w-full text-center"
++                >
++                  {PRICING.evaluation.cta}
++                </Btn>
++              </div>
++            </div>
++          </div>
++        </Reveal>
++
++        {/* 5b — in-person programs (choose one) */}
++        <div className="mx-auto mt-20 max-w-2xl text-center">
++          <Reveal>
++            <Eyebrow className="justify-center">
++              {PRICING.programsEyebrow}
++            </Eyebrow>
++          </Reveal>
++          <Reveal delay={80}>
++            <h3 className="display text-3xl sm:text-5xl">
++              {PRICING.programsTitle}
++            </h3>
++          </Reveal>
++          <Reveal delay={140}>
++            <p className="serif mt-4 leading-relaxed text-muted">
++              {PRICING.programsNote}
++            </p>
++          </Reveal>
++        </div>
++
++        <div className="mt-12 grid items-stretch gap-6 lg:grid-cols-3">
++          {PRICING.programs.map((tier, i) => (
+             <Reveal
+               key={tier.name}
+               delay={i * 90}
+@@ -208,7 +273,7 @@ export default function Services({ go, sub }) {
+                     </li>
+                   ))}
+                 </ul>
+-                <div className="mt-8 pt-2">
++                <div className="mt-auto pt-8">
+                   <Btn
+                     to={tier.to}
+                     go={go}
+@@ -223,6 +288,30 @@ export default function Services({ go, sub }) {
+           ))}
+         </div>
+ 
++        {/* 5c — the remote alternative: application-gated, no upfront price */}
++        <Reveal delay={120}>
++          <div
++            className="mx-auto mt-14 flex max-w-4xl flex-col items-center gap-5 border border-line px-6 py-10 text-center sm:flex-row sm:justify-between sm:text-left"
++            style={{ background: "var(--c-surface)" }}
++          >
++            <div>
++              <p className="eyebrow text-accent">{PRICING.vault.eyebrow}</p>
++              <h4 className="display mt-2 text-2xl">{PRICING.vault.name}</h4>
++              <p className="serif mt-2 max-w-xl leading-relaxed text-muted">
++                {PRICING.vault.line}
++              </p>
++            </div>
++            <Btn
++              to={PRICING.vault.to}
++              go={go}
++              variant="ghost"
++              className="shrink-0"
++            >
++              {PRICING.vault.cta}
++            </Btn>
++          </div>
++        </Reveal>
++
+         <Reveal delay={120}>
+           <p className="mx-auto mt-10 max-w-2xl text-center text-sm text-muted2">
+             {PRICING.note}
+diff --git a/src/pages/VaultOffer.jsx b/src/pages/VaultOffer.jsx
+index a651098..35a9585 100644
+--- a/src/pages/VaultOffer.jsx
++++ b/src/pages/VaultOffer.jsx
+@@ -1,4 +1,4 @@
+-import { useState } from 'react'
++import { useState } from "react";
+ import {
+   Section,
+   Reveal,
+@@ -10,8 +10,14 @@ import {
+   FAQList,
+   Icon,
+   Stars,
+-} from '../ui.jsx'
+-import { VAULT_OFFER, TEAM, TESTIMONIALS, CLINIC, DISCLAIMERS } from '../data.js'
++} from "../ui.jsx";
++import {
++  VAULT_OFFER,
++  TEAM,
++  TESTIMONIALS,
++  CLINIC,
++  DISCLAIMERS,
++} from "../data.js";
+ 
+ // The Founder's Vault — high-ticket virtual-offer long-form landing page.
+ // Structure: hero + authority → VSL → qualify → method → value stack →
+@@ -19,21 +25,33 @@ import { VAULT_OFFER, TEAM, TESTIMONIALS, CLINIC, DISCLAIMERS } from '../data.js
+ // TODO(client): confirm tiers/prices + wire real application + payment
+ 
+ export default function VaultOffer({ go, sub }) {
+-  const O = VAULT_OFFER
+-  const founder = TEAM.members.find((m) => m.founder) || TEAM.members[0]
+-  const proof = TESTIMONIALS.items.slice(0, 2)
++  const O = VAULT_OFFER;
++  const founder = TEAM.members.find((m) => m.founder) || TEAM.members[0];
++  const proof = TESTIMONIALS.items.slice(0, 2);
+ 
+   // apply form (demo only — no real submission/payment wired yet)
+-  const [form, setForm] = useState({ name: '', email: '', sport: '', injury: '' })
+-  const set = (k) => (e) => setForm((f) => ({ ...f, [k]: e.target.value }))
++  const [form, setForm] = useState({
++    name: "",
++    email: "",
++    sport: "",
++    injury: "",
++  });
++  const set = (k) => (e) => setForm((f) => ({ ...f, [k]: e.target.value }));
+   const onApply = (e) => {
+-    e.preventDefault()
+-    go('thank-you/vault')
+-  }
++    e.preventDefault();
++    go("thank-you/vault");
++  };
+ 
+   const scrollToVsl = () => {
+-    document.getElementById('vault-vsl')?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+-  }
++    document
++      .getElementById("vault-vsl")
++      ?.scrollIntoView({ behavior: "smooth", block: "start" });
++  };
++  const scrollToApply = () => {
++    document
++      .getElementById("apply")
++      ?.scrollIntoView({ behavior: "smooth", block: "start" });
++  };
+ 
+   return (
+     <main>
+@@ -42,7 +60,7 @@ export default function VaultOffer({ go, sub }) {
+         className="relative overflow-hidden border-b border-line"
+         style={{
+           background:
+-            'radial-gradient(ellipse at 50% 0%, rgba(15,48,36,0.55), transparent 64%), linear-gradient(180deg,#11150F,var(--c-bg))',
++            "radial-gradient(ellipse at 50% 0%, rgba(15,48,36,0.55), transparent 64%), linear-gradient(180deg,#11150F,var(--c-bg))",
+         }}
+       >
+         <Section className="pt-28 pb-20 sm:pt-36 sm:pb-24">
+@@ -52,16 +70,21 @@ export default function VaultOffer({ go, sub }) {
+                 <Eyebrow>{O.hero.kicker}</Eyebrow>
+               </Reveal>
+               <Reveal delay={80}>
+-                <h1 className="display text-5xl leading-[1.02] sm:text-7xl">{O.hero.h1}</h1>
++                <h1 className="display text-5xl leading-[1.02] sm:text-7xl">
++                  {O.hero.h1}
++                </h1>
+               </Reveal>
+               <Reveal delay={160}>
+                 <p className="lede mt-7 max-w-xl">{O.hero.lede}</p>
+               </Reveal>
+               <Reveal delay={240}>
+                 <div className="mt-9 flex flex-wrap items-center gap-5">
+-                  <Btn href={CLINIC.calendly} size="lg">
++                  <button
++                    onClick={scrollToApply}
++                    className="btn-primary px-9 py-4 text-lg"
++                  >
+                     {O.hero.ctaPrimary}
+-                  </Btn>
++                  </button>
+                   <button onClick={scrollToVsl} className="btn-underline">
+                     {O.hero.ctaSecondary}
+                   </button>
+@@ -81,11 +104,13 @@ export default function VaultOffer({ go, sub }) {
+                     className="absolute inset-x-0 bottom-0 p-5"
+                     style={{
+                       background:
+-                        'linear-gradient(180deg, transparent, rgba(11,13,9,0.92))',
++                        "linear-gradient(180deg, transparent, rgba(11,13,9,0.92))",
+                     }}
+                   >
+                     <p className="display text-xl text-ink">{founder.name}</p>
+-                    <p className="serif text-sm italic text-accent">{founder.cred}</p>
++                    <p className="serif text-sm italic text-accent">
++                      {founder.cred}
++                    </p>
+                   </div>
+                 </div>
+               </Reveal>
+@@ -125,8 +150,9 @@ export default function VaultOffer({ go, sub }) {
+         </Reveal>
+         <Reveal delay={200}>
+           <p className="serif mx-auto mt-7 max-w-2xl text-lg italic text-muted">
+-            {founder.name} walks you through the same four-phase method that rebuilds Miami’s
+-            athletes — and exactly how it’s delivered to you, from anywhere.
++            {founder.name} walks you through the same four-phase method that
++            rebuilds Miami’s athletes — and exactly how it’s delivered to you,
++            from anywhere.
+           </p>
+         </Reveal>
+         <DiamondRule />
+@@ -153,8 +179,13 @@ export default function VaultOffer({ go, sub }) {
+               <ul className="mt-6 space-y-4">
+                 {O.forWho.fit.map((f, i) => (
+                   <li key={i} className="flex items-start gap-3">
+-                    <Icon name="check" className="mt-0.5 h-5 w-5 shrink-0 text-accent" />
+-                    <span className="serif text-lg leading-relaxed text-ink">{f}</span>
++                    <Icon
++                      name="check"
++                      className="mt-0.5 h-5 w-5 shrink-0 text-accent"
++                    />
++                    <span className="serif text-lg leading-relaxed text-ink">
++                      {f}
++                    </span>
+                   </li>
+                 ))}
+               </ul>
+@@ -163,16 +194,20 @@ export default function VaultOffer({ go, sub }) {
+ 
+           <Reveal delay={100}>
+             <div className="card h-full p-8 sm:p-9">
+-              <h3 className="display text-2xl text-muted">This isn’t for you if</h3>
++              <h3 className="display text-2xl text-muted">
++                This isn’t for you if
++              </h3>
+               <ul className="mt-6 space-y-4">
+                 {O.forWho.notFit.map((f, i) => (
+                   <li key={i} className="flex items-start gap-3">
+                     <span
+                       className="mt-1 h-px w-4 shrink-0"
+-                      style={{ background: 'var(--c-muted2)' }}
++                      style={{ background: "var(--c-muted2)" }}
+                       aria-hidden
+                     />
+-                    <span className="serif text-lg leading-relaxed text-muted">{f}</span>
++                    <span className="serif text-lg leading-relaxed text-muted">
++                      {f}
++                    </span>
+                   </li>
+                 ))}
+               </ul>
+@@ -204,7 +239,9 @@ export default function VaultOffer({ go, sub }) {
+               <div className="card-brass-top h-full p-8">
+                 <span className="display text-3xl text-accent">{s.n}</span>
+                 <h3 className="display mt-4 text-2xl text-ink">{s.title}</h3>
+-                <p className="serif mt-3 text-lg leading-relaxed text-muted">{s.body}</p>
++                <p className="serif mt-3 text-lg leading-relaxed text-muted">
++                  {s.body}
++                </p>
+               </div>
+             </Reveal>
+           ))}
+@@ -212,120 +249,64 @@ export default function VaultOffer({ go, sub }) {
+         <DiamondRule />
+       </Section>
+ 
+-      {/* ─────────────────────────────── 5 · VALUE STACK ─────────────────────────────── */}
++      {/* ─────────────────────────────── 5 · WHAT'S INCLUDED ─────────────────────────────── */}
+       <Section className="py-12">
+         <div className="mx-auto max-w-2xl text-center">
+           <Reveal>
+-            <Eyebrow className="mx-auto w-fit">{O.valueStack.eyebrow}</Eyebrow>
++            <Eyebrow className="mx-auto w-fit">{O.included.eyebrow}</Eyebrow>
++          </Reveal>
++          <Reveal delay={80}>
++            <h2 className="display text-4xl sm:text-5xl">{O.included.title}</h2>
+           </Reveal>
+         </div>
+ 
+         <Reveal delay={80}>
+           <div className="card-brass mx-auto mt-10 max-w-2xl p-8 sm:p-10">
+             <ul>
+-              {O.valueStack.items.map((it, i) => (
++              {O.included.items.map((it, i) => (
+                 <li
+                   key={i}
+-                  className="flex items-baseline justify-between gap-6 border-b border-line py-4"
++                  className="flex items-start gap-3 border-b border-line py-4 last:border-b-0"
+                 >
+-                  <span className="serif text-lg text-ink">{it.label}</span>
+-                  <span className="display whitespace-nowrap text-xl text-accent">
+-                    {it.value}
+-                  </span>
++                  <Icon
++                    name="check"
++                    className="mt-1 h-5 w-5 shrink-0 text-accent"
++                  />
++                  <span className="serif text-lg text-ink">{it}</span>
+                 </li>
+               ))}
+             </ul>
+-            <div className="hairline mt-2" />
+-            <div className="mt-6 flex flex-wrap items-baseline justify-between gap-4">
+-              <span className="eyebrow text-muted">{O.valueStack.totalLabel}</span>
+-              <span className="display text-5xl text-ink">{O.valueStack.total}</span>
+-            </div>
+           </div>
+         </Reveal>
+         <DiamondRule />
+       </Section>
+ 
+-      {/* ─────────────────────────────── 6 · PRICING TIERS ─────────────────────────────── */}
++      {/* ─────────────────────────────── 6 · THE INVESTMENT (application-gated) ─────────────────────────────── */}
+       <Section className="py-12">
+-        <div className="mx-auto max-w-2xl text-center">
+-          <Reveal>
+-            <Eyebrow className="mx-auto w-fit">Choose your level</Eyebrow>
+-          </Reveal>
+-          <Reveal delay={80}>
+-            <h2 className="display text-4xl sm:text-5xl">One method. Three ways in.</h2>
+-          </Reveal>
+-        </div>
+-
+-        <div className="mt-14 grid items-stretch gap-6 lg:grid-cols-3">
+-          {O.tiers.map((t, i) => (
+-            <Reveal key={t.name} delay={i * 90} className="h-full">
+-              <div
+-                className={`relative flex h-full flex-col p-8 sm:p-9 ${
+-                  t.featured ? 'card-green lg:-my-3 lg:scale-[1.03]' : 'card-brass-top'
+-                }`}
++        <Reveal>
++          <div className="mx-auto max-w-3xl text-center">
++            <Eyebrow className="mx-auto w-fit">{O.investment.eyebrow}</Eyebrow>
++            <h2 className="display mt-4 text-4xl sm:text-5xl">
++              {O.investment.title}
++            </h2>
++            <p className="lede mx-auto mt-6 max-w-2xl">{O.investment.body}</p>
++            <p className="serif mt-5 text-base italic text-muted">
++              {O.investment.note}
++            </p>
++            <div className="mt-9 flex justify-center">
++              <button
++                onClick={scrollToApply}
++                className="btn-primary px-9 py-4 text-lg"
+               >
+-                {t.featured && (
+-                  <span
+-                    className="eyebrow absolute -top-3 left-1/2 -translate-x-1/2 whitespace-nowrap px-3 py-1"
+-                    style={{ background: 'var(--c-accent)', color: 'var(--c-onaccent)' }}
+-                  >
+-                    Most chosen
+-                  </span>
+-                )}
+-                <h3
+-                  className="display text-2xl"
+-                  style={{ color: t.featured ? '#fff' : 'var(--c-ink)' }}
+-                >
+-                  {t.name}
+-                </h3>
+-                <div className="mt-4 flex items-baseline gap-2">
+-                  <span
+-                    className="display text-4xl"
+-                    style={{ color: t.featured ? '#fff' : 'var(--c-accent)' }}
+-                  >
+-                    {t.price}
+-                  </span>
+-                  <span
+-                    className="text-sm"
+-                    style={{ color: t.featured ? '#dce8e2' : 'var(--c-muted)' }}
+-                  >
+-                    {t.unit}
+-                  </span>
+-                </div>
+-                <p
+-                  className="serif mt-4 text-lg leading-relaxed"
+-                  style={{ color: t.featured ? '#dce8e2' : 'var(--c-muted)' }}
+-                >
+-                  {t.desc}
+-                </p>
+-                <ul className="mt-6 space-y-3">
+-                  {t.points.map((p, j) => (
+-                    <li key={j} className="flex items-start gap-3">
+-                      <Icon
+-                        name="check"
+-                        className="mt-0.5 h-5 w-5 shrink-0"
+-                        style={{ color: t.featured ? 'var(--c-accent-soft)' : 'var(--c-accent)' }}
+-                      />
+-                      <span style={{ color: t.featured ? '#eef4f0' : 'var(--c-ink)' }}>{p}</span>
+-                    </li>
+-                  ))}
+-                </ul>
+-                <div className="mt-auto pt-8">
+-                  <Btn
+-                    href={CLINIC.calendly}
+-                    go={go}
+-                    variant={t.featured ? 'primary' : 'ghost'}
+-                    className="w-full text-center"
+-                  >
+-                    {t.cta}
+-                  </Btn>
+-                </div>
+-              </div>
+-            </Reveal>
+-          ))}
+-        </div>
++                {O.investment.cta}
++              </button>
++            </div>
++          </div>
++        </Reveal>
+         <Reveal delay={120}>
+-          <p className="mt-8 text-center text-sm text-muted">{DISCLAIMERS.network}</p>
++          <p className="mt-10 text-center text-sm text-muted">
++            {DISCLAIMERS.network}
++          </p>
+         </Reveal>
+         <DiamondRule />
+       </Section>
+@@ -337,14 +318,24 @@ export default function VaultOffer({ go, sub }) {
+             className="relative mx-auto max-w-3xl overflow-hidden border border-line p-10 text-center sm:p-14"
+             style={{
+               background:
+-                'radial-gradient(ellipse at 50% 0%, rgba(0,0,0,0.28), transparent 70%), var(--c-green)',
++                "radial-gradient(ellipse at 50% 0%, rgba(0,0,0,0.28), transparent 70%), var(--c-green)",
+             }}
+           >
+-            <Icon name="shield" className="mx-auto h-10 w-10" style={{ color: 'var(--c-accent)' }} />
+-            <h2 className="display mt-5 text-3xl sm:text-4xl" style={{ color: '#fff' }}>
++            <Icon
++              name="shield"
++              className="mx-auto h-10 w-10"
++              style={{ color: "var(--c-accent)" }}
++            />
++            <h2
++              className="display mt-5 text-3xl sm:text-4xl"
++              style={{ color: "#fff" }}
++            >
+               {O.riskReversal.title}
+             </h2>
+-            <p className="serif mx-auto mt-5 max-w-xl text-lg leading-relaxed" style={{ color: '#dce8e2' }}>
++            <p
++              className="serif mx-auto mt-5 max-w-xl text-lg leading-relaxed"
++              style={{ color: "#dce8e2" }}
++            >
+               {O.riskReversal.body}
+             </p>
+           </div>
+@@ -384,7 +375,9 @@ export default function VaultOffer({ go, sub }) {
+           ))}
+         </div>
+         <Reveal delay={120}>
+-          <p className="mt-8 text-center text-sm text-muted2">{DISCLAIMERS.results}</p>
++          <p className="mt-8 text-center text-sm text-muted2">
++            {DISCLAIMERS.results}
++          </p>
+         </Reveal>
+         <DiamondRule />
+       </Section>
+@@ -413,19 +406,18 @@ export default function VaultOffer({ go, sub }) {
+               <Eyebrow>The final step</Eyebrow>
+             </Reveal>
+             <Reveal delay={80}>
+-              <h2 className="display text-4xl sm:text-5xl">Apply for The Founder’s Vault</h2>
++              <h2 className="display text-4xl sm:text-5xl">
++                Apply for The Founder’s Vault
++              </h2>
+             </Reveal>
+             <Reveal delay={140}>
+               <p className="lede mt-5 max-w-md">
+-                Every application is reviewed by {founder.name} personally. Tell us a little about
+-                you, and we’ll be in touch about next steps.
++                Every application is reviewed by {founder.name} personally. Tell
++                us a little about you, and we’ll be in touch about next steps.
+               </p>
+             </Reveal>
+             <Reveal delay={200}>
+               <div className="mt-8 flex flex-wrap items-center gap-5">
+-                <Btn href={CLINIC.calendly} size="lg">
+-                  {O.hero.ctaPrimary}
+-                </Btn>
+                 <button onClick={scrollToVsl} className="btn-underline">
+                   {O.hero.ctaSecondary}
+                 </button>
+@@ -435,7 +427,7 @@ export default function VaultOffer({ go, sub }) {
+ 
+           <div className="lg:col-span-7">
+             <Reveal delay={120}>
+-              {/* TODO(client): confirm tiers/prices + wire real application + payment */}
++              {/* TODO(client): wire real application submission (currently demo → thank-you). Pricing is shared with applicants off-page, by design. */}
+               <form onSubmit={onApply} className="card-brass p-8 sm:p-9">
+                 <div className="grid gap-4 sm:grid-cols-2">
+                   <label className="block">
+@@ -443,7 +435,7 @@ export default function VaultOffer({ go, sub }) {
+                     <input
+                       required
+                       value={form.name}
+-                      onChange={set('name')}
++                      onChange={set("name")}
+                       placeholder="Your full name"
+                       className="mt-2 w-full rounded-theme border border-line bg-bg px-4 py-3 text-ink outline-none focus:border-accent"
+                     />
+@@ -454,7 +446,7 @@ export default function VaultOffer({ go, sub }) {
+                       required
+                       type="email"
+                       value={form.email}
+-                      onChange={set('email')}
++                      onChange={set("email")}
+                       placeholder="you@email.com"
+                       className="mt-2 w-full rounded-theme border border-line bg-bg px-4 py-3 text-ink outline-none focus:border-accent"
+                     />
+@@ -464,7 +456,7 @@ export default function VaultOffer({ go, sub }) {
+                     <input
+                       required
+                       value={form.sport}
+-                      onChange={set('sport')}
++                      onChange={set("sport")}
+                       placeholder="e.g. Hyrox, running, lifting"
+                       className="mt-2 w-full rounded-theme border border-line bg-bg px-4 py-3 text-ink outline-none focus:border-accent"
+                     />
+@@ -474,13 +466,16 @@ export default function VaultOffer({ go, sub }) {
+                     <input
+                       required
+                       value={form.injury}
+-                      onChange={set('injury')}
++                      onChange={set("injury")}
+                       placeholder="What’s holding you back?"
+                       className="mt-2 w-full rounded-theme border border-line bg-bg px-4 py-3 text-ink outline-none focus:border-accent"
+                     />
+                   </label>
+                 </div>
+-                <button type="submit" className="btn-primary mt-6 w-full px-6 py-3.5 font-semibold">
++                <button
++                  type="submit"
++                  className="btn-primary mt-6 w-full px-6 py-3.5 font-semibold"
++                >
+                   {O.hero.ctaPrimary}
+                 </button>
+                 <p className="mt-3 text-center text-xs text-muted">
+@@ -507,5 +502,5 @@ export default function VaultOffer({ go, sub }) {
+         }
+       />
+     </main>
+-  )
++  );
+ }

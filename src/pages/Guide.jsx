@@ -247,7 +247,10 @@ export default function Guide({ go }) {
                 </button>
               </form>
 
-              <p className="mt-4 flex items-center justify-center gap-2 text-center text-xs text-muted">
+              <p className="mt-4 rounded-theme border border-line bg-bg/50 px-3 py-2 text-center text-xs font-semibold text-muted">
+                Demo checkout — no payment is processed and no card is stored.
+              </p>
+              <p className="mt-3 flex items-center justify-center gap-2 text-center text-xs text-muted">
                 <Icon name="lock" className="h-4 w-4" /> {EBOOK.checkout.note}
               </p>
               <p className="mt-3 text-center text-xs text-muted2">
