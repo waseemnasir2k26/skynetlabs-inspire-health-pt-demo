@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState } from "react";
 import {
   Section,
   Reveal,
@@ -10,8 +10,14 @@ import {
   FAQList,
   Icon,
   Stars,
-} from '../ui.jsx'
-import { VAULT_OFFER, TEAM, TESTIMONIALS, CLINIC, DISCLAIMERS } from '../data.js'
+} from "../ui.jsx";
+import {
+  VAULT_OFFER,
+  TEAM,
+  TESTIMONIALS,
+  CLINIC,
+  DISCLAIMERS,
+} from "../data.js";
 
 // The Founder's Vault — high-ticket virtual-offer long-form landing page.
 // Structure: hero + authority → VSL → qualify → method → value stack →
@@ -19,21 +25,33 @@ import { VAULT_OFFER, TEAM, TESTIMONIALS, CLINIC, DISCLAIMERS } from '../data.js
 // TODO(client): confirm tiers/prices + wire real application + payment
 
 export default function VaultOffer({ go, sub }) {
-  const O = VAULT_OFFER
-  const founder = TEAM.members.find((m) => m.founder) || TEAM.members[0]
-  const proof = TESTIMONIALS.items.slice(0, 2)
+  const O = VAULT_OFFER;
+  const founder = TEAM.members.find((m) => m.founder) || TEAM.members[0];
+  const proof = TESTIMONIALS.items.slice(0, 2);
 
   // apply form (demo only — no real submission/payment wired yet)
-  const [form, setForm] = useState({ name: '', email: '', sport: '', injury: '' })
-  const set = (k) => (e) => setForm((f) => ({ ...f, [k]: e.target.value }))
+  const [form, setForm] = useState({
+    name: "",
+    email: "",
+    sport: "",
+    injury: "",
+  });
+  const set = (k) => (e) => setForm((f) => ({ ...f, [k]: e.target.value }));
   const onApply = (e) => {
-    e.preventDefault()
-    go('thank-you/vault')
-  }
+    e.preventDefault();
+    go("thank-you/vault");
+  };
 
   const scrollToVsl = () => {
-    document.getElementById('vault-vsl')?.scrollIntoView({ behavior: 'smooth', block: 'start' })
-  }
+    document
+      .getElementById("vault-vsl")
+      ?.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
+  const scrollToApply = () => {
+    document
+      .getElementById("apply")
+      ?.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
 
   return (
     <main>
@@ -42,7 +60,7 @@ export default function VaultOffer({ go, sub }) {
         className="relative overflow-hidden border-b border-line"
         style={{
           background:
-            'radial-gradient(ellipse at 50% 0%, rgba(15,48,36,0.55), transparent 64%), linear-gradient(180deg,#11150F,var(--c-bg))',
+            "radial-gradient(ellipse at 50% 0%, rgba(15,48,36,0.55), transparent 64%), linear-gradient(180deg,#11150F,var(--c-bg))",
         }}
       >
         <Section className="pt-28 pb-20 sm:pt-36 sm:pb-24">
@@ -52,16 +70,21 @@ export default function VaultOffer({ go, sub }) {
                 <Eyebrow>{O.hero.kicker}</Eyebrow>
               </Reveal>
               <Reveal delay={80}>
-                <h1 className="display text-5xl leading-[1.02] sm:text-7xl">{O.hero.h1}</h1>
+                <h1 className="display text-5xl leading-[1.02] sm:text-7xl">
+                  {O.hero.h1}
+                </h1>
               </Reveal>
               <Reveal delay={160}>
                 <p className="lede mt-7 max-w-xl">{O.hero.lede}</p>
               </Reveal>
               <Reveal delay={240}>
                 <div className="mt-9 flex flex-wrap items-center gap-5">
-                  <Btn href={CLINIC.calendly} size="lg">
+                  <button
+                    onClick={scrollToApply}
+                    className="btn-primary px-9 py-4 text-lg"
+                  >
                     {O.hero.ctaPrimary}
-                  </Btn>
+                  </button>
                   <button onClick={scrollToVsl} className="btn-underline">
                     {O.hero.ctaSecondary}
                   </button>
@@ -81,11 +104,13 @@ export default function VaultOffer({ go, sub }) {
                     className="absolute inset-x-0 bottom-0 p-5"
                     style={{
                       background:
-                        'linear-gradient(180deg, transparent, rgba(11,13,9,0.92))',
+                        "linear-gradient(180deg, transparent, rgba(11,13,9,0.92))",
                     }}
                   >
                     <p className="display text-xl text-ink">{founder.name}</p>
-                    <p className="serif text-sm italic text-accent">{founder.cred}</p>
+                    <p className="serif text-sm italic text-accent">
+                      {founder.cred}
+                    </p>
                   </div>
                 </div>
               </Reveal>
@@ -125,8 +150,9 @@ export default function VaultOffer({ go, sub }) {
         </Reveal>
         <Reveal delay={200}>
           <p className="serif mx-auto mt-7 max-w-2xl text-lg italic text-muted">
-            {founder.name} walks you through the same four-phase method that rebuilds Miami’s
-            athletes — and exactly how it’s delivered to you, from anywhere.
+            {founder.name} walks you through the same four-phase method that
+            rebuilds Miami’s athletes — and exactly how it’s delivered to you,
+            from anywhere.
           </p>
         </Reveal>
         <DiamondRule />
@@ -153,8 +179,13 @@ export default function VaultOffer({ go, sub }) {
               <ul className="mt-6 space-y-4">
                 {O.forWho.fit.map((f, i) => (
                   <li key={i} className="flex items-start gap-3">
-                    <Icon name="check" className="mt-0.5 h-5 w-5 shrink-0 text-accent" />
-                    <span className="serif text-lg leading-relaxed text-ink">{f}</span>
+                    <Icon
+                      name="check"
+                      className="mt-0.5 h-5 w-5 shrink-0 text-accent"
+                    />
+                    <span className="serif text-lg leading-relaxed text-ink">
+                      {f}
+                    </span>
                   </li>
                 ))}
               </ul>
@@ -163,16 +194,20 @@ export default function VaultOffer({ go, sub }) {
 
           <Reveal delay={100}>
             <div className="card h-full p-8 sm:p-9">
-              <h3 className="display text-2xl text-muted">This isn’t for you if</h3>
+              <h3 className="display text-2xl text-muted">
+                This isn’t for you if
+              </h3>
               <ul className="mt-6 space-y-4">
                 {O.forWho.notFit.map((f, i) => (
                   <li key={i} className="flex items-start gap-3">
                     <span
                       className="mt-1 h-px w-4 shrink-0"
-                      style={{ background: 'var(--c-muted2)' }}
+                      style={{ background: "var(--c-muted2)" }}
                       aria-hidden
                     />
-                    <span className="serif text-lg leading-relaxed text-muted">{f}</span>
+                    <span className="serif text-lg leading-relaxed text-muted">
+                      {f}
+                    </span>
                   </li>
                 ))}
               </ul>
@@ -204,7 +239,9 @@ export default function VaultOffer({ go, sub }) {
               <div className="card-brass-top h-full p-8">
                 <span className="display text-3xl text-accent">{s.n}</span>
                 <h3 className="display mt-4 text-2xl text-ink">{s.title}</h3>
-                <p className="serif mt-3 text-lg leading-relaxed text-muted">{s.body}</p>
+                <p className="serif mt-3 text-lg leading-relaxed text-muted">
+                  {s.body}
+                </p>
               </div>
             </Reveal>
           ))}
@@ -212,120 +249,64 @@ export default function VaultOffer({ go, sub }) {
         <DiamondRule />
       </Section>
 
-      {/* ─────────────────────────────── 5 · VALUE STACK ─────────────────────────────── */}
+      {/* ─────────────────────────────── 5 · WHAT'S INCLUDED ─────────────────────────────── */}
       <Section className="py-12">
         <div className="mx-auto max-w-2xl text-center">
           <Reveal>
-            <Eyebrow className="mx-auto w-fit">{O.valueStack.eyebrow}</Eyebrow>
+            <Eyebrow className="mx-auto w-fit">{O.included.eyebrow}</Eyebrow>
+          </Reveal>
+          <Reveal delay={80}>
+            <h2 className="display text-4xl sm:text-5xl">{O.included.title}</h2>
           </Reveal>
         </div>
 
         <Reveal delay={80}>
           <div className="card-brass mx-auto mt-10 max-w-2xl p-8 sm:p-10">
             <ul>
-              {O.valueStack.items.map((it, i) => (
+              {O.included.items.map((it, i) => (
                 <li
                   key={i}
-                  className="flex items-baseline justify-between gap-6 border-b border-line py-4"
+                  className="flex items-start gap-3 border-b border-line py-4 last:border-b-0"
                 >
-                  <span className="serif text-lg text-ink">{it.label}</span>
-                  <span className="display whitespace-nowrap text-xl text-accent">
-                    {it.value}
-                  </span>
+                  <Icon
+                    name="check"
+                    className="mt-1 h-5 w-5 shrink-0 text-accent"
+                  />
+                  <span className="serif text-lg text-ink">{it}</span>
                 </li>
               ))}
             </ul>
-            <div className="hairline mt-2" />
-            <div className="mt-6 flex flex-wrap items-baseline justify-between gap-4">
-              <span className="eyebrow text-muted">{O.valueStack.totalLabel}</span>
-              <span className="display text-5xl text-ink">{O.valueStack.total}</span>
-            </div>
           </div>
         </Reveal>
         <DiamondRule />
       </Section>
 
-      {/* ─────────────────────────────── 6 · PRICING TIERS ─────────────────────────────── */}
+      {/* ─────────────────────────────── 6 · THE INVESTMENT (application-gated) ─────────────────────────────── */}
       <Section className="py-12">
-        <div className="mx-auto max-w-2xl text-center">
-          <Reveal>
-            <Eyebrow className="mx-auto w-fit">Choose your level</Eyebrow>
-          </Reveal>
-          <Reveal delay={80}>
-            <h2 className="display text-4xl sm:text-5xl">One method. Three ways in.</h2>
-          </Reveal>
-        </div>
-
-        <div className="mt-14 grid items-stretch gap-6 lg:grid-cols-3">
-          {O.tiers.map((t, i) => (
-            <Reveal key={t.name} delay={i * 90} className="h-full">
-              <div
-                className={`relative flex h-full flex-col p-8 sm:p-9 ${
-                  t.featured ? 'card-green lg:-my-3 lg:scale-[1.03]' : 'card-brass-top'
-                }`}
+        <Reveal>
+          <div className="mx-auto max-w-3xl text-center">
+            <Eyebrow className="mx-auto w-fit">{O.investment.eyebrow}</Eyebrow>
+            <h2 className="display mt-4 text-4xl sm:text-5xl">
+              {O.investment.title}
+            </h2>
+            <p className="lede mx-auto mt-6 max-w-2xl">{O.investment.body}</p>
+            <p className="serif mt-5 text-base italic text-muted">
+              {O.investment.note}
+            </p>
+            <div className="mt-9 flex justify-center">
+              <button
+                onClick={scrollToApply}
+                className="btn-primary px-9 py-4 text-lg"
               >
-                {t.featured && (
-                  <span
-                    className="eyebrow absolute -top-3 left-1/2 -translate-x-1/2 whitespace-nowrap px-3 py-1"
-                    style={{ background: 'var(--c-accent)', color: 'var(--c-onaccent)' }}
-                  >
-                    Most chosen
-                  </span>
-                )}
-                <h3
-                  className="display text-2xl"
-                  style={{ color: t.featured ? '#fff' : 'var(--c-ink)' }}
-                >
-                  {t.name}
-                </h3>
-                <div className="mt-4 flex items-baseline gap-2">
-                  <span
-                    className="display text-4xl"
-                    style={{ color: t.featured ? '#fff' : 'var(--c-accent)' }}
-                  >
-                    {t.price}
-                  </span>
-                  <span
-                    className="text-sm"
-                    style={{ color: t.featured ? '#dce8e2' : 'var(--c-muted)' }}
-                  >
-                    {t.unit}
-                  </span>
-                </div>
-                <p
-                  className="serif mt-4 text-lg leading-relaxed"
-                  style={{ color: t.featured ? '#dce8e2' : 'var(--c-muted)' }}
-                >
-                  {t.desc}
-                </p>
-                <ul className="mt-6 space-y-3">
-                  {t.points.map((p, j) => (
-                    <li key={j} className="flex items-start gap-3">
-                      <Icon
-                        name="check"
-                        className="mt-0.5 h-5 w-5 shrink-0"
-                        style={{ color: t.featured ? 'var(--c-accent-soft)' : 'var(--c-accent)' }}
-                      />
-                      <span style={{ color: t.featured ? '#eef4f0' : 'var(--c-ink)' }}>{p}</span>
-                    </li>
-                  ))}
-                </ul>
-                <div className="mt-auto pt-8">
-                  <Btn
-                    href={CLINIC.calendly}
-                    go={go}
-                    variant={t.featured ? 'primary' : 'ghost'}
-                    className="w-full text-center"
-                  >
-                    {t.cta}
-                  </Btn>
-                </div>
-              </div>
-            </Reveal>
-          ))}
-        </div>
+                {O.investment.cta}
+              </button>
+            </div>
+          </div>
+        </Reveal>
         <Reveal delay={120}>
-          <p className="mt-8 text-center text-sm text-muted">{DISCLAIMERS.network}</p>
+          <p className="mt-10 text-center text-sm text-muted">
+            {DISCLAIMERS.network}
+          </p>
         </Reveal>
         <DiamondRule />
       </Section>
@@ -337,14 +318,24 @@ export default function VaultOffer({ go, sub }) {
             className="relative mx-auto max-w-3xl overflow-hidden border border-line p-10 text-center sm:p-14"
             style={{
               background:
-                'radial-gradient(ellipse at 50% 0%, rgba(0,0,0,0.28), transparent 70%), var(--c-green)',
+                "radial-gradient(ellipse at 50% 0%, rgba(0,0,0,0.28), transparent 70%), var(--c-green)",
             }}
           >
-            <Icon name="shield" className="mx-auto h-10 w-10" style={{ color: 'var(--c-accent)' }} />
-            <h2 className="display mt-5 text-3xl sm:text-4xl" style={{ color: '#fff' }}>
+            <Icon
+              name="shield"
+              className="mx-auto h-10 w-10"
+              style={{ color: "var(--c-accent)" }}
+            />
+            <h2
+              className="display mt-5 text-3xl sm:text-4xl"
+              style={{ color: "#fff" }}
+            >
               {O.riskReversal.title}
             </h2>
-            <p className="serif mx-auto mt-5 max-w-xl text-lg leading-relaxed" style={{ color: '#dce8e2' }}>
+            <p
+              className="serif mx-auto mt-5 max-w-xl text-lg leading-relaxed"
+              style={{ color: "#dce8e2" }}
+            >
               {O.riskReversal.body}
             </p>
           </div>
@@ -384,7 +375,9 @@ export default function VaultOffer({ go, sub }) {
           ))}
         </div>
         <Reveal delay={120}>
-          <p className="mt-8 text-center text-sm text-muted2">{DISCLAIMERS.results}</p>
+          <p className="mt-8 text-center text-sm text-muted2">
+            {DISCLAIMERS.results}
+          </p>
         </Reveal>
         <DiamondRule />
       </Section>
@@ -413,19 +406,18 @@ export default function VaultOffer({ go, sub }) {
               <Eyebrow>The final step</Eyebrow>
             </Reveal>
             <Reveal delay={80}>
-              <h2 className="display text-4xl sm:text-5xl">Apply for The Founder’s Vault</h2>
+              <h2 className="display text-4xl sm:text-5xl">
+                Apply for The Founder’s Vault
+              </h2>
             </Reveal>
             <Reveal delay={140}>
               <p className="lede mt-5 max-w-md">
-                Every application is reviewed by {founder.name} personally. Tell us a little about
-                you, and we’ll be in touch about next steps.
+                Every application is reviewed by {founder.name} personally. Tell
+                us a little about you, and we’ll be in touch about next steps.
               </p>
             </Reveal>
             <Reveal delay={200}>
               <div className="mt-8 flex flex-wrap items-center gap-5">
-                <Btn href={CLINIC.calendly} size="lg">
-                  {O.hero.ctaPrimary}
-                </Btn>
                 <button onClick={scrollToVsl} className="btn-underline">
                   {O.hero.ctaSecondary}
                 </button>
@@ -435,7 +427,7 @@ export default function VaultOffer({ go, sub }) {
 
           <div className="lg:col-span-7">
             <Reveal delay={120}>
-              {/* TODO(client): confirm tiers/prices + wire real application + payment */}
+              {/* TODO(client): wire real application submission (currently demo → thank-you). Pricing is shared with applicants off-page, by design. */}
               <form onSubmit={onApply} className="card-brass p-8 sm:p-9">
                 <div className="grid gap-4 sm:grid-cols-2">
                   <label className="block">
@@ -443,7 +435,7 @@ export default function VaultOffer({ go, sub }) {
                     <input
                       required
                       value={form.name}
-                      onChange={set('name')}
+                      onChange={set("name")}
                       placeholder="Your full name"
                       className="mt-2 w-full rounded-theme border border-line bg-bg px-4 py-3 text-ink outline-none focus:border-accent"
                     />
@@ -454,7 +446,7 @@ export default function VaultOffer({ go, sub }) {
                       required
                       type="email"
                       value={form.email}
-                      onChange={set('email')}
+                      onChange={set("email")}
                       placeholder="you@email.com"
                       className="mt-2 w-full rounded-theme border border-line bg-bg px-4 py-3 text-ink outline-none focus:border-accent"
                     />
@@ -464,7 +456,7 @@ export default function VaultOffer({ go, sub }) {
                     <input
                       required
                       value={form.sport}
-                      onChange={set('sport')}
+                      onChange={set("sport")}
                       placeholder="e.g. Hyrox, running, lifting"
                       className="mt-2 w-full rounded-theme border border-line bg-bg px-4 py-3 text-ink outline-none focus:border-accent"
                     />
@@ -474,13 +466,16 @@ export default function VaultOffer({ go, sub }) {
                     <input
                       required
                       value={form.injury}
-                      onChange={set('injury')}
+                      onChange={set("injury")}
                       placeholder="What’s holding you back?"
                       className="mt-2 w-full rounded-theme border border-line bg-bg px-4 py-3 text-ink outline-none focus:border-accent"
                     />
                   </label>
                 </div>
-                <button type="submit" className="btn-primary mt-6 w-full px-6 py-3.5 font-semibold">
+                <button
+                  type="submit"
+                  className="btn-primary mt-6 w-full px-6 py-3.5 font-semibold"
+                >
                   {O.hero.ctaPrimary}
                 </button>
                 <p className="mt-3 text-center text-xs text-muted">
@@ -507,5 +502,5 @@ export default function VaultOffer({ go, sub }) {
         }
       />
     </main>
-  )
+  );
 }

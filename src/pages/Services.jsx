@@ -166,8 +166,73 @@ export default function Services({ go, sub }) {
           </Reveal>
         </div>
 
-        <div className="mt-14 grid items-stretch gap-6 lg:grid-cols-3">
-          {PRICING.tiers.map((tier, i) => (
+        {/* 5a — the front door: one evaluation */}
+        <Reveal delay={100}>
+          <div className="card-brass mx-auto mt-14 max-w-4xl p-8 sm:p-10">
+            <div className="grid items-center gap-8 sm:grid-cols-[1.4fr_1fr]">
+              <div>
+                <p className="eyebrow text-accent">Start here</p>
+                <h3 className="display mt-2 text-3xl">
+                  {PRICING.evaluation.name}
+                </h3>
+                <p className="serif mt-3 leading-relaxed text-muted">
+                  {PRICING.evaluation.desc}
+                </p>
+                <ul className="mt-5 grid gap-2.5 sm:grid-cols-2">
+                  {PRICING.evaluation.points.map((pt) => (
+                    <li
+                      key={pt}
+                      className="flex items-start gap-2.5 text-sm text-muted"
+                    >
+                      <Icon
+                        name="check"
+                        className="mt-0.5 h-4 w-4 shrink-0 text-accent"
+                      />
+                      <span>{pt}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div className="flex flex-col items-start gap-3 sm:items-center sm:text-center">
+                <span className="display text-5xl text-accent sm:text-6xl">
+                  {PRICING.evaluation.price}
+                </span>
+                <span className="text-sm text-muted2">
+                  {PRICING.evaluation.unit}
+                </span>
+                <Btn
+                  to={PRICING.evaluation.to}
+                  go={go}
+                  className="mt-2 w-full text-center"
+                >
+                  {PRICING.evaluation.cta}
+                </Btn>
+              </div>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* 5b — in-person programs (choose one) */}
+        <div className="mx-auto mt-20 max-w-2xl text-center">
+          <Reveal>
+            <Eyebrow className="justify-center">
+              {PRICING.programsEyebrow}
+            </Eyebrow>
+          </Reveal>
+          <Reveal delay={80}>
+            <h3 className="display text-3xl sm:text-5xl">
+              {PRICING.programsTitle}
+            </h3>
+          </Reveal>
+          <Reveal delay={140}>
+            <p className="serif mt-4 leading-relaxed text-muted">
+              {PRICING.programsNote}
+            </p>
+          </Reveal>
+        </div>
+
+        <div className="mt-12 grid items-stretch gap-6 lg:grid-cols-3">
+          {PRICING.programs.map((tier, i) => (
             <Reveal
               key={tier.name}
               delay={i * 90}
@@ -208,7 +273,7 @@ export default function Services({ go, sub }) {
                     </li>
                   ))}
                 </ul>
-                <div className="mt-8 pt-2">
+                <div className="mt-auto pt-8">
                   <Btn
                     to={tier.to}
                     go={go}
@@ -222,6 +287,30 @@ export default function Services({ go, sub }) {
             </Reveal>
           ))}
         </div>
+
+        {/* 5c — the remote alternative: application-gated, no upfront price */}
+        <Reveal delay={120}>
+          <div
+            className="mx-auto mt-14 flex max-w-4xl flex-col items-center gap-5 border border-line px-6 py-10 text-center sm:flex-row sm:justify-between sm:text-left"
+            style={{ background: "var(--c-surface)" }}
+          >
+            <div>
+              <p className="eyebrow text-accent">{PRICING.vault.eyebrow}</p>
+              <h4 className="display mt-2 text-2xl">{PRICING.vault.name}</h4>
+              <p className="serif mt-2 max-w-xl leading-relaxed text-muted">
+                {PRICING.vault.line}
+              </p>
+            </div>
+            <Btn
+              to={PRICING.vault.to}
+              go={go}
+              variant="ghost"
+              className="shrink-0"
+            >
+              {PRICING.vault.cta}
+            </Btn>
+          </div>
+        </Reveal>
 
         <Reveal delay={120}>
           <p className="mx-auto mt-10 max-w-2xl text-center text-sm text-muted2">

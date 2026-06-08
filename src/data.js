@@ -19,15 +19,15 @@ export const CLINIC = {
   // Booking is the primary CTA. Real links from the client prototype:
   calendly: "https://calendly.com/inspirehealthpt/60min",
   freeCall: "https://shoulder.inspirehealthpt.co/6a0f23d5d134ea342e889e00/",
-  // TODO(client): confirm public phone + email. Booking-first until provided.
-  phone: null,
-  phoneHref: null,
-  email: null,
+  // Public contact — confirmed by client 2026-06-08.
+  phone: "(305) 479-7757",
+  phoneHref: "tel:+13054797757",
+  email: "inspirehealthpt@gmail.com",
   rating: "5.0",
   reviewCount: "72",
-  // TODO(client): real VSL embed URL (by Miami Starroom). Placeholder frame for now.
+  // VSL by Miami Starroom — still in final edit; placeholder frame until the cut lands.
   vsl: null,
-  vslNote: "VSL by Miami Starroom — drops in here",
+  vslNote: "VSL by Miami Starroom — final edit in progress",
 };
 
 export const BRANDLINES = {
@@ -37,13 +37,16 @@ export const BRANDLINES = {
   oneLine: "One room. One doctor. One hour.",
 };
 
-// primary nav — used by Header + Footer
+// primary nav — used by Header + Footer (kept identical in both so top === bottom).
+// Includes the two offers (Shoulder Guide + Founder's Vault) so nothing is buried.
 export const NAV = [
   { p: "", label: "Home" },
   { p: "about", label: "About" },
   { p: "services", label: "Services" },
   { p: "facilities", label: "The Space" },
   { p: "gallery", label: "The Gallery" },
+  { p: "ebook", label: "The Shoulder Guide" },
+  { p: "vault-offer", label: "The Founder’s Vault" },
   { p: "faq", label: "FAQ" },
 ];
 
@@ -204,59 +207,95 @@ export const COMPARE = {
   ],
 };
 
-// pricing — entry eval transparent; programs by consult (premium concierge framing)
-// TODO(client): confirm real prices. Values below are placeholders for layout.
+// pricing — real, client-confirmed 2026-06-08.
+//   • Every journey starts with one Evaluation ($279 — same as a single session).
+//   • Then choose ONE in-person program (2 / 3 / 4 month).
+//   • OR train remotely via The Founder's Vault — online, by application only,
+//     prices NOT shown here (qualified applicants are walked through investment
+//     + pay-in-full / payment-plan options). In-person and the Vault are
+//     mutually exclusive paths.
 export const PRICING = {
   eyebrow: "Investment",
   title: "Straightforward, cash-pay, no insurance runaround.",
   note: "Out-of-network · superbill provided for possible reimbursement (coverage varies by plan).",
-  tiers: [
+
+  // step one — the front door
+  evaluation: {
+    name: "The Evaluation",
+    price: "$279",
+    unit: "one-time · 60 minutes",
+    desc: "Where every journey starts — a complete assessment and same-day hands-on treatment with your clinician. Priced the same as a single private session.",
+    points: [
+      "Full movement & injury screen",
+      "Hands-on treatment day one",
+      "A clear, custom plan you’ll understand",
+      "Direct access — no referral needed",
+    ],
+    cta: "Book Your Evaluation",
+    to: "evaluation",
+  },
+
+  // step two, path A — in-person programs (choose one; most pick the 3-month)
+  programsEyebrow: "In-person programs",
+  programsTitle: "Commit to the work. Choose your runway.",
+  programsNote:
+    "Multi-session programs at The Vault in Miami, each one full hour and 1-on-1. Most clients choose the 3-month.",
+  programs: [
     {
-      name: "The Evaluation",
-      price: "$250", // TODO(client) confirm
-      unit: "one-time · 60 minutes",
-      desc: "A complete assessment and same-day hands-on treatment with your clinician.",
+      name: "2-Month Plan",
+      price: "$1,800",
+      unit: "8 weeks · in person",
+      desc: "A focused block to break the cycle, calm the driver of your pain, and build a real foundation.",
       points: [
-        "Full movement & injury screen",
-        "Hands-on treatment day one",
-        "A clear, custom plan you’ll understand",
-        "Direct access — no referral needed",
+        "A full hour, 1-on-1, every visit",
+        "Same clinician each session",
+        "Built on the four-phase method",
+        "Superbill provided",
       ],
-      cta: "Book Your Evaluation",
+      cta: "Start the 2-Month Plan",
       to: "evaluation",
       featured: false,
     },
     {
-      name: "The Performance Plan",
-      price: "From $180", // TODO(client) confirm
-      unit: "per private session",
-      desc: "Our most-chosen path. Private, focused sessions on your schedule, inside the four-phase method.",
+      name: "3-Month Plan",
+      price: "$2,550",
+      unit: "12 weeks · in person",
+      desc: "Our most-chosen runway — long enough to forge durable strength, not just calm symptoms.",
       points: [
-        "A full hour, 1-on-1, every visit",
-        "Same clinician each session",
+        "Everything in the 2-Month Plan",
         "Dry needling & BFR included as indicated",
-        "Superbill provided",
+        "Strength & motor-control progression",
+        "A movement re-screen built in",
       ],
-      cta: "Start Your Plan",
+      cta: "Start the 3-Month Plan",
       to: "evaluation",
       featured: true,
     },
     {
-      name: "Concierge & Virtual",
-      price: "By consult",
-      unit: "membership / remote",
-      desc: "Priority access in-clinic, or train with the founder from anywhere through The Founder’s Vault.",
+      name: "4-Month Program",
+      price: "$3,280",
+      unit: "16 weeks · in person",
+      desc: "The full progression — from rehab all the way through to performance and return-to-sport.",
       points: [
+        "Everything in the 3-Month Plan",
+        "Performance & plyometric phase",
+        "Sport-specific return-to-play work",
         "Priority scheduling",
-        "Quarterly movement re-screen",
-        "Remote programming option",
-        "Direct line to your clinician",
       ],
-      cta: "Explore The Founder’s Vault",
-      to: "vault-offer",
+      cta: "Start the 4-Month Program",
+      to: "evaluation",
       featured: false,
     },
   ],
+
+  // step two, path B — the remote alternative (application-gated, no upfront price)
+  vault: {
+    eyebrow: "Or train remotely",
+    name: "The Founder’s Vault",
+    line: "Not local, or prefer to train with Dr. Guzman from anywhere? The Founder’s Vault is our 3-month online program — by application only, with pay-in-full and payment-plan options shared once you’re a fit.",
+    cta: "Apply for The Founder’s Vault",
+    to: "vault-offer",
+  },
 };
 
 // ------------------------------------------------------------------------ TEAM
@@ -444,17 +483,18 @@ export const GALLERY = {
     eyebrow: "Current Exhibition",
     title: "The Vault Collection", // TODO(client): real exhibition title
     statement:
-      "This season’s walls bring together three Miami artists — mixed-media collage, photography on metal, and colored pencil — each piece chosen for the room it lives in.", // TODO(client)
+      "This season the walls belong to Miami mixed-media artist Katy Hirschfeld — layered collage built from hundreds of cut fragments, each piece chosen for the room it lives in.",
   },
 
   // ── current artists (swap these to rotate the show) ──
+  // Katy Hirschfeld is the sole featured artist this season (client direction
+  // 2026-06-08). Bio is her own artist statement, verbatim.
   artists: [
     {
-      name: "Katie Hirshfield",
+      name: "Katy Hirschfeld",
       medium: "Mixed-media collage",
       feature: true, // spotlight artist
-      // TODO(client): confirm full artist bio.
-      bio: "This season’s featured artist. Katie Hirshfield builds her portraits from hundreds of cut fragments — magazine, ephemera, found print — layered into a single face. Up close it reads as chaos; from across the room it resolves into something unmistakably human.",
+      bio: "My collages are often influenced by my personal outlook and true life experiences. I share a fraction of my own little world, by promoting strength, knowledge, and self awareness to overcome social flux and challenges; learning from them through the art of mixed media. I like to express my playful side, never shunning the Basquiat beneath. Culled from the social consciousness and current events of today, each of my pieces features a different cultural comment viewed through the lens of my experiences. The simple overlapping of many small pieces, arranged in just the right way speaks volumes, touching on issues implicitly without being overbearing or sanctimonious. My work tends to stand as a viewer’s test, challenging what one sees versus what they feel in relation to the contemporary pits, progress and powers affecting us all.",
       images: [
         { src: "/img/gallery/katie-1.jpg", ratio: "tall" },
         { src: "/img/gallery/katie-4.jpg", ratio: "wide" },
@@ -462,24 +502,6 @@ export const GALLERY = {
         { src: "/img/gallery/katie-2.jpg", ratio: "tall" },
         { src: "/img/gallery/katie-3.jpg", ratio: "tall" },
       ],
-    },
-    {
-      name: "Adrian Mesa",
-      medium: "Photography on metal",
-      // TODO(client): confirm full artist bio.
-      bio: "Local Miami photographer. Adrian Mesa prints his portraits on metal — faces weathered and exact, mounted in reclaimed industrial frames.",
-      images: [
-        { src: "/img/gallery/adrian-1.jpg", ratio: "tall" },
-        { src: "/img/gallery/adrian-2.jpg", ratio: "tall" },
-        { src: "/img/gallery/adrian-3.jpg", ratio: "tall" },
-      ],
-    },
-    {
-      name: "Carlo Guzman",
-      medium: "Colored pencil",
-      // TODO(client): confirm full artist bio.
-      bio: "Colored-pencil work, scorched and framed — text and surface treated as a single gesture.",
-      images: [{ src: "/img/gallery/carlo-1.jpg", ratio: "tall" }],
     },
   ],
 
@@ -533,10 +555,10 @@ export const EBOOK = {
       "Each movement builds on the last",
       "Plus access to our shoulder protocol video library",
     ],
-    claimLabel: "How to claim your bonus",
+    claimLabel: "Included — delivered automatically",
     claim:
-      "DM the word SHOULDER RESET to @inspirehealthpt on Instagram and we’ll send your 12-day challenge access right away.",
-    claimHref: "https://instagram.com/inspirehealthpt",
+      "When you grab the guide, your 12-Day Shoulder Challenge is sent straight to your inbox — one guided movement a day, no manual step needed.",
+    claimHref: null,
   },
   // anchored value framing
   valueLine:
@@ -608,62 +630,27 @@ export const VAULT_OFFER = {
       },
     ],
   },
-  // value stack — TODO(client): confirm what's included + real $ values
-  valueStack: {
-    eyebrow: "What you get",
+  // What's included — clean inclusions list, no fabricated dollar values.
+  included: {
+    eyebrow: "What’s included",
+    title: "Everything you need to do this right.",
     items: [
-      { label: "Full remote assessment & video screen", value: "$250" },
-      { label: "Custom four-phase program (app-delivered)", value: "$600" },
-      { label: "Direct founder messaging & check-ins", value: "$400" },
-      { label: "Shoulder Health & Freedom guide", value: "$27" },
+      "Full remote assessment & video movement screen",
+      "Custom four-phase program, app-delivered & updated as you progress",
+      "Direct founder messaging & regular check-ins",
+      "The Shoulder Health & Freedom guide",
     ],
-    totalLabel: "Total value",
-    total: "$1,277",
   },
-  // pricing tiers — anchor high, recommend middle. TODO(client): confirm prices.
-  tiers: [
-    {
-      name: "The Reset",
-      price: "$295",
-      unit: "one-time",
-      desc: "A remote assessment + a 6-week program to break the cycle.",
-      points: [
-        "Full remote assessment",
-        "6-week custom program",
-        "One mid-point check-in",
-      ],
-      cta: "Start The Reset",
-      featured: false,
-    },
-    {
-      name: "The Build",
-      price: "$595",
-      unit: "12 weeks",
-      desc: "The full progression with ongoing founder access — most chosen.",
-      points: [
-        "Everything in The Reset",
-        "12-week progressive program",
-        "Direct founder messaging",
-        "Bi-weekly check-ins",
-      ],
-      cta: "Apply for The Build",
-      featured: true,
-    },
-    {
-      name: "The Vault Membership",
-      price: "By consult",
-      unit: "ongoing",
-      desc: "Continuous, founder-led performance coaching for serious athletes.",
-      points: [
-        "Everything in The Build",
-        "Continuous programming",
-        "Priority founder access",
-        "Quarterly re-assessment",
-      ],
-      cta: "Request an Invite",
-      featured: false,
-    },
-  ],
+  // Investment — application-gated (client direction 2026-06-08). 3-month online
+  // program. Prices intentionally NOT shown on the page: qualified applicants are
+  // walked through pay-in-full and payment-plan options on the application call.
+  investment: {
+    eyebrow: "The investment",
+    title: "A serious, 3-month commitment.",
+    body: "The Founder’s Vault is a founder-led, 3-month program — not a subscription app, and not for everyone. Because every program is built and coached personally, we keep it small and take clients by application. Pricing, with pay-in-full and payment-plan options, is shared the moment we confirm you’re a fit.",
+    note: "Applying takes two minutes, and there’s no obligation.",
+    cta: "Apply for The Founder’s Vault",
+  },
   riskReversal: {
     title: "A fair promise.",
     // satisfaction/service guarantee — NOT a clinical outcome guarantee (compliance)
