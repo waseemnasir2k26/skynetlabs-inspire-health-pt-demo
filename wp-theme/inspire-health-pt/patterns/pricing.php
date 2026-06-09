@@ -200,7 +200,7 @@
 		<!-- wp:buttons -->
 		<div class="wp-block-buttons">
 			<!-- wp:button {"className":"is-style-outline"} -->
-			<div class="wp-block-button is-style-outline"><a class="wp-block-button__link wp-element-button" href="/vault-offer">Apply for The Founder’s Vault</a></div>
+			<div class="wp-block-button is-style-outline"><a class="wp-block-button__link wp-element-button" href="/founders-vault">Apply for The Founder’s Vault</a></div>
 			<!-- /wp:button -->
 		</div>
 		<!-- /wp:buttons -->
