@@ -1,0 +1,27 @@
+/*
+Theme Name: Inspire Health PT
+Theme URI: https://inspirehealthpt.co/
+Author: SkynetLabs
+Author URI: https://skynetlabs.co/
+Description: Bespoke full-site-editing block theme for Inspire Health PT — "The Vault." Private 1-on-1 rehab & performance, Miami. Hunter-green-on-near-black with brass accents, Bebas Neue display, Cormorant Garamond serif, Inter body. Compliance-safe (FL Ch.486 + FTC 2023).
+Version: 1.0.0
+Requires at least: 6.4
+Tested up to: 6.7
+Requires PHP: 7.4
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: inspire-health-pt
+Tags: full-site-editing, block-patterns
+*/
+
+/*
+ * This is a full-site-editing (block) theme.
+ * All design tokens, palette, typography, spacing and global styles live in
+ * theme.json (version 3). All signature/runtime styling (cards, marquee,
+ * film grain, ken-burns, eyebrow, lede, buttons, VSL frame) lives in
+ * assets/css/theme.css, enqueued on the front end and added to the editor
+ * via add_editor_style() in functions.php.
+ *
+ * Do not add layout or visual rules here — this file exists only to carry the
+ * WordPress theme header above. Edit theme.json or assets/css/theme.css instead.
+ */

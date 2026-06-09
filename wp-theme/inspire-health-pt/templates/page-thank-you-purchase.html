@@ -1,0 +1,60 @@
+<!-- wp:template-part {"slug":"header","tagName":"header"} /-->
+
+<!-- wp:group {"tagName":"main","align":"full","backgroundColor":"bg","style":{"spacing":{"padding":{"top":"var:preset|spacing|80","bottom":"var:preset|spacing|80"}}},"layout":{"type":"constrained"}} -->
+<main
+  class="wp-block-group alignfull has-bg-background-color has-background"
+  style="
+    padding-top: var(--wp--preset--spacing--80);
+    padding-bottom: var(--wp--preset--spacing--80);
+  "
+>
+  <!-- wp:group {"style":{"spacing":{"blockGap":"var:preset|spacing|30"}},"layout":{"type":"constrained","contentSize":"640px"}} -->
+  <div class="wp-block-group">
+    <!-- wp:paragraph {"align":"center","className":"eyebrow is-style-eyebrow","textColor":"accent","fontSize":"small"} -->
+    <p
+      class="has-text-align-center eyebrow is-style-eyebrow has-accent-color has-text-color has-small-font-size"
+    >
+      Payment received
+    </p>
+    <!-- /wp:paragraph -->
+
+    <!-- wp:heading {"textAlign":"center","level":1,"fontSize":"xx-large"} -->
+    <h1 class="wp-block-heading has-text-align-center has-xx-large-font-size">
+      Your guide is on its way.
+    </h1>
+    <!-- /wp:heading -->
+
+    <!-- wp:paragraph {"align":"center","className":"lede is-style-lede","textColor":"mint","fontSize":"lede"} -->
+    <p
+      class="has-text-align-center lede is-style-lede has-mint-color has-text-color has-lede-font-size"
+    >
+      Your copy of Shoulder Health &amp; Freedom is ready below — plus your free
+      12-Day Shoulder Challenge lands in your inbox shortly.
+    </p>
+    <!-- /wp:paragraph -->
+
+    <!-- Download link / order details render here via WooCommerce order-received content -->
+    <!-- wp:post-content {"layout":{"type":"constrained"}} /-->
+
+    <!-- wp:buttons {"layout":{"type":"flex","justifyContent":"center"},"style":{"spacing":{"margin":{"top":"var:preset|spacing|30"}}}} -->
+    <div
+      class="wp-block-buttons"
+      style="margin-top: var(--wp--preset--spacing--30)"
+    >
+      <!-- wp:button {"className":"is-style-fill"} -->
+      <div class="wp-block-button is-style-fill">
+        <a
+          class="wp-block-button__link wp-element-button"
+          href="https://calendly.com/inspirehealthpt/60min"
+          >Ready to go deeper? Book your evaluation</a
+        >
+      </div>
+      <!-- /wp:button -->
+    </div>
+    <!-- /wp:buttons -->
+  </div>
+  <!-- /wp:group -->
+</main>
+<!-- /wp:group -->
+
+<!-- wp:template-part {"slug":"footer","tagName":"footer"} /-->

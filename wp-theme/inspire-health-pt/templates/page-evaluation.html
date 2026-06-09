@@ -1,0 +1,100 @@
+<!-- wp:template-part {"slug":"header","tagName":"header"} /-->
+
+<!-- wp:group {"tagName":"main","align":"full","backgroundColor":"bg","style":{"spacing":{"padding":{"top":"var:preset|spacing|70","bottom":"var:preset|spacing|80"}}},"layout":{"type":"constrained"}} -->
+<main
+  class="wp-block-group alignfull has-bg-background-color has-background"
+  style="
+    padding-top: var(--wp--preset--spacing--70);
+    padding-bottom: var(--wp--preset--spacing--80);
+  "
+>
+  <!-- wp:paragraph {"align":"center","className":"eyebrow is-style-eyebrow","textColor":"accent","fontSize":"small"} -->
+  <p
+    class="has-text-align-center eyebrow is-style-eyebrow has-accent-color has-text-color has-small-font-size"
+  >
+    Start with a 60-minute evaluation
+  </p>
+  <!-- /wp:paragraph -->
+
+  <!-- wp:heading {"textAlign":"center","level":1,"fontSize":"xx-large"} -->
+  <h1 class="wp-block-heading has-text-align-center has-xx-large-font-size">
+    A real diagnosis. A real plan.
+  </h1>
+  <!-- /wp:heading -->
+
+  <!-- wp:paragraph {"align":"center","className":"lede is-style-lede","textColor":"mint","fontSize":"lede"} -->
+  <p
+    class="has-text-align-center lede is-style-lede has-mint-color has-text-color has-lede-font-size"
+  >
+    One private hour with a Doctor of Physical Therapy. We find why the pain is
+    there, treat it the same day, and send you home with a plan you actually
+    understand.
+  </p>
+  <!-- /wp:paragraph -->
+
+  <!-- wp:spacer {"height":"var:preset|spacing|40"} -->
+  <div
+    style="height: var(--wp--preset--spacing--40)"
+    aria-hidden="true"
+    class="wp-block-spacer"
+  ></div>
+  <!-- /wp:spacer -->
+
+  <!-- VSL: replace the placeholder below with the real Vimeo embed once the cut is uploaded.
+       Swap the whole wp:html block for: <!-- wp:embed {"url":"https://vimeo.com/XXXXXXXX","type":"video","providerNameSlug":"vimeo","responsive":true} /-->
+  -->
+  <!-- wp:html -->
+  <figure
+    class="wp-block-embed is-type-video is-provider-vimeo wp-block-embed-vimeo wp-embed-aspect-16-9 wp-has-aspect-ratio"
+    style="max-width: 880px; margin: 0 auto"
+  >
+    <div
+      class="vsl-frame"
+      role="img"
+      aria-label="Inspire Health PT video — coming soon"
+    >
+      <span class="vsl-play" aria-hidden="true">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="#120F08">
+          <path d="M8 5v14l11-7z" />
+        </svg>
+      </span>
+    </div>
+  </figure>
+  <!-- /wp:html -->
+
+  <!-- wp:spacer {"height":"var:preset|spacing|50"} -->
+  <div
+    style="height: var(--wp--preset--spacing--50)"
+    aria-hidden="true"
+    class="wp-block-spacer"
+  ></div>
+  <!-- /wp:spacer -->
+
+  <!-- Editable intro / proof copy lives in the page content -->
+  <!-- wp:post-content {"layout":{"type":"constrained"}} /-->
+
+  <!-- wp:heading {"textAlign":"center","level":2,"fontSize":"x-large"} -->
+  <h2 class="wp-block-heading has-text-align-center has-x-large-font-size">
+    Reserve your time
+  </h2>
+  <!-- /wp:heading -->
+
+  <!-- wp:paragraph {"align":"center","textColor":"muted"} -->
+  <p class="has-text-align-center has-muted-color has-text-color">
+    Pick a time below. We’ll confirm and send everything you need before your
+    visit.
+  </p>
+  <!-- /wp:paragraph -->
+
+  <!-- Calendly inline embed — widget script is enqueued by functions.php on this template only -->
+  <!-- wp:html -->
+  <div
+    class="calendly-inline-widget"
+    data-url="https://calendly.com/inspirehealthpt/60min?hide_gdpr_banner=1&background_color=0c0f0d&text_color=f2ecdd&primary_color=b8893a"
+    style="min-width: 320px; height: 720px"
+  ></div>
+  <!-- /wp:html -->
+</main>
+<!-- /wp:group -->
+
+<!-- wp:template-part {"slug":"footer","tagName":"footer"} /-->

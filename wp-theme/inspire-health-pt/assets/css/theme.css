@@ -1,0 +1,427 @@
+/* ==========================================================================
+   inspire-health-pt — theme.css
+   Signature styles ported from src/index.css to plain CSS.
+   React --c-* / --font-* tokens are remapped to the theme.json preset custom
+   properties (var(--wp--preset--color--*)) so the same rules work in the FSE
+   editor and on the front end. Block-style classes match the
+   register_block_style() slugs in BUILD-SPEC.md §6 (is-style-{slug}).
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. Token bridge — React tokens -> theme.json preset variables
+   -------------------------------------------------------------------------- */
+:root {
+  /* surfaces */
+  --c-bg: var(--wp--preset--color--bg);
+  --c-surface: var(--wp--preset--color--surface);
+  --c-surface2: var(--wp--preset--color--surface-2);
+  --c-green: var(--wp--preset--color--green);
+  --c-green-deep: var(--wp--preset--color--green-deep);
+  --c-pine: var(--wp--preset--color--pine);
+  --c-sage: var(--wp--preset--color--sage);
+  --c-mint: var(--wp--preset--color--mint);
+
+  /* ink */
+  --c-ink: var(--wp--preset--color--ink);
+  --c-muted: var(--wp--preset--color--muted);
+  --c-muted2: var(--wp--preset--color--muted-2);
+
+  /* accent — brass / gold */
+  --c-accent: var(--wp--preset--color--accent);
+  --c-accent-soft: var(--wp--preset--color--accent-soft);
+  --c-onaccent: var(--wp--preset--color--onaccent);
+
+  /* lines */
+  --c-line: var(--wp--preset--color--line);
+  --c-line-soft: var(--wp--preset--color--line-soft);
+
+  /* type families */
+  --font-display: var(--wp--preset--font-family--display);
+  --font-body: var(--wp--preset--font-family--body);
+  --font-serif: var(--wp--preset--font-family--serif);
+
+  /* misc brand tokens */
+  --radius: 2px;
+  --shadow: 0 26px 64px -22px rgba(0, 0, 0, 0.78);
+  --grain: 0.05;
+  --display-weight: 400;
+  --display-tracking: 0.012em;
+  --uppercase: uppercase;
+}
+
+/* --------------------------------------------------------------------------
+   2. Base type rhythm (display headings + editorial serif)
+   -------------------------------------------------------------------------- */
+* {
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+::selection {
+  background: var(--c-accent);
+  color: var(--c-onaccent);
+}
+
+.display {
+  font-family: var(--font-display);
+  font-weight: var(--display-weight);
+  letter-spacing: var(--display-tracking);
+  text-transform: var(--uppercase);
+  line-height: 1.04;
+}
+
+/* editorial serif — big paragraphs, taglines, blockquotes */
+.serif {
+  font-family: var(--font-serif);
+}
+
+/* .lede — Cormorant serif paragraph (register_block_style: lede) */
+.lede,
+.is-style-lede {
+  font-family: var(--font-serif);
+  font-size: clamp(1.15rem, 1.6vw, 1.4rem);
+  line-height: 1.7;
+  color: #cfcabb;
+  font-weight: 400;
+}
+
+/* .tagline — serif italic accent (register_block_style: tagline) */
+.tagline,
+.is-style-tagline {
+  font-family: var(--font-serif);
+  font-style: italic;
+  color: var(--c-accent);
+}
+
+/* --------------------------------------------------------------------------
+   3. Premium signatures
+   -------------------------------------------------------------------------- */
+
+/* film-grain overlay — intensity driven by --grain.
+   functions.php adds the `grain` body class via the body_class filter. */
+.grain::after,
+body.grain::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 80;
+  opacity: var(--grain);
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* slow ken-burns zoom for hero / cta imagery.
+   register_block_style: ken-burns -> is-style-ken-burns (core/cover, core/image).
+   The legacy .kenburns class is kept so spec markup using className:"kenburns"
+   also resolves. On core/cover, target the generated background image span. */
+@keyframes kenburns {
+  from {
+    transform: scale(1.05);
+  }
+  to {
+    transform: scale(1.16);
+  }
+}
+
+.kenburns,
+.is-style-ken-burns img,
+.is-style-ken-burns .wp-block-cover__image-background {
+  animation: kenburns 26s ease-out infinite alternate;
+}
+
+/* scroll reveal — assets/js/reveal.js adds .in via IntersectionObserver */
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    opacity 0.7s cubic-bezier(0.2, 0.7, 0.2, 1),
+    transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.reveal.in {
+  opacity: 1;
+  transform: none;
+}
+
+/* marquee brand band (register_block_style: marquee -> is-style-marquee).
+   The inner row scrolls; duplicate the content in markup for a seamless loop. */
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+.marquee,
+.is-style-marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee 38s linear infinite;
+}
+/* keep the brand band from wrapping inside a WP flex group */
+.is-style-marquee {
+  flex-wrap: nowrap;
+  white-space: nowrap;
+}
+
+/* giant section numerals */
+.numeral {
+  font-family: var(--font-display);
+  font-weight: var(--display-weight);
+  opacity: 0.06;
+  line-height: 1;
+  pointer-events: none;
+}
+
+/* --------------------------------------------------------------------------
+   4. Buttons / inline CTAs
+   -------------------------------------------------------------------------- */
+
+/* primary CTA — gold button, near-black text */
+.btn-primary {
+  background: var(--c-accent);
+  color: var(--c-onaccent);
+  border-radius: var(--radius);
+  font-family: var(--font-display);
+  letter-spacing: 0.06em;
+  transition:
+    transform 0.25s cubic-bezier(0.2, 0.7, 0.2, 1),
+    box-shadow 0.25s,
+    background 0.25s;
+}
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow);
+  background: var(--c-accent-soft);
+}
+
+.btn-ghost {
+  border: 1px solid var(--c-line);
+  color: var(--c-ink);
+  border-radius: var(--radius);
+  font-family: var(--font-display);
+  letter-spacing: 0.06em;
+  transition:
+    border-color 0.25s,
+    background 0.25s,
+    transform 0.25s;
+}
+.btn-ghost:hover {
+  border-color: var(--c-accent);
+  transform: translateY(-2px);
+}
+
+/* underline-on-hover text link (Cormorant, inline editorial CTAs) */
+.btn-underline {
+  color: #cfcabb;
+  border-bottom: 1px solid var(--c-muted2);
+  font-family: var(--font-serif);
+  transition:
+    color 0.25s,
+    border-color 0.25s;
+}
+.btn-underline:hover {
+  color: var(--c-ink);
+  border-color: var(--c-accent);
+}
+
+/* --------------------------------------------------------------------------
+   5. Cards (register_block_style: card / brass-edge / brass-top / green-featured)
+   -------------------------------------------------------------------------- */
+
+/* standard card -> is-style-card */
+.card,
+.is-style-card {
+  background: var(--c-surface);
+  border: 1px solid var(--c-line-soft);
+  border-radius: var(--radius);
+}
+
+/* brass left-edge bar card — the brand's signature element.
+   register_block_style: brass-edge -> is-style-brass-edge */
+.card-brass,
+.is-style-brass-edge {
+  background: var(--c-surface);
+  border: 1px solid var(--c-line-soft);
+  border-left: 3px solid var(--c-accent);
+  border-radius: 0;
+}
+
+/* brass top-edge bar variant (prototype phase cards).
+   register_block_style: brass-top -> is-style-brass-top */
+.card-brass-top,
+.is-style-brass-top {
+  background: var(--c-surface2);
+  border: 1px solid #262a26;
+  border-top: 2px solid var(--c-accent);
+  border-radius: 0;
+}
+
+/* hunter-green premium / featured card.
+   register_block_style: green-featured -> is-style-green-featured */
+.card-green,
+.is-style-green-featured {
+  background: var(--c-green);
+  border: 1px solid var(--c-line);
+  border-top: 2px solid var(--c-accent);
+  border-radius: 0;
+}
+
+.hairline {
+  height: 1px;
+  background: var(--c-line);
+}
+
+/* --------------------------------------------------------------------------
+   6. Underline-draw link (register_block_style: underline-draw -> is-style-underline-draw)
+   -------------------------------------------------------------------------- */
+.ulink,
+.is-style-underline-draw {
+  position: relative;
+}
+.ulink::after,
+.is-style-underline-draw::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -3px;
+  width: 100%;
+  height: 1px;
+  background: var(--c-accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.35s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.ulink:hover::after,
+.is-style-underline-draw:hover::after {
+  transform: scaleX(1);
+}
+
+/* --------------------------------------------------------------------------
+   7. Brass eyebrow (register_block_style: eyebrow -> is-style-eyebrow)
+   -------------------------------------------------------------------------- */
+.eyebrow,
+.is-style-eyebrow {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  letter-spacing: 0.26em;
+  font-size: 0.82rem;
+  color: var(--c-accent);
+}
+
+/* --------------------------------------------------------------------------
+   8. Diamond-rule ornament — —◆— decorative section break
+   register_block_style: diamond -> is-style-diamond (core/separator)
+   Also supports the raw .diamond-rule markup (core/html / core/group).
+   -------------------------------------------------------------------------- */
+.diamond-rule {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  max-width: 520px;
+  margin: 0 auto;
+}
+.diamond-rule .line {
+  flex: 1;
+  height: 1px;
+  background: var(--c-pine);
+}
+.diamond-rule .line.mid {
+  background: var(--c-accent);
+}
+.diamond-rule .diamond {
+  width: 8px;
+  height: 8px;
+  background: var(--c-accent);
+  transform: rotate(45deg);
+}
+
+/* core/separator is-style-diamond — render the —◆— as a styled rule */
+.wp-block-separator.is-style-diamond {
+  max-width: 520px;
+  margin-left: auto;
+  margin-right: auto;
+  border: 0;
+  height: auto;
+  background: none;
+  text-align: center;
+  overflow: visible;
+  position: relative;
+}
+.wp-block-separator.is-style-diamond::before {
+  content: "";
+  display: block;
+  height: 1px;
+  background: var(--c-pine);
+}
+.wp-block-separator.is-style-diamond::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 8px;
+  height: 8px;
+  margin: -4px 0 0 -4px;
+  background: var(--c-accent);
+  transform: rotate(45deg);
+}
+
+/* --------------------------------------------------------------------------
+   9. VSL / video placeholder frame (Evaluation LP §7)
+   -------------------------------------------------------------------------- */
+.vsl-frame {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  background: #0a0c0a;
+  border: 1px solid var(--c-line);
+  border-radius: var(--radius);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  cursor: pointer;
+  transition: border-color 0.3s;
+}
+.vsl-frame:hover {
+  border-color: var(--c-accent);
+}
+.vsl-play {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: var(--c-accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s;
+}
+.vsl-frame:hover .vsl-play {
+  transform: scale(1.08);
+}
+
+/* --------------------------------------------------------------------------
+   10. Reduced-motion guard
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .kenburns,
+  .is-style-ken-burns img,
+  .is-style-ken-burns .wp-block-cover__image-background,
+  .marquee,
+  .is-style-marquee {
+    animation: none;
+  }
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+}

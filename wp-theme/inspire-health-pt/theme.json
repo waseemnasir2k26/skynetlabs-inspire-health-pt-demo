@@ -1,0 +1,255 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/theme.json",
+  "version": 3,
+  "settings": {
+    "appearanceTools": true,
+    "useRootPaddingAwareAlignments": true,
+    "layout": { "contentSize": "1200px", "wideSize": "1320px" },
+    "color": {
+      "defaultPalette": false,
+      "defaultGradients": false,
+      "custom": true,
+      "customGradient": true,
+      "palette": [
+        { "name": "Background", "slug": "bg", "color": "#0C0F0D" },
+        { "name": "Surface", "slug": "surface", "color": "#141915" },
+        { "name": "Surface 2", "slug": "surface-2", "color": "#1A1F1A" },
+        { "name": "Hunter Green", "slug": "green", "color": "#0F3024" },
+        { "name": "Green Deep", "slug": "green-deep", "color": "#0A2019" },
+        { "name": "Pine", "slug": "pine", "color": "#2D6B52" },
+        { "name": "Sage", "slug": "sage", "color": "#4A8B6F" },
+        { "name": "Mint", "slug": "mint", "color": "#C9D9CF" },
+        { "name": "Ink", "slug": "ink", "color": "#F2ECDD" },
+        { "name": "Muted", "slug": "muted", "color": "#9DA39A" },
+        { "name": "Muted 2", "slug": "muted-2", "color": "#8A8E86" },
+        { "name": "Accent", "slug": "accent", "color": "#B8893A" },
+        { "name": "Accent Soft", "slug": "accent-soft", "color": "#CB9B3C" },
+        { "name": "On Accent", "slug": "onaccent", "color": "#120F08" },
+        { "name": "Line", "slug": "line", "color": "rgba(184,137,58,0.24)" },
+        {
+          "name": "Line Soft",
+          "slug": "line-soft",
+          "color": "rgba(242,236,221,0.08)"
+        }
+      ]
+    },
+    "typography": {
+      "defaultFontSizes": false,
+      "fluid": true,
+      "customFontSize": true,
+      "fontFamilies": [
+        {
+          "name": "Bebas Neue",
+          "slug": "display",
+          "fontFamily": "'Bebas Neue', sans-serif",
+          "fontFace": [
+            {
+              "fontFamily": "Bebas Neue",
+              "fontWeight": "400",
+              "fontStyle": "normal",
+              "fontDisplay": "swap",
+              "src": ["file:./assets/fonts/bebas-neue-400.woff2"]
+            }
+          ]
+        },
+        {
+          "name": "Inter",
+          "slug": "body",
+          "fontFamily": "'Inter', system-ui, sans-serif",
+          "fontFace": [
+            {
+              "fontFamily": "Inter",
+              "fontWeight": "100 900",
+              "fontStyle": "normal",
+              "fontStretch": "normal",
+              "fontDisplay": "swap",
+              "src": ["file:./assets/fonts/inter-variable.woff2"]
+            },
+            {
+              "fontFamily": "Inter",
+              "fontWeight": "100 900",
+              "fontStyle": "italic",
+              "fontStretch": "normal",
+              "fontDisplay": "swap",
+              "src": ["file:./assets/fonts/inter-variable-italic.woff2"]
+            }
+          ]
+        },
+        {
+          "name": "Cormorant Garamond",
+          "slug": "serif",
+          "fontFamily": "'Cormorant Garamond', Georgia, serif",
+          "fontFace": [
+            {
+              "fontFamily": "Cormorant Garamond",
+              "fontWeight": "400",
+              "fontStyle": "normal",
+              "fontDisplay": "swap",
+              "src": ["file:./assets/fonts/cormorant-garamond-400.woff2"]
+            },
+            {
+              "fontFamily": "Cormorant Garamond",
+              "fontWeight": "600",
+              "fontStyle": "normal",
+              "fontDisplay": "swap",
+              "src": ["file:./assets/fonts/cormorant-garamond-600.woff2"]
+            },
+            {
+              "fontFamily": "Cormorant Garamond",
+              "fontWeight": "400",
+              "fontStyle": "italic",
+              "fontDisplay": "swap",
+              "src": ["file:./assets/fonts/cormorant-garamond-400-italic.woff2"]
+            }
+          ]
+        }
+      ],
+      "fontSizes": [
+        { "name": "Small", "slug": "small", "size": "0.875rem" },
+        { "name": "Base", "slug": "base", "size": "1rem" },
+        { "name": "Medium", "slug": "medium", "size": "1.125rem" },
+        {
+          "name": "Lede",
+          "slug": "lede",
+          "size": "clamp(1.15rem, 1.6vw, 1.4rem)"
+        },
+        { "name": "Large", "slug": "large", "size": "1.5rem" },
+        {
+          "name": "X Large",
+          "slug": "x-large",
+          "size": "clamp(2rem, 4vw, 3rem)"
+        },
+        {
+          "name": "XX Large",
+          "slug": "xx-large",
+          "size": "clamp(2.75rem, 7vw, 5rem)"
+        },
+        {
+          "name": "Display",
+          "slug": "display",
+          "size": "clamp(3.5rem, 11vw, 8rem)"
+        }
+      ]
+    },
+    "spacing": {
+      "defaultSpacingSizes": false,
+      "customSpacingSize": true,
+      "units": ["px", "em", "rem", "vh", "vw", "%"],
+      "spacingSizes": [
+        { "name": "1", "slug": "20", "size": "0.5rem" },
+        { "name": "2", "slug": "30", "size": "1rem" },
+        { "name": "3", "slug": "40", "size": "1.5rem" },
+        { "name": "4", "slug": "50", "size": "2rem" },
+        { "name": "5", "slug": "60", "size": "3rem" },
+        { "name": "6", "slug": "70", "size": "5rem" },
+        { "name": "7", "slug": "80", "size": "8rem" }
+      ]
+    },
+    "border": { "radius": true, "color": true, "style": true, "width": true }
+  },
+  "styles": {
+    "color": {
+      "background": "var(--wp--preset--color--bg)",
+      "text": "var(--wp--preset--color--ink)"
+    },
+    "spacing": {
+      "blockGap": "var(--wp--preset--spacing--50)",
+      "padding": {
+        "top": "0",
+        "right": "var(--wp--preset--spacing--40)",
+        "bottom": "0",
+        "left": "var(--wp--preset--spacing--40)"
+      }
+    },
+    "typography": {
+      "fontFamily": "var(--wp--preset--font-family--body)",
+      "fontSize": "var(--wp--preset--font-size--base)",
+      "lineHeight": "1.65"
+    },
+    "elements": {
+      "heading": {
+        "typography": {
+          "fontFamily": "var(--wp--preset--font-family--display)",
+          "fontWeight": "400",
+          "letterSpacing": "0.012em",
+          "lineHeight": "1.04",
+          "textTransform": "uppercase"
+        },
+        "color": { "text": "var(--wp--preset--color--ink)" }
+      },
+      "h1": {
+        "typography": { "fontSize": "var(--wp--preset--font-size--xx-large)" }
+      },
+      "h2": {
+        "typography": { "fontSize": "var(--wp--preset--font-size--x-large)" }
+      },
+      "h3": {
+        "typography": { "fontSize": "var(--wp--preset--font-size--large)" }
+      },
+      "link": {
+        "color": { "text": "var(--wp--preset--color--ink)" },
+        ":hover": {
+          "color": { "text": "var(--wp--preset--color--accent-soft)" }
+        }
+      },
+      "button": {
+        "border": { "radius": "2px" },
+        "color": {
+          "background": "var(--wp--preset--color--accent)",
+          "text": "var(--wp--preset--color--onaccent)"
+        },
+        "typography": {
+          "fontFamily": "var(--wp--preset--font-family--display)",
+          "letterSpacing": "0.06em",
+          "textTransform": "uppercase"
+        },
+        ":hover": {
+          "color": {
+            "background": "var(--wp--preset--color--accent-soft)",
+            "text": "var(--wp--preset--color--onaccent)"
+          }
+        }
+      }
+    },
+    "blocks": {
+      "core/paragraph": { "typography": { "lineHeight": "1.65" } },
+      "core/quote": {
+        "typography": {
+          "fontFamily": "var(--wp--preset--font-family--serif)",
+          "fontStyle": "italic",
+          "fontSize": "var(--wp--preset--font-size--large)"
+        },
+        "color": { "text": "var(--wp--preset--color--ink)" }
+      },
+      "core/separator": {
+        "color": { "text": "var(--wp--preset--color--line)" }
+      }
+    }
+  },
+  "templateParts": [
+    { "name": "header", "title": "Header", "area": "header" },
+    { "name": "footer", "title": "Footer", "area": "footer" }
+  ],
+  "customTemplates": [
+    {
+      "name": "page-evaluation",
+      "title": "Evaluation Landing Page",
+      "postTypes": ["page"]
+    },
+    {
+      "name": "page-thank-you-booking",
+      "title": "Thank You — Booking",
+      "postTypes": ["page"]
+    },
+    {
+      "name": "page-thank-you-purchase",
+      "title": "Thank You — Purchase",
+      "postTypes": ["page"]
+    },
+    {
+      "name": "page-wide",
+      "title": "Full-Width Page",
+      "postTypes": ["page"]
+    }
+  ]
+}
