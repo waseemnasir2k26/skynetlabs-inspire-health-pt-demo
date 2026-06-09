@@ -144,9 +144,20 @@ export default function Facilities({ go }) {
       {/* 5 — Texture beat: a subtle row of three detail frames, no faces */}
       <Section className="pb-24 sm:pb-28">
         <div className="grid gap-5 sm:grid-cols-3">
-          {["Brass detail", "The walls", "The sauna"].map((cap, i) => (
+          {[
+            { src: "/img/space/storefront.jpg", cap: "The entrance" },
+            { src: "/img/space/wide.jpg", cap: "The floor" },
+            { src: "/img/space/door-logo.jpg", cap: "The mark" },
+          ].map(({ src, cap }, i) => (
             <Reveal key={cap} delay={i * 70}>
-              <PlaceholderFrame caption={cap} ratio="aspect-square" />
+              <figure className="overflow-hidden border border-line bg-surface2">
+                <img
+                  src={src}
+                  alt={cap}
+                  className="aspect-square w-full object-cover"
+                  loading="lazy"
+                />
+              </figure>
             </Reveal>
           ))}
         </div>
